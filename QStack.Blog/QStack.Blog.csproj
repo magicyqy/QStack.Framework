@@ -1,0 +1,546 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>263fb1bf-4fb2-4b0b-9bab-63d59b804051</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="app_data\pluginpackages\1.0.0.1\**" />
+    <Compile Remove="Resources\**" />
+    <Compile Remove="wwwroot\tools\webps\新文件夹\**" />
+    <Content Remove="app_data\pluginpackages\1.0.0.1\**" />
+    <Content Remove="Resources\**" />
+    <Content Remove="wwwroot\tools\webps\新文件夹\**" />
+    <EmbeddedResource Remove="app_data\pluginpackages\1.0.0.1\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <EmbeddedResource Remove="wwwroot\tools\webps\新文件夹\**" />
+    <None Remove="app_data\pluginpackages\1.0.0.1\**" />
+    <None Remove="Resources\**" />
+    <None Remove="wwwroot\tools\webps\新文件夹\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\tools\ascii\index.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\phpqrcode.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrbitstream.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrconfig.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrconst.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrencode.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrimage.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrinput.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrlib.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrmask.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrrscode.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrspec.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrsplit.php" />
+    <Content Remove="wwwroot\tools\qrcode\qrcode\qrtools.php" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="app_data\secrets\DaoFactories_0_ConnectionString_pwd0" />
+    <None Remove="app_data\secrets\DaoFactories_1_ConnectionString_pwd1" />
+    <None Remove="app_data\secrets\OAuths_QQ_AppId_qqappid" />
+    <None Remove="app_data\secrets\OAuths_QQ_AppKey_qqappkey" />
+    <None Remove="CopyLib.props" />
+    <None Remove="Program.cs~RFc630d601.TMP" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <Content Include="app_data\secrets\DaoFactories_0_ConnectionString_pwd0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app_data\secrets\DaoFactories_1_ConnectionString_pwd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app_data\secrets\OAuths_QQ_AppId_qqappid">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app_data\secrets\OAuths_QQ_AppKey_qqappkey">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspectCore.Abstractions" Version="2.1.0" />
+    <PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="2.1.0" />
+    <PackageReference Include="AspNet.Security.OAuth.QQ" Version="3.1.1" />
+    <PackageReference Include="AspNetCoreRateLimit" Version="3.0.5" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="3.1.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+    <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="3.1.0" />
+    <PackageReference Include="Serilog.Filters.Expressions" Version="2.1.0" />
+    <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QStack.Framework.AspNetCore.Plugin\QStack.Framework.AspNetCore.Plugin.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Basic.IServices\QStack.Framework.Basic.IServices.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Basic.Services\Qstack.Framework.Basic.Services.csproj" />
+    <ProjectReference Include="..\QStack.Framework.HangFire\QStack.Framework.HangFire.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Persistent.EFCore.External\QStack.Framework.Persistent.EFCore.External.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Persistent.EFCore\QStack.Framework.Persistent.EFCore.csproj" />
+    <ProjectReference Include="..\QStack.Framework.SearchEngine\QStack.Framework.SearchEngine.csproj" />
+	  <ProjectReference Include="..\QStack.Framework.Util\QStack.Framework.Util.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="app_data\logs\app\" />
+    <Folder Include="app_data\logs\web\" />
+    <Folder Include="app_data\Migrations\" />
+    <Folder Include="app_data\Migrations\spiderdb\" />
+    <Folder Include="app_data\pluginpackages\QStack.Blog.DemoPlugin.Mvc\" />
+    <Folder Include="app_data\plugins\" />
+    <Folder Include="wwwroot\tools\ascii\" />
+    <Folder Include="wwwroot\tools\codeonline\Tiny-editor-master\" />
+    <Folder Include="wwwroot\tools\ka\flash\" />
+    <Folder Include="wwwroot\tools\ka\images\" />
+    <Folder Include="wwwroot\tools\webps\js\external\" />
+    <Folder Include="wwwroot\tools\rsa\rsa-js-php-master\" />
+    <Folder Include="wwwroot\upload\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\tools\aes\encrypt_aes.js" />
+    <None Include="wwwroot\tools\codeonline\Tiny-editor.js" />
+    <None Include="wwwroot\tools\des\encrypt_des.js" />
+    <None Include="wwwroot\tools\json\.gitignore" />
+    <None Include="wwwroot\tools\json\debug.log" />
+    <None Include="wwwroot\tools\json\favoricon.psd" />
+    <None Include="wwwroot\tools\json\js\clipboard.min.js" />
+    <None Include="wwwroot\tools\json\js\difflib.js" />
+    <None Include="wwwroot\tools\json\js\diffview.js" />
+    <None Include="wwwroot\tools\json\js\editor.js" />
+    <None Include="wwwroot\tools\json\js\FileSaver.js" />
+    <None Include="wwwroot\tools\json\js\helper.js" />
+    <None Include="wwwroot\tools\json\js\jquery.js" />
+    <None Include="wwwroot\tools\json\js\jsonlint.js" />
+    <None Include="wwwroot\tools\json\js\localforage.min.js" />
+    <None Include="wwwroot\tools\json\js\main.js" />
+    <None Include="wwwroot\tools\json\js\parse.js" />
+    <None Include="wwwroot\tools\json\js\uuid.js" />
+    <None Include="wwwroot\tools\json\js\vue.min.js" />
+    <None Include="wwwroot\tools\json\README.md" />
+    <None Include="wwwroot\tools\json\svg\icon.svg" />
+    <None Include="wwwroot\tools\ka\js\bootstrap.min.js" />
+    <None Include="wwwroot\tools\ka\js\jquery.min.js" />
+    <None Include="wwwroot\tools\ka\js\main.js" />
+    <None Include="wwwroot\tools\ka\js\zeroclipboard.min.js" />
+    <None Include="wwwroot\tools\make_pic_antimate\static\js\exif.min.js" />
+    <None Include="wwwroot\tools\make_pic_antimate\static\js\f241c62b799d461fb473e84db951ea21.js" />
+    <None Include="wwwroot\tools\make_pic_antimate\static\js\jquery-ui.min.js" />
+    <None Include="wwwroot\tools\make_pic_antimate\static\js\jquery.min.js" />
+    <None Include="wwwroot\tools\make_pic_antimate\static\js\make.js" />
+    <None Include="wwwroot\tools\make_pic_antimate\static\js\nod.js" />
+    <None Include="wwwroot\tools\make_pic_antimate\static\picture\icon-camera.svg" />
+    <None Include="wwwroot\tools\make_pic_antimate\static\picture\icon-close.svg" />
+    <None Include="wwwroot\tools\morse\js\bootstrap.min.js" />
+    <None Include="wwwroot\tools\morse\js\docs.min.js" />
+    <None Include="wwwroot\tools\morse\js\jquery.js" />
+    <None Include="wwwroot\tools\morse\js\particles.min.js" />
+    <None Include="wwwroot\tools\morse\js\xmorse.min.js" />
+    <None Include="wwwroot\tools\webps\js\b.js" />
+    <None Include="wwwroot\tools\webps\js\a.js" />
+    <None Include="wwwroot\tools\webps\js\gaoding-extend.js" />
+    <None Include="wwwroot\tools\webps\js\c.js" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_10.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_11.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_12.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_13.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_14.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_15.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_16.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_17.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_18.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_19.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_20.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_21.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_22.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_23.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_24.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_25.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_26.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_27.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_28.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_29.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_30.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_31.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_32.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_33.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_34.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_35.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_36.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_37.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_38.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_39.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_40.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_8.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\frame_9.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_101_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_105_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_109_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_113_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_117_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_121_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_125_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_129_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_133_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_137_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_141_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_145_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_149_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_153_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_157_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_161_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_165_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_169_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_173_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_177_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_21_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_25_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_29_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_33_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_37_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_41_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_45_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_49_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_53_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_57_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_61_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_65_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_69_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_73_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_77_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_81_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_85_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_89_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_93_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_0\mask_97_0.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_101_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_105_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_109_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_113_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_117_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_121_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_125_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_129_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_133_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_137_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_141_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_145_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_149_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_153_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_157_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_161_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_165_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_169_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_173_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_177_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_21_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_25_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_29_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_33_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_37_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_41_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_45_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_49_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_53_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_57_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_61_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_65_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_69_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_73_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_77_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_81_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_85_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_89_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_93_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_1\mask_97_1.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_101_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_105_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_109_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_113_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_117_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_121_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_125_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_129_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_133_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_137_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_141_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_145_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_149_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_153_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_157_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_161_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_165_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_169_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_173_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_177_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_21_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_25_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_29_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_33_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_37_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_41_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_45_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_49_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_53_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_57_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_61_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_65_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_69_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_73_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_77_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_81_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_85_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_89_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_93_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_2\mask_97_2.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_101_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_105_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_109_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_113_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_117_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_121_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_125_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_129_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_133_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_137_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_141_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_145_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_149_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_153_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_157_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_161_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_165_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_169_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_173_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_177_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_21_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_25_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_29_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_33_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_37_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_41_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_45_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_49_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_53_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_57_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_61_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_65_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_69_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_73_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_77_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_81_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_85_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_89_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_93_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_3\mask_97_3.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_101_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_105_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_109_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_113_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_117_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_121_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_125_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_129_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_133_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_137_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_141_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_145_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_149_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_153_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_157_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_161_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_165_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_169_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_173_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_177_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_21_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_25_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_29_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_33_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_37_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_41_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_45_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_49_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_53_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_57_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_61_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_65_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_69_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_73_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_77_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_81_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_85_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_89_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_93_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_4\mask_97_4.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_101_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_105_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_109_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_113_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_117_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_121_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_125_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_129_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_133_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_137_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_141_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_145_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_149_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_153_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_157_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_161_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_165_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_169_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_173_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_177_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_21_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_25_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_29_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_33_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_37_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_41_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_45_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_49_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_53_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_57_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_61_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_65_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_69_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_73_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_77_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_81_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_85_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_89_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_93_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_5\mask_97_5.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_101_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_105_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_109_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_113_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_117_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_121_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_125_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_129_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_133_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_137_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_141_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_145_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_149_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_153_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_157_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_161_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_165_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_169_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_173_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_177_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_21_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_25_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_29_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_33_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_37_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_41_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_45_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_49_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_53_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_57_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_61_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_65_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_69_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_73_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_77_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_81_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_85_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_89_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_93_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_6\mask_97_6.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_101_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_105_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_109_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_113_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_117_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_121_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_125_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_129_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_133_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_137_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_141_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_145_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_149_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_153_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_157_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_161_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_165_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_169_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_173_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_177_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_21_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_25_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_29_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_33_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_37_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_41_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_45_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_49_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_53_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_57_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_61_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_65_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_69_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_73_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_77_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_81_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_85_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_89_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_93_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\mask_7\mask_97_7.dat" />
+    <None Include="wwwroot\tools\qrcode\qrcode\cache\Thumbs.db" />
+    <None Include="wwwroot\tools\rsa\LICENSE" />
+    <None Include="wwwroot\tools\rsa\README.md" />
+    <None Include="wwwroot\tools\rsa\rsa_pubkey.js" />
+    <None Include="wwwroot\tools\rsa\src\js\jsencrypt\jsencrypt.js" />
+    <None Include="wwwroot\tools\rsa\src\js\jsencrypt\jsencrypt.min.js" />
+    <None Include="wwwroot\tools\rsa\src\js\zepto.min.js" />
+    <None Include="wwwroot\tools\rsa\src\key\private.pem" />
+    <None Include="wwwroot\tools\rsa\src\key\public.pem" />
+    <None Include="wwwroot\tools\timestamp\timestamp.js" />
+    <None Include="wwwroot\tools\useragent\Browser.js" />
+    <None Include="wwwroot\tools\yasuotu\tinyimg.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Z.EntityFramework.Extensions.EFCore">
+      <HintPath>..\lib\Z.EntityFramework.Extensions.EFCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+
+
+</Project>

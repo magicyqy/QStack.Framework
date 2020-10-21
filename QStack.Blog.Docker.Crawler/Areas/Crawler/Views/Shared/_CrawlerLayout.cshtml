@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DotnetSpider</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link href="https://cdn.bootcdn.net/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icheck-bootstrap@3.0.1/icheck-bootstrap.min.css" asp-append-version="true" />
+    <environment names="Development">
+        <link rel="stylesheet" href="~/crawlerassets/css/sweetalert.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/crawlerassets/css/site.css" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/crawlerassets/css/sweetalert.min.css" asp-append-version="true" />       
+        <link rel="stylesheet" href="~/crawlerassets/css/site.min.css" asp-append-version="true" />
+    </environment>
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="@(QStack.Blog.Docker.Crawler.CrawlerPluginContext.Area)" asp-controller="Home" asp-action="Index">DotnetSpider</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a> *@
+                        @* </li> *@
+                        <li class="nav-item margin-left-10">
+                            <a class="nav-link text-dark" asp-area="@(QStack.Blog.Docker.Crawler.CrawlerPluginContext.Area)" asp-controller="Agent" asp-action="Index">Agent</a>
+                        </li>
+                        <li class="nav-item margin-left-10">
+                            <a class="nav-link text-dark" asp-area="@(QStack.Blog.Docker.Crawler.CrawlerPluginContext.Area)" asp-controller="Spider" asp-action="Index">Spider</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3" id="app">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - DotnetSpider
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+    </script>
+    <script src="~/crawlerassets/js/sweetalert.js" asp-append-version="true"></script>
+   <script src="https://cdn.bootcdn.net/ajax/libs/select2/4.0.9/js/select2.full.min.js"></script>
+   <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+    <environment names="Development">
+        <script src="~/crawlerassets/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/crawlerassets/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    @await Html.PartialAsync("Pagination")
+    @await Html.PartialAsync("Select2")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

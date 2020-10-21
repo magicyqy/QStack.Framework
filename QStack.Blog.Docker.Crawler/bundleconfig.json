@@ -1,0 +1,91 @@
+[
+  {
+    "outputFileName": "wwwroot/crawlerassets/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/crawlerassets/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/crawlerassets/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/crawlerassets/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/crawlerassets/css/sweetalert.min.css",
+    "inputFiles": [
+      "wwwroot/crawlerassets/css/sweetalert.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/crawlerassets/js/pagination.min.js",
+    "inputFiles": [
+      "wwwroot/crawlerassets/js/pagination.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/crawlerassets/js/select2.min.js",
+    "inputFiles": [
+      "wwwroot/crawlerassets/js/select2.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/crawlerassets/js/spider.min.js",
+    "inputFiles": [
+      "wwwroot/crawlerassets/js/spider.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/crawlerassets/js/agent.min.js",
+    "inputFiles": [
+      "wwwroot/crawlerassets/js/agent.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/crawlerassets/js/agentHeartbeat.min.js",
+    "inputFiles": [
+      "wwwroot/crawlerassets/js/agentHeartbeat.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/crawlerassets/js/spiderHistory.min.js",
+    "inputFiles": [
+      "wwwroot/crawlerassets/js/spiderHistory.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

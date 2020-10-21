@@ -1,0 +1,38 @@
+﻿@model Tuple<List<QStack.Framework.Basic.ViewModel.Shop.ProductCategoryDto>,List<QStack.Framework.Basic.ViewModel.Shop.ProductDto>>
+    <div class="col-lg-3 shop_right_sidebar">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Product">
+            <div class="input-group-append">
+                <span class="input-group-text theme_btn"><i class="fa fa-search"></i></span>
+            </div>
+        </div>
+
+        <div class="s_widget">
+            <h4>分类 :</h4>
+            <ul class="categories side-section">
+                @foreach (var item in Model.Item1)
+                {
+                <li><a href="@(Url.RouteUrl("default",new { controller = "shop", action = "pc", id = item.Id }))" class="@(item.IsActive?" active":"")">@(item.Name)</a></li>
+                }
+
+            </ul>
+        </div>
+        <div class="s_widget popular_products">
+            <h4>热 门</h4>
+            <div class="side-section">
+                @foreach (var item in Model.Item2)
+                {
+                    <div class="media media_fast">
+                        <a href="@(Url.GetProductUrl(item.Id))"><img src="@(item.ImageThumbUrl)" alt="@(item.Name)"></a>
+                        <div class="media-body">
+                            <a href="@(Url.GetProductUrl(item.Id))">@(item.Name)</a>
+                            @if (item.Price == 0)
+                            {<h6 class="price-free">免费</h6> }
+                            else
+                            { <h6>￥@(item.PurchasePrice?.ToString("F2"))</h6>}
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>

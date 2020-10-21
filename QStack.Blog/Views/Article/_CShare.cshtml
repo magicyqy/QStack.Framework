@@ -1,0 +1,9 @@
+﻿@model QStack.Framework.Basic.ViewModel.Articles.ArticleDto
+<div class="cc-common">    
+    <div class="cc-banquan">
+        <strong>
+            此文章来源于互联网，本站仅作转载分享之用。如果文章内容、图片有涉及到版权问题，请联系我，我会尽快进行处理！</strong><br>
+        <strong>原文地址：</strong><a href="@(Model.SourceUrl)" title="" target="_blank">@(Model.SourceUrl)</a><br>
+        <strong>来源：@(string.IsNullOrWhiteSpace(Model.Author)?"佚名": Model.Author) -  @(string.IsNullOrWhiteSpace(Model.Source) ? "互联网" : Model.Source)</strong>
+    </div>
+</div>

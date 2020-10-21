@@ -1,0 +1,46 @@
+﻿@model QStack.Framework.Core.Entity.PageModel<QStack.Framework.Basic.ViewModel.Shop.ProductDto>
+@section header
+{
+    <link href="~/css/shop.css" rel="stylesheet">
+    <meta name="keywords" content="Qy小栈,.net,.netcore,前端,源码,工具,梯子" />
+    <meta name="description" content="Qy小栈源码与各种工具软件分享，.net源码、.netcore源码、商城源码、电子白板源码、科学上网" />
+}
+<div class="content_wrap lyear-wrapper">
+
+    <!-- Shop with sidebar -->
+    <section class="shop_with_sidebar">
+        <div class="container">
+            <div class="row">
+                @await Component.InvokeAsync("ProductCatagory", Convert.ToInt32(ViewContext.RouteData.Values["id"]))
+                <div class="col-lg-9 shop_left_sidebar">
+
+                    <div class="row">
+                        @foreach (var item in Model.Data)
+                        {
+
+                            <div class="col-md-3 col-sm-4">
+                                <div class="shop_items">
+                                    <a href="@(Url.GetProductUrl(item.Id))" class="shop_img"><img src="@(item.ImageThumbUrl)" alt="@(item.SEOTitle)"></a>
+                                    <div class="shop_text">
+                                        <a href="@(Url.GetProductUrl(item.Id))" class="s_heding">@(item.Name)</a>
+                                        @if (item.Price == 0)
+                                        {<h4 class="price-free">免费</h4> }
+                                        else
+                                        { <h4>￥@(item.PurchasePrice?.ToString("F2"))</h4>}
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+
+                    </div>
+                    @{await Html.RenderPartialAsync("_Pager", Model);}
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End Shop with side bar -->
+
+</div>

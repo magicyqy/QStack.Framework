@@ -1,0 +1,5 @@
+{
+  "Docker": "tcp://localhost:2375",
+  "DockerVolumes": "/data/dotnetspider/logs:/app/logs;/etc/hosts:/etc/hosts"
+ 
+}

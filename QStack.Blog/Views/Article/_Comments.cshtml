@@ -1,0 +1,82 @@
+﻿<section class="comment-section lyear-arc">
+    <div class="mt-4 lyear-comment-title">
+        <h4><span>评论 (<b class="comment-count">0</b>)</span></h4>
+    </div>
+    <ul class="media-list list-unstyled lyear-comment">
+    </ul>
+    <div class="row">
+        <div class="col-lg-12" id="page-container"></div>
+    </div>
+    <div id="respond" class="comment-respond">
+        <div class="mt-2">
+            <h4><span>说点什么吧...</span> <small class="cancel-comment-reply" onclick="cancelReply()">(取消回复)</small></h4>
+        </div>
+        <form id="comment-form" action="#" method="post" class="mt-4 lyear-comment-form">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input id="author" readonly="readonly" class="form-control" placeholder="昵称*" name="nickname" type="text" required="" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input id="email" class="form-control" placeholder="邮箱*" name="email" type="text" required="" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <textarea id="comment" class="form-control" rows="5" placeholder="想说的内容" name="commentText" required=""></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <button name="submit" type="button" id="submit" class="btn btn-primary" onclick="sumitForm(this); return false;">发表评论</button>
+                        <input type='hidden' name='articleId' value='' id='comment_arc_id' />
+                        <input type='hidden' name='parentId' id='parentId' value='' />
+                        <input type='hidden' name='replyTo' id='replyTo' value='' />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<script id="comment-page-tmpl" type="text/html">
+    <ul class="pagination">
+        <li class="page-item" style="line-height:30px; margin-right:5px;">第 {{page}}/{{pageCount==0?1:pageCount}} 页</li>
+        <li class="page-item"><a class="page-link last-page"><i class="fa fa-chevron-left"></i>上一页</a></li>
+        <li class="page-item"><a class="page-link next-page">下一页<i class="fa fa-chevron-right"></i></a></li>
+    </ul>
+</script>
+<script id="comment-tmpl" type="text/html">
+    <li id="comment-{{id}}">
+        {{include 'comment-children-tmpl' $data}}
+        {{ if children.length > 0 }}
+        {{each children}}
+        {{include 'comment-children-tmpl' $value}}
+        {{/each}}
+        {{if pageSize < childrenCount}}
+        <p class="lzl_more"><span>还有{{childrenCount - pageSize}}条回复，</span><a class="noopener" data-page="2" data-pagesize="{{pageSize}}" data-commentid="{{id}}" class="j_lzl_m">查看</a></p>
+        {{/if}}
+        {{ /if }}
+    </li>
+</script>
+<script id="comment-children-tmpl" type="text/html">
+    <div class="media {{if parentId}} media-child{{/if}}" id="media-{{id}}">
+        <img class="d-flex mr-3 rounded-circle" src="~/images/author.jpg" alt="{{nickName}}">
+        <div class="media-body">
+            <a href="#!" class="text-custom reply-btn" data-id="{{id}}" data-parentid="{{parentId}}" data-nickname="{{nickName}}"><i class="mdi mdi-reply"></i>&nbsp; 回复</a>
+            <h4 class="media-heading"><a href="#!">{{nickName}}</a>{{if nickName=='Qy'}}<span class="blogger">站长</span>{{/if}}<span class="text-muted post-date">{{createTime}}</span></h4>
+
+            <p> {{if replyTo}}@@{{replyTo}}：{{/if}} {{commentText}}</p>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="comment-children-page-tmpl">
+    {{if page < pageCount}}
+    <p class="lzl_more"><span>还有{{totalCount - page*pageSize}}条回复，</span><a class="noopener" data-page="{{page+1}}" data-pagesize="{{pageSize}}" data-commentid="{{data[0].parentId}}" class="j_lzl_m">查看</a></p>
+    {{/if}}
+</script>

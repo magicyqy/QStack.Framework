@@ -1,0 +1,21 @@
+﻿@model List<QStack.Framework.Basic.ViewModel.Shop.ProductDto>
+<div class="col-12">
+    <h2 class="r_heding">同类源码</h2>
+</div>
+<!-- shop_items -->
+@foreach(var item in Model)
+{
+<div class="col-md-4 col-sm-6">
+    <div class="shop_items">
+        <a href="@(Url.GetProductUrl(item.Id))" class="shop_img"><img src="@(item.ImageThumbUrl)" alt="@(item.Name)"></a>
+        <div class="shop_text">
+            <a href="@(Url.GetProductUrl(item.Id))" class="s_heding">@(item.Name)</a>
+            @if (item.Price == 0)
+            {<h4 class="price-free">免费</h4> }
+            else
+            { <h4>￥@(item.PurchasePrice?.ToString("F2"))</h4>}
+            <a href="@(Url.GetProductUrl(item.Id))" class="theme_btn">去看看</a>
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,62 @@
+﻿@model Tuple<List<QStack.Framework.Basic.ViewModel.Articles.ArticleDto>
+    , List<QStack.Framework.Basic.ViewModel.Articles.TagDto>,Dictionary<DateTime,int>>
+        <!-- 侧边栏 -->
+        <div class="col-xl-4">
+            <div class="lyear-sidebar">
+                <!-- 热门文章 -->
+                <aside class="widget widget-hot-posts">
+                    <div class="widget-title">热门文章</div>
+                    <ul>
+                        @foreach(var item in Model.Item1)
+                        {
+                        <li>
+                            <a href="@(Url.GetArticleUrl(item.Id))">@(item.Title)</a> <span>(@(item.PageViews))</span>
+                        </li>
+                        }
+                    </ul>
+                </aside>
+
+                <!-- 归档 -->
+                <aside class="widget">
+                    <div class="widget-title">归档</div>
+                    <ul>
+                        @foreach (var item in Model.Item3)
+                        {
+                            <li><a href="#">@(item.Key.Year) @(item.Key.Month)月</a> (@(item.Value))</li>
+                        }
+
+                        @*<li><a href="#">2019 四月</a> (08)</li>
+                        <li><a href="#">2019 五月</a> (11)</li>
+                        <li><a href="#">2019 六月</a> (21)</li>*@
+                    </ul>
+                </aside>
+
+                <!-- 标签 -->
+                <aside class="widget widget-tag-cloud">
+                    <div class="widget-title">标签</div>
+                    <div class="tag-cloud">
+                        @{ 
+                            var badgeColor = new string[]
+                            {
+                                "badge-primary",
+                                "badge-light",
+                                "badge-danger",
+                                "badge-success",
+                                "badge-info",
+                                "badge-warning",
+                                "badge-dark",
+                                "badge-secondary"
+                            };
+                            var count = Model.Item2.Count();
+                            
+                        }
+                        @for (int i=0;i< count; i++)
+                        {
+                            <a href="/tag/@(Model.Item2.ElementAt(i).Id)" class="badge @(badgeColor[i%badgeColor.Length])">@(Model.Item2.ElementAt(i).Name)</a>
+                        }
+                       
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <!-- 侧边栏 end -->

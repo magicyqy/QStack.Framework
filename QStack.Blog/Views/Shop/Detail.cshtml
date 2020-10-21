@@ -1,0 +1,79 @@
+﻿@model QStack.Framework.Basic.ViewModel.Shop.ProductDto
+@section header
+{
+    <link href="~/css/shop.css" rel="stylesheet">
+    <meta name="keywords" content="@(Model.SeoKeyWord)" />
+    <meta name="description" content="@(Model.SeoDescription)" />
+}
+<section class="shop_with_sidebar">
+    <div class="container">
+        <div class="row">
+            @await Component.InvokeAsync("ProductCatagory", Model.ProductCategoryId)
+            <div class="col-lg-9 shop_left_sidebar">
+                <div class="row">
+                    <div class="col-md-4 min_img">
+                        <img src="@(Model.ImageUrl)" alt="">
+                    </div>
+                    <div class="col-md-8 product_details">
+                        <h2>@(Model.Name)</h2>
+                        <h4>分类:  @(Model.ProductCategoryName)</h4>
+                        <ul class="value-section">
+                            @if (Model.Price > 0)
+                            {
+                                <li>
+                                    <h1>￥@(Model.Price?.ToString("F2"))</h1>
+                                    <span><a class="theme_btn">在线联系</a></span>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <span><a href="#product-download" class="theme_btn">免费下载</a></span>
+                                </li>
+
+                            }
+                        </ul>
+                    </div>
+                    <div class="review-tab col-12">
+                        <ul class="nav nav-tabs" style="
+                                    border-bottom: 1px solid #e7c884;
+                                ">
+                            <li><a data-toggle="tab" href="#home" class="active theme_btn">资源详情</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane fade in active show">
+                                @(Html.Raw(Model.ProductContent))
+                            </div>
+                        </div>
+                        <ul class="nav nav-tabs" id="product-download" style="
+                                    border-bottom: 1px solid #e7c884;
+                                ">
+                            <li><a data-toggle="tab" href="#home" class="active theme_btn">下载</a></li>
+                        </ul>
+
+                        <div class="download-content">
+                            @if (Model.Price <= 0)
+                            {
+                                for (var i = 0; i < Model.ProductDownloads.Count; i++)
+                                {
+                                    var url = ViewContext.HttpContext.Request.GetHostUri() + Url.RouteUrl("default", new { controller = "download", action = "p", id = Model.ProductDownloads[i].ProductId, gid = Model.ProductDownloads[i].Gid });
+                                    <div class="cc-download">
+                                        <p>@(Model.ProductDownloads[i].ExtDesc)</p>
+                                        <strong>下载地址@(i+1)：</strong><a href="@(url)" target="_blank">@(url)</a><br>
+                                        <strong>分享码：</strong><b>@(Model.ProductDownloads[i].ValidCode)</b>
+                                    </div>
+                                }
+
+                            }
+                        </div>
+
+                    </div>
+                    <hr />
+                    @await Component.InvokeAsync("RelatedProduct", Model.ProductCategoryId)
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Shop with side bar -->

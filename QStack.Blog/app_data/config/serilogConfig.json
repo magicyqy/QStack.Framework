@@ -1,0 +1,254 @@
+{
+  "Serilog": {
+    "MinimumLevel": "Information", //<- global error level. Ovveride all local error level
+    "WriteTo": [
+      //配置console过滤
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "WriteTo": [
+              {
+                "Name": "Console"
+              }
+            ]
+            ,
+            "Filter": [
+              {
+                "Name": "ByExcluding",
+                "Args": {
+                  //类sql写法
+                  "expression": "@Level <> 'Error' and StartsWith(SourceContext, 'ServiceFramework.')"
+                }
+              }
+            ]
+          }
+        }
+      },
+      //web info日志
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "MinimumLevel": "Debug", // <- local error level. 
+            //Only records with Information logging level will be written to the log file
+            //but if ovveride global level to Debug, and dont override local error level -> it will still be global
+            "WriteTo": [
+              {
+                "Name": "Async",
+                "Args": {
+                  "configure": [
+                    {
+                      "Name": "File",
+                      "Args": {
+                        "RestrictedToMinimumLevel": "Information",
+                        "path": "app_data/logs/web/info-.log",
+                        "shared": true,
+                        "rollingInterval": "Day",
+                        "fileSizeLimitBytes": 512000,
+                        "rollOnFileSizeLimit": true
+                        //,"formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Blog"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "Filter": [
+              {
+                "Name": "ByIncludingOnly",
+                "Args": {
+                  //类sql写法
+                  // "expression": "SourceContext = 'QStack.Blog'"
+                  "expression": " StartsWith(SourceContext,'Microsoft') and SourceContext <> 'Microsoft.EntityFrameworkCore.Database.Command' "
+                }
+              },
+              {
+                "Name": "ByExcluding",
+                "Args": {
+                  //类sql写法
+                  "expression": "@Level = 'Error'"
+                }
+              }
+            ]
+          }
+        }
+      },
+      //web error日志
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "MinimumLevel": "Error", // <- local error level. 
+            //Only records with Information logging level will be written to the log file
+            //but if ovveride global level to Debug, and dont override local error level -> it will still be global
+            "WriteTo": [
+              {
+                "Name": "Async",
+                "Args": {
+                  "configure": [
+                    {
+                      "Name": "File",
+                      "Args": {
+                        "RestrictedToMinimumLevel": "Error",
+                        "path": "app_data/logs/web/error-.log",
+                        "shared": true,
+                        "rollingInterval": "Day",
+                        "fileSizeLimitBytes": 512000,
+                        "rollOnFileSizeLimit": true
+                        //,"formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Blog"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "Filter": [
+              {
+                "Name": "ByIncludingOnly",
+                "Args": {
+                  //类sql写法
+                  "expression": "StartsWith(SourceContext,'Microsoft') or  StartsWith(SourceContext,'QStack.Blog')"
+                }
+              }
+            ]
+          }
+        }
+      },
+      //记录sql
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "MinimumLevel": "Debug",
+            "WriteTo": [
+
+              {
+                "Name": "Async",
+                "Args": {
+                  "configure": [
+                    {
+
+                      "Name": "File",
+                      "Args": {
+                        "RestrictedToMinimumLevel": "Information",
+                        "path": "app_data/logs/sql-.log",
+                        "shared": true,
+                        "rollingInterval": "Day",
+                        "fileSizeLimitBytes": 512000,
+                        "rollOnFileSizeLimit": true,
+                        "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}]  {Message:lj}{NewLine}{NewLine}{Exception}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "Filter": [
+              {
+                "Name": "ByIncludingOnly",
+                "Args": {
+                  "expression": "EnableSql=true and SourceContext = 'Microsoft.EntityFrameworkCore.Database.Command' "
+                }
+              }
+            ]
+          }
+        }
+      },
+      //app info日志，分为info和error
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "MinimumLevel": "Information",
+            "WriteTo": [             
+              {
+                "Name": "Async",
+                "Args": {
+                  "configure": [
+                    {
+                      "Name": "File",
+                      "Args": {
+                        "RestrictedToMinimumLevel": "Information",
+                        "path": "app_data/logs/app/info-.log",
+                        "shared": true,
+                        "rollingInterval": "Day",
+                        "fileSizeLimitBytes": 512000,
+                        "rollOnFileSizeLimit": true,
+                        "formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Blog"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "Filter": [
+              {
+                "Name": "ByIncludingOnly",
+                "Args": {
+                  "expression": "EnableAppInfo=true and StartsWith(SourceContext, 'ServiceFramework.')"
+                }
+              },
+              {
+                "Name": "ByExcluding",
+                "Args": {
+                  //类sql写法
+                  "expression": "@Level = 'Error'"
+                }
+              }
+
+            ]
+          }
+        }
+      },
+      //app error日志
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "MinimumLevel": "Error",
+            "WriteTo": [
+              {
+                "Name": "Async",
+                "Args": {
+                  "configure": [
+                    {
+                      "Name": "File",
+                      "Args": {
+                        "RestrictedToMinimumLevel": "Error",
+                        "path": "app_data/logs/app/error-.log",
+                        "shared": true,
+                        "rollingInterval": "Day",
+                        "fileSizeLimitBytes": 512000,
+                        "rollOnFileSizeLimit": true,
+                        "formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Blog"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "Filter": [
+              {
+                "Name": "ByIncludingOnly",
+                "Args": {
+                  "expression": "StartsWith(SourceContext, 'ServiceFramework.')"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "Enrich": [
+      "FromLogContext"
+    ],
+    "Properties": {
+      "Application": "QStack.Blog",
+      "EnableAppInfo": false,
+      "EnableSql": true
+    }
+  }
+
+
+}

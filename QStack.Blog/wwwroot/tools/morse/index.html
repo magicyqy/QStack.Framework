@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>摩斯密码 - Qy小栈</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="shortcut icon" href="https://pay-cloud.com/favicon.ico" />
+			<link href="css/bootstrap.min.css" rel="stylesheet">
+			<link href="css/docs.min.css" rel="stylesheet">
+			<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+			<link href="css/xsj-base.css" rel="stylesheet">
+			<style type="text/css">
+			pre {
+				background-color: #f6dcd7;
+				padding: 10px 15px;
+				white-space: pre-wrap;
+				word-wrap: break-word;
+			}
+			pre.strong {
+				font-weight: bold;
+			}
+			.main{
+				width:100%;
+				height:auto!important;height:260px;min-height:260px;
+				border-radius:10px;
+				box-shadow:#999 0px 0px 6px;
+				padding:20px;
+				margin-top:10px;
+			}
+			.panel-default{
+				width:100%;
+				height:auto!important;height:100px;min-height:100px;
+				border-radius:10px;
+				box-shadow:#999 0px 0px 6px;
+				margin-top:10px;
+			}
+			</style>
+	</head>
+<body>
+		<div class="top">
+			<header class="navbar navbar-static-top bs-docs-nav" role="banner">
+				<div class="container" >
+					<div class="navbar-header" >
+						<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a href="#" class="navbar-brand">摩斯密码</a>
+					</div>
+					<nav id="bs-navbar" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li >
+                                <a href="https://qystack.top/">Qy小栈</a>
+
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="https://qystack.top/" target="_blank">Qy小栈</a></li>
+						</ul>
+					</nav>
+				</div>
+			</header>
+			<div id="particles-js" class="canvas"></div>
+			<i class="fa fa-terminal" aria-hidden="true" style="font-size:15em;color:#fff;margin-top:50px;"></i>
+			<h1 style="color:#fff;">摩斯密码</h1>
+		</div>
+		<div class="container">
+			<div class="main">
+				<form>
+					<textarea class="form-control" rows="5" id="input">http://bgongju.com/</textarea>
+					<div class="form-group has-success" style="margin-top:15px;">
+						<label class="col-sm-1 control-label" for="inputSuccess">空格</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id='space' value='_' placeholder='space' />
+						</div>
+					</div>
+					<div class="form-group has-success">
+						<label class="col-sm-1 control-label" for="inputSuccess">短</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id='short' value='.' placeholder='short' />
+						</div>
+					</div>
+					<div class="form-group has-success">
+						<label class="col-sm-1 control-label" for="inputSuccess">长</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id='long' value='-' placeholder='long'  />
+						</div>
+					</div>
+					<div class="col-sm-6" style="margin-top:10px;">
+						<input class="form-control btn-primary" type='button' onclick='encode()' value='加密' />
+					</div>
+					<div class="col-sm-6" style="margin-top:10px;">
+						<input class="form-control btn-success" type='button' onclick='decode()' value='解密' />
+					</div>
+				</form>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					结果
+				</div>
+				<div class="panel-body">
+					<div id='result'></div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					介绍
+				</div>
+				<div class="panel-body">
+				<a href="https://baike.baidu.com/item/%E6%91%A9%E5%B0%94%E6%96%AF%E7%94%B5%E7%A0%81/1527853?fr=aladdin">摩斯密码</a> 是一个文字转换成特殊电码的工具。
+				在上方输入你要转换的文字/摩斯密码，可以进行编码/解码。
+				还可以在输入框下面添加一些字符，加强代码。
+
+				</div>
+			</div>
+			<hr />
+			<p>
+			Copyright © 2020<a href="https://qystack.top">Qy小栈</a>
+			</p>
+		</div>
+  <script type="text/javascript" src="js/xmorse.min.js"></script>
+  <script type="text/javascript">
+    function $_(id) {
+      return document.getElementById(id);
+    }
+    function getoption() {
+      return {
+        space: $_('space').value,
+        short: $_('short').value,
+        long: $_('long').value,
+      };
+    }
+    function encode() {
+      $_('result').innerHTML = xmorse.encode($_('input').value, getoption());
+    }
+    function decode() {
+      $_('result').innerHTML = xmorse.decode($_('input').value, getoption()) || '无效的摩斯电码！';
+    }
+  </script>
+	    <script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/docs.min.js"></script>
+		<script src="js/particles.min.js"></script><!-- 动态背景 -->
+		<script type="text/javascript"> 
+particlesJS('particles-js',
+  
+  {
+    "particles": {
+      "number": {
+        "value": 80,
+        "density": {
+          "enable": true,
+          "value_area": 800
+        }
+      },
+      "color": {
+        "value": "#ffffff"
+      },
+      "shape": {
+        "type": "circle",
+        "stroke": {
+          "width": 0,
+          "color": "#000000"
+        },
+        "polygon": {
+          "nb_sides": 5
+        },
+        "image": {
+          "src": "img/github.svg",
+          "width": 100,
+          "height": 100
+        }
+      },
+      "opacity": {
+        "value": 0.5,
+        "random": false,
+        "anim": {
+          "enable": false,
+          "speed": 1,
+          "opacity_min": 0.1,
+          "sync": false
+        }
+      },
+      "size": {
+        "value": 5,
+        "random": true,
+        "anim": {
+          "enable": false,
+          "speed": 40,
+          "size_min": 0.1,
+          "sync": false
+        }
+      },
+      "line_linked": {
+        "enable": true,
+        "distance": 150,
+        "color": "#ffffff",
+        "opacity": 0.4,
+        "width": 1
+      },
+      "move": {
+        "enable": true,
+        "speed": 6,
+        "direction": "none",
+        "random": false,
+        "straight": false,
+        "out_mode": "out",
+        "attract": {
+          "enable": false,
+          "rotateX": 600,
+          "rotateY": 1200
+        }
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": true,
+          "mode": "repulse"
+        },
+        "onclick": {
+          "enable": true,
+          "mode": "push"
+        },
+        "resize": true
+      },
+      "modes": {
+        "grab": {
+          "distance": 400,
+          "line_linked": {
+            "opacity": 1
+          }
+        },
+        "bubble": {
+          "distance": 400,
+          "size": 40,
+          "duration": 2,
+          "opacity": 8,
+          "speed": 3
+        },
+        "repulse": {
+          "distance": 100
+        },
+        "push": {
+          "particles_nb": 4
+        },
+        "remove": {
+          "particles_nb": 2
+        }
+      }
+    },
+    "retina_detect": true,
+    "config_demo": {
+
+    }
+  }
+
+);
+</script>
+   <div style="display:none"> </div>
+</body>
+</html>

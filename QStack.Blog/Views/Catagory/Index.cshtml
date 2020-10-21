@@ -1,0 +1,5 @@
+﻿@model QStack.Framework.Core.Entity.PageModel<QStack.Framework.Basic.ViewModel.Articles.ArticleDto>
+@{
+    //ViewData["Title"] = Model.Item1?.Name;
+}
+@await Html.PartialAsync("~/Views/Home/Index.cshtml", Model)

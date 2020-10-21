@@ -1,0 +1,106 @@
+﻿@{ 
+     Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@(ViewData["Title"]==null?"Qy小栈 — 分享技术&生活": ViewData["Title"]+ " — Qy小栈")</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Qy" />
+    <meta name="keywords" content="在线ps，在线ps编辑，在线ps编辑器，ps在线，在线photoshop" />
+    <meta name="description"
+          content="欢迎使用由我爱学习网提供的ps在线编辑器，免去下载ps，不下载完全使用ps全部功能，在线ps照片处理，在线ps合成图片，在线ps编辑图片，在线调整和美化您的图像。" />
+
+    <style type="text/css">
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #con {
+            height: calc(100vh - 90px);
+        }
+
+        a:link {
+            color: #999999;
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: #999999;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #CC6600;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: #999999;
+        }
+
+        .head {
+            background-color: #30708d;
+            width: 100%;
+            height: 90px;
+            z-index: 999;
+            position: absolute;
+        }
+
+        .ads_center {
+            width: 900px;
+            max-height: 90px;
+            position: absolute;
+            left: 50%;
+            top: 0%;
+            transform: translate(-50%, 0%);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main_header_area" id="header">
+        <div class="container">
+            <div class="header_menu">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="/"><img src="~/images/banner_logo.png" alt=""></a>
+                    <!-- Small Divice Menu-->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar_supported" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <SCRIPT LANGUAGE="Javascript">
+    var Words = "%20%20%20%20%20%20%20%20%20%20%20%20%3Cdiv%20id%3D%22con%22%20%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ciframe%20style%3D%22overflow%3Ahidden%3Bmargin-top%3A%2090px%3B%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20%20frameborder%3D%220%22%20scrolling%3D%22no%22%20src%3D%22iframe/runPS.html%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/iframe%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E";
+
+    function OutWord() {
+        var NewWords;
+        NewWords = unescape(Words);
+        document.write(NewWords);
+    }
+
+    OutWord();
+    </SCRIPT>
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F9f604f900f5e9600424a4d1f9c67ea0c' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+</body>
+
+</html>

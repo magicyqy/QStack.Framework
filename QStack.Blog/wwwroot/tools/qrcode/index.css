@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin:auto;
+}
+form{
+	margin:auto;
+}
+#logo{
+	margin:auto;
+	width:214px;
+	height:87px;
+	clear:both;
+}
+#m_body{
+	margin:auto;
+	width:760px;
+	clear:both;
+}
+#m_bot{
+	margin:auto;
+	width:760px;
+	height:90px;
+	font-size:14px;
+	line-height:90px;
+	text-align:center;
+}

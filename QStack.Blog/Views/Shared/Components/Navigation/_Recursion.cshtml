@@ -1,0 +1,19 @@
+﻿@model IEnumerable<QStack.Framework.Basic.ViewModel.NavigationMenuDto>
+    <ul class="dropdown-menu">
+        @foreach (var item in Model)
+        {
+            if (item.Children.Count == 0)
+            {
+                <li><a href="@(item.Url)">@(item.Name)</a></li>
+            }
+            else
+            {
+                 <li class="dropdown">
+                     <a class="nav-link dropdown-toggle" href="@(item.Url)" role="button" data-toggle="dropdown"
+                        aria-expanded="false">@(item.Name)</a>
+                     @await Html.PartialAsync("_Recursion",item.Children)
+                 </li>
+            }
+        }
+       
+    </ul>

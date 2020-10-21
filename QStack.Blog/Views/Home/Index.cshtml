@@ -1,0 +1,62 @@
+﻿@model QStack.Framework.Core.Entity.PageModel<QStack.Framework.Basic.ViewModel.Articles.ArticleDto>
+@section header{
+    <meta name="keywords" content="Qy小栈,.net,.netcore,技术,编程,资讯,源码,程序员工具" />
+    <meta name="description" content="Qy小栈:关注.net core编程技术，服务器建站，分享生活资讯新闻" />
+}
+
+<div class="lyear-wrapper">
+    <section class="mt-4 pb-4">
+        <div class="container">
+
+            <div class="row">
+                <!-- 文章列表 -->
+                <div class="col-xl-8">
+                    @foreach (var item in Model.Data)
+                    {
+                        <article class="lyear-arc">
+                            <div class="arc-header">
+                                <h2 class="arc-title"><a href="@(Url.GetArticleUrl(item.Id))"><span class="arc-type @(item.ArticleType)">[@item.ArticleType.GetDescription()]</span> @(item.Title)</a></h2>
+                                <ul class="arc-meta">
+                                    <li><i class="fa fa-calendar-minus-o"></i> @(item.PublishTime?.ToString("yyyy-MM-dd"))</li>
+                                    <li><i class="fa fa-user-circle"></i> <span style="color:#11598d;"> @(item.Author)</span></li>
+                                    <li><i class="fa fa-folder-open-o"></i> @(item.CatagoryName)</li>
+                                    @if (item.Tags?.Count > 0)
+                                    {
+                                        <li>
+                                            <i class="fa fa-tags"></i>
+                                            @Html.Raw(string.Join(",", item.Tags.Select(t => $"<a href=\"/tag/{t.Id}\">{t.Name}</a>")))
+                                        </li>
+                                    }
+                                    <li><i class="fa fa-eye-slash"></i> <a>@(item.PageViews) 浏览</a></li>
+                                    @*<li><i class="mdi mdi-comment-multiple-outline"></i> <a href="#">3 评论</a></li>*@
+                                </ul>
+                            </div>
+                            <div class="arc-preview">
+                                @if (!string.IsNullOrWhiteSpace(item.CoverUrl))
+                                {
+                                    <a href="@(item.CoverUrl)"><img src="@(item.CoverUrl)" alt="" class="img-fluid rounded"></a>
+                                }
+
+                            </div>
+                            <div class="arc-synopsis">
+                                <p>
+                                    @(item.Summary)
+                                </p>
+                            </div>
+                        </article>
+                    }
+
+                    @await Html.PartialAsync("_Pager", Model)
+                </div>
+                <!-- 内容 end -->
+                <!-- 侧边栏 -->
+                @await Component.InvokeAsync("SideBar")
+                <!-- 侧边栏 end -->
+            </div>
+
+        </div>
+        <!-- end container -->
+
+    </section>
+</div>
+

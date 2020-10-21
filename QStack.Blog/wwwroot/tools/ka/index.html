@@ -1,0 +1,263 @@
+﻿<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>卡密生成系统 - Qy小栈</title>
+<meta name="keywords" content="卡密生成,卡密在线生成器,在线卡密批量生成器,卡密一键生成,在线卡密生成工具,自动发货卡密生成,自动发卡平台卡密生成,在线卡密对批量生成,售卡平台伴侣">
+<meta http-equiv="description" content="本工具可在线卡密对儿生成工具,支持自定义卡号密码前后缀和位数,支持特殊字符,支持卡号和密码单独保存,用于生成适用于各类发卡平台的卡密数据">
+<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet">
+<link type="text/css" href="css/bootstrap-theme.min.css" rel="stylesheet">
+<link type="text/css" href="css/style.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/zeroclipboard.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+
+    </head>
+   <body class="newserver">
+<div class="container-fluid">
+    <form target="_self" method="post" action="" onsubmit="return runcode();">
+	<div class="row">
+	    <div class="form-inline">
+		<div class="form-group">
+		    <input type="text" id="prefix" class="form-control" name="prefix" placeholder="卡号前缀" value="">
+		</div>
+		<div class="form-group">
+		    <input type="text" id="suffix" class="form-control" name="suffix" placeholder="卡号后缀" value="">
+		</div>
+		<div class="form-group">
+		    <input type="number" id="startpos" class="form-control" name="startpos" placeholder="卡序号起始值（默认1）" value="">
+		</div>
+		<div class="form-group">
+		    <input type="number" id="number" class="form-control" name="number" placeholder="生成条数（默认500）" value="">
+		</div>
+		<div class="form-group">
+		    <input type="number" id="length" class="form-control" name="length" placeholder="密码位数（默认15）" value="">
+		</div>
+		<div class="form-group">
+		    <button type="submit" class="btn btn-info">生成</button>
+		    <button type="reset" class="btn btn-default reset">重置</button>
+		    <a class="btn btn-default" href="http://jingyan.baidu.com/article/20b68a88ba1267796cec6230.html" target="_blank" role="button">查看帮助</a>
+		</div>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="combination">密码字符包含：
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox1" class="schar" value="1" checked>
+		    数字 </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox2" class="schar" value="2" checked>
+		    小写字母 </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox3" class="schar" value="3" checked>
+		    大写字母 </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox4" class="schar" value="4">
+		    下划线"_" </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox5" class="schar" value="5">
+		    减号"-" </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox6" class="schar" value="6">
+		    井号"#" </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox7" class="schar" value="7">
+		    斜线"/" </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox8" class="schar" value="8">
+		    点号"." </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox9" class="schar" value="9">
+		    @ </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox10" class="schar" value="10">
+		    单引号 </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox11" class="schar" value="11">
+		    & </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox12" class="schar" value="12">
+		    叹号"!" </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox13" class="schar" value="13">
+		    小括号 </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox14" class="schar" value="14">
+		    中括号 </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox15" class="schar" value="15">
+		    花括号 </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox16" class="schar" value="16">
+		    ^ </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox17" class="schar" value="17">
+		    美元符号"$" </label>
+		<label class="checkbox-inline">
+		    <input type="checkbox" id="inlineCheckbox18" class="schar" value="18">
+		    百分号"%" </label>
+	    </div>
+	</div>
+	<div class="row">
+	</div>
+	<div class="row">
+	    <fieldset class="c-3">
+		<div class="buttons" title="生成卡密数据后，按钮自动激活。">
+		    <legend>卡密</legend>
+		    <button type="button" class="btn btn-info copy" data-clipboard-target="code" disabled="disabled">复制</button>
+		    <button type="button" class="btn btn-default selectall" disabled="disabled">全选</button>
+		    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-code-modal-sm" disabled="disabled">导出为TXT文档</button>
+		</div>
+		<textarea id="code" name="code" class="form-control" placeholder="卡密对儿，用于发卡平台等批量导入的卡密数据。" readonly></textarea>
+	    </fieldset>
+	    <fieldset class="c-3">
+		<div class="buttons" title="生成卡密数据后，按钮自动激活。">
+		    <legend>卡号</legend>
+		    <button type="button" class="btn btn-info copy" data-clipboard-target="cnum" disabled="disabled">复制</button>
+		    <button type="button" class="btn btn-default selectall" disabled="disabled">全选</button>
+		    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-cnum-modal-sm" disabled="disabled">导出为TXT文档</button>
+		</div>
+		<textarea id="cnum" name="cnum" class="form-control" placeholder="单独列出的卡号数据。" readonly></textarea>
+	    </fieldset>
+	    <fieldset class="c-3">
+		<div class="buttons" title="生成卡密数据后，按钮自动激活。">
+		    <legend>密码</legend>
+		    <button type="button" class="btn btn-info copy" data-clipboard-target="passn" disabled="disabled">复制</button>
+		    <button type="button" class="btn btn-default selectall" disabled="disabled">全选</button>
+		    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-passn-modal-sm" disabled="disabled">导出为TXT文档</button>
+		</div>
+		<textarea id="passn" name="passn" class="form-control" placeholder="单独列出的密码数据，在某些仅需要密码作为激活码等的情况下使用。" readonly></textarea>
+	    </fieldset>
+	</div>
+    </form>
+    <div class="row">
+	<script type="text/javascript">
+	    /*1000*30 创建于 2015-08-17*/
+	    var cpro_id = "u2269507";
+	</script>
+	<script src="js/c.js" type="text/javascript"></script>
+    </div>
+    <div class="row">
+	<h5><strong>使用说明</strong></h5>
+    </div>
+    <div class="row">
+	<ul class="tips">
+	    <li>本工具为“卡密对儿”生成工具，用于生成适用于类似飞鸿网科1889等平台的卡密数据。</li>
+	    <li>本工具支持生成卡的数量为1~99999。制作新一批卡时请估计最终出卡数量，通过卡号前缀补零，以免较早的卡号位数与较晚的卡号位数不同。</li>
+	    <li>卡号前后缀如果不填写，则卡号形式默认为起始值~起始值+生成条数的数字序列。</li>
+	    <li>为已存在的卡生成新卡，须填写卡序号起始值。例如前期已拥有500张卡，则新生成卡序号起始值为501，以免卡号重复。</li>
+	    <li>如一次性生成的卡数量较大，页面可能会出现卡顿，请耐心等待。</li>
+	    <li>生成的卡可以手动复制或者直接导出为txt文本文档，支持自定义文件名。<strong>注:</strong> 使用导出功能请导出后点击删除按钮，可以避免在服务器上留下卡密存档。</li>
+	</ul>
+    </div>
+    <div class="row">
+
+	
+    </div>
+</div>
+<div class="modal fade bs-code-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+	<div class="modal-content">
+	    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">导出为TXT文档</h4>
+	    </div>
+	    <div class="modal-body">
+		<p><strong>注:</strong> 下载后请点击删除按钮，否则服务器上将保留该份卡密文档。</p>
+		<input type="text" class="form-control filename" name="filename" placeholder="自定义文件名（默认文件名为日期）" value="">
+		<div class="dli">
+		    <p>点击文件名下载，或文件名上点鼠标右键，选择“另存为”：</p>
+		    <ul class="downloadlist" style="list-style: none; padding-left:0; margin-bottom:0;">
+		    </ul>
+		</div>
+	    </div>
+	    <div class="modal-footer">
+		<button type="button" ttt="code" class="btn btn-default export">确定</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	    </div>
+	</div>
+    </div>
+</div>
+<div class="modal fade bs-cnum-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+	<div class="modal-content">
+	    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">导出为TXT文档</h4>
+	    </div>
+	    <div class="modal-body">
+		<p><strong>注:</strong> 下载后请点击删除按钮，否则服务器上将保留该份卡密文档。</p>
+		<input type="text" class="form-control filename" name="filename" placeholder="自定义文件名（默认文件名为日期）" value="">
+		<div class="dli">
+		    <p>点击文件名下载，或文件名上点鼠标右键，选择“另存为”：</p>
+		    <ul class="downloadlist" style="list-style: none; padding-left:0; margin-bottom:0;">
+		    </ul>
+		</div>
+	    </div>
+	    <div class="modal-footer">
+		<button type="button" ttt="cnum" class="btn btn-default export">确定</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	    </div>
+	</div>
+    </div>
+</div>
+<div class="modal fade bs-passn-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+	<div class="modal-content">
+	    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">导出为TXT文档</h4>
+	    </div>
+	    <div class="modal-body">
+		<p><strong>注:</strong> 下载后请点击删除按钮，否则服务器上将保留该份卡密文档。</p>
+		<input type="text" class="form-control filename" name="filename" placeholder="自定义文件名（默认文件名为日期）" value="">
+		<div class="dli">
+		    <p>点击文件名下载，或文件名上点鼠标右键，选择“另存为”：</p>
+		    <ul class="downloadlist">
+		    </ul>
+		</div>
+	    </div>
+	    <div class="modal-footer">
+		<button type="button" ttt="passn" class="btn btn-default export">确定</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	    </div>
+	</div>
+    </div>
+</div>
+<div class="modal fade bs-contact-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+	<div class="modal-content">
+	    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">联系/反馈</h4>
+	    </div>
+	    <div class="modal-body">
+		<div class="contact" style="margin:10px 15px; line-height:20px;">
+	
+		</div>
+	    </div>
+	    <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	    </div>
+	</div>
+    </div>
+</div>
+<div class="modal fade bs-donate-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+	<div class="modal-content">
+	    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">赞助我们</h4>
+	    </div>
+	    <div class="modal-body">
+		<div class="donate" style="margin:10px 15px; line-height:20px;">
+		
+		</div>
+	    </div>
+	    <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	    </div>
+	</div>
+    </div>
+</div>
+   </body>

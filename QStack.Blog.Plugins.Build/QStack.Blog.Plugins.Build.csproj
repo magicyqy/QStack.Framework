@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+	<Target Name="Build-Demo" AfterTargets="Build-Crawler">
+		<ItemGroup>
+			<PluginProjects Remove="@(PluginProjects)" />
+			<AssembliesBuiltByChildProjects Remove="@(AssembliesBuiltByChildProjects)" />
+			<AssemblyIdentities Remove="@(AssemblyIdentities)" />
+			<VersionNumber Remove="@(VersionNumber)" />
+			<RootFolders Remove="@(RootFolders)" />
+			<PluginProjects Include="..\QStack.Blog.DemoPlugin.Mvc\QStack.Blog.DemoPlugin.Mvc.csproj" />
+		</ItemGroup>
+		<MSBuild BuildInParallel="true" Projects="@(PluginProjects)" Targets="Build" Properties="Cofiguration=$(Configuration)">
+			<Output TaskParameter="TargetOutputs" ItemName="AssembliesBuiltByChildProjects" />
+		</MSBuild>
+
+		<GetAssemblyIdentity AssemblyFiles="%(AssembliesBuiltByChildProjects.Identity)">
+			<Output TaskParameter="Assemblies" ItemName="AssemblyIdentities" />
+		</GetAssemblyIdentity>
+
+		<ItemGroup>
+			<VersionNumber Include="@(AssemblyIdentities->'%(Version)')" />
+		</ItemGroup>
+
+		<ItemGroup>
+			<RootFolders Include="$([System.IO.Directory]::GetParent(`%(AssembliesBuiltByChildProjects.MSBuildSourceProjectFile)`))">
+				<Version>@(AssemblyIdentities->'%(Version)')</Version>
+				<PluginName>$([System.IO.Path]::GetFileNameWithoutExtension(`%(AssembliesBuiltByChildProjects.Identity)`))</PluginName>
+			</RootFolders>
+
+		</ItemGroup>
+		<MakeDir Directories="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)" />
+		<Message Importance="high" Text="plugin-version:%(RootFolders.Version)" />
+		<MSBuild BuildInParallel="true" Projects="@(PluginProjects)" Targets="Publish" Properties="Cofiguration=$(Configuration)">
+		</MSBuild>
+		<ZipDirectory Overwrite="true" SourceDirectory="%(RootFolders.Identity)\bin\$(Configuration)\$(TargetFramework)\publish" DestinationFile="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)\%(RootFolders.PluginName).zip"></ZipDirectory>
+
+	</Target>
+
+	<Target Name="Build-Crawler" BeforeTargets="Build">
+		<ItemGroup>
+			<PluginProjects Include="..\QStack.Blog.Docker.Crawler\QStack.Blog.Docker.Crawler.csproj" />
+		</ItemGroup>
+		<MSBuild BuildInParallel="true" Projects="@(PluginProjects)" Targets="Build" Properties="Cofiguration=$(Configuration)">
+			<Output TaskParameter="TargetOutputs" ItemName="AssembliesBuiltByChildProjects" />
+		</MSBuild>
+
+		<GetAssemblyIdentity AssemblyFiles="%(AssembliesBuiltByChildProjects.Identity)">
+			<Output TaskParameter="Assemblies" ItemName="AssemblyIdentities" />
+		</GetAssemblyIdentity>
+
+		<ItemGroup>
+			<VersionNumber Include="@(AssemblyIdentities->'%(Version)')" />
+		</ItemGroup>
+
+		<ItemGroup>
+			<RootFolders Include="$([System.IO.Directory]::GetParent(`%(AssembliesBuiltByChildProjects.MSBuildSourceProjectFile)`))">
+				<Version>@(AssemblyIdentities->'%(Version)')</Version>
+				<PluginName>$([System.IO.Path]::GetFileNameWithoutExtension(`%(AssembliesBuiltByChildProjects.Identity)`))</PluginName>
+			</RootFolders>
+
+		</ItemGroup>
+		<MakeDir Directories="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)" />
+		<Message Importance="high" Text="plugin-version:%(RootFolders.Version)" />
+		<MSBuild BuildInParallel="true" Projects="@(PluginProjects)" Targets="Publish" Properties="Cofiguration=$(Configuration)">		
+		</MSBuild>
+		<ZipDirectory Overwrite="true" SourceDirectory="%(RootFolders.Identity)\bin\$(Configuration)\$(TargetFramework)\publish" DestinationFile="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)\%(RootFolders.PluginName).zip"></ZipDirectory>
+
+	</Target>
+</Project>

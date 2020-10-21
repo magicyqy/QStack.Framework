@@ -1,0 +1,395 @@
+﻿@model QStack.Framework.Core.Entity.PageModel<ProxyIPDto>
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header
+{
+    <meta name="keywords" content="免费代理ip http代理 https代理 socks4代理 socks5代理 爬虫代理" />
+    <meta name="description" content="为爬虫、大数据等技术学习者搜罗国内外免费代理ip" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/icheck-bootstrap@3.0.1/icheck-bootstrap.min.css" />
+
+    <style type="text/css">
+
+
+        .limiter {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .container-table100 {
+            width: 100%;
+            min-height: 100vh;
+            background: #ffffff;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            /*   align-items: center;*/
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 33px 30px;
+        }
+
+        .wrap-table100 {
+            width: 1170px;
+            margin-bottom:20px;
+        }
+
+        form .control-label {
+            justify-content: flex-end;
+        }
+
+        table {
+            border-spacing: 1;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+            table * {
+                position: relative;
+            }
+
+            table td, table th {
+                padding-left: 8px;
+            }
+
+            table thead tr {
+                height: 50px;
+                background: #828186;
+            }
+
+            table tbody tr {
+                height: 50px;
+            }
+
+                table tbody tr:last-child {
+                    border: 0;
+                }
+
+            table td, table th {
+                text-align: center;
+            }
+
+                table td.l, table th.l {
+                    text-align: center;
+                }
+
+                table td.c, table th.c {
+                    text-align: center;
+                }
+
+                table td.r, table th.r {
+                    text-align: center;
+                }
+
+
+        .table100-head th {
+            font-family: OpenSans-Regular;
+            font-size: 18px;
+            color: #fff;
+            line-height: 1.2;
+            font-weight: unset;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #faf2cc;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #dff0d8;
+        }
+
+        tbody tr:nth-child(odd):hover {
+            background-color: #e5ddb5;
+        }
+
+        tbody tr:nth-child(even):hover {
+            background-color: #b2d7a3;
+        }
+
+        tbody tr {
+            font-family: OpenSans-Regular;
+            font-size: 15px;
+            color: #808080;
+            line-height: 1.2;
+            font-weight: unset;
+        }
+
+            tbody tr:hover {
+                color: #555555;
+                cursor: pointer;
+            }
+
+        .column1 {
+            width: 260px;
+            padding-left: 40px;
+        }
+
+        .column2 {
+            width: 160px;
+        }
+
+        .column3 {
+            width: 245px;
+        }
+
+        .column4 {
+            width: 110px;
+            text-align: center;
+        }
+
+        .column5 {
+            width: 170px;
+            text-align: center;
+        }
+
+        .column6 {
+            width: 222px;
+            text-align: center;
+            padding-right: 62px;
+        }
+
+
+        @@media screen and (max-width: 768px) {
+            table {
+                display: block;
+            }
+
+                table > *, table tr, table td, table th {
+                    display: block;
+                }
+
+                table thead {
+                    display: none;
+                }
+
+                table tbody tr {
+                    height: auto;
+                    padding: 37px 0;
+                }
+
+                    table tbody tr td {
+                        padding-left: 40% !important;
+                        margin-bottom: 24px;
+                    }
+
+                        table tbody tr td:last-child {
+                            margin-bottom: 0;
+                        }
+
+                        table tbody tr td:before {
+                            font-family: OpenSans-Regular;
+                            font-size: 14px;
+                            color: #999999;
+                            line-height: 1.2;
+                            font-weight: unset;
+                            position: absolute;
+                            width: 40%;
+                            left: 30px;
+                            top: 0;
+                        }
+
+                        table tbody tr td:nth-child(1):before {
+                            content: "Date";
+                        }
+
+                        table tbody tr td:nth-child(2):before {
+                            content: "Order ID";
+                        }
+
+                        table tbody tr td:nth-child(3):before {
+                            content: "Name";
+                        }
+
+                        table tbody tr td:nth-child(4):before {
+                            content: "Price";
+                        }
+
+                        table tbody tr td:nth-child(5):before {
+                            content: "Quantity";
+                        }
+
+                        table tbody tr td:nth-child(6):before {
+                            content: "Total";
+                        }
+
+            .column4,
+            .column5,
+            .column6 {
+                text-align: left;
+            }
+
+            .column4,
+            .column5,
+            .column6,
+            .column1,
+            .column2,
+            .column3 {
+                width: 100%;
+            }
+
+            tbody tr {
+                font-size: 14px;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .container-table100 {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+
+        .icheck-primary {
+            margin-right: 20px;
+        }
+    </style>
+}
+<div class="lyear-wrapper">
+    <section class="mt-4 pb-4">
+        <div class="container">
+            <div class="row">
+                <div class="limiter">
+                    <div class="container-table100">
+                        <div class="wrap-table100">
+                            <section>
+                                <h1>特别说明</h1>
+                                <ul>
+                                    <li>本页面所提供的代理IP数据均来源于互联网，本站不能保证数据来源的正确性及安全性。</li>
+                                    <li>本页面提供的数据仅作为学习研究使用；禁止利用本平台资源从事任何违反本国（地区）法律法规的活动。</li>
+                                    <li>.netcore如何使用socks4、socks5作为http代理，看<a href="">这里</a></li>
+                                </ul>
+                                <br>
+                            </section>
+                            <form action="">
+                                <div class="form-group form-inline">
+                                    <label class="col-sm-2 control-label">代理类型：</label>
+                                    <div class="col-sm-7  form-check-inline">
+                                        <div class="icheck-primary icheck-inline">
+                                            <input type="radio" id="chb0" @(Html.ViewContext.HttpContext.Request.Query["type"] == "" ? "checked" : "") value="" name="type" />
+                                            <label for="chb0">all</label>
+                                        </div>
+                                        <div class="icheck-primary icheck-inline">
+
+                                            <input type="radio" id="chb1" @(Html.ViewContext.HttpContext.Request.Query["type"] == "http" ? "checked" : "") value="http" name="type" />
+                                            <label for="chb1">http</label>
+                                        </div>
+                                        <div class="icheck-primary icheck-inline">
+                                            <input type="radio" id="chb2" value="https" @(Html.ViewContext.HttpContext.Request.Query["type"] == "https" ? "checked" : "") name="type" />
+                                            <label for="chb2">https</label>
+                                        </div>
+                                        <div class="icheck-primary icheck-inline">
+                                            <input type="radio" id="chb3" value="socks4" @(Html.ViewContext.HttpContext.Request.Query["type"] == "socks4" ? "checked" : "") name="type" />
+                                            <label for="chb3">socks4</label>
+                                        </div>
+                                        <div class="icheck-primary icheck-inline">
+                                            <input type="radio" id="chb4" value="socks5" @(Html.ViewContext.HttpContext.Request.Query["type"] == "socks5" ? "checked" : "") name="type" />
+                                            <label for="chb4">socks5</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group  form-inline">
+                                    <label class="col-sm-2 control-label">匿名度：</label>
+                                    <div class="col-sm-7  form-check-inline">
+                                        <div class="icheck-primary icheck-inline">
+                                            <input type="radio" id="chb00" @(Html.ViewContext.HttpContext.Request.Query["Secret"] == "" ? "checked" : "") value="" name="Secret" />
+                                            <label for="chb00">all</label>
+                                        </div>
+                                        <div class="icheck-primary icheck-inline">
+                                            <input type="radio" id="chb5" value="high" @(Html.ViewContext.HttpContext.Request.Query["Secret"] == "high" ? "checked" : "") name="Secret" />
+                                            <label for="chb5">high</label>
+                                        </div>
+                                        <div class="icheck-primary icheck-inline">
+                                            <input type="radio" id="chb6" value="no" @(Html.ViewContext.HttpContext.Request.Query["Secret"] == "no" ? "checked" : "") name="Secret" />
+                                            <label for="chb6">no</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group  form-inline">
+                                    <label class="col-sm-2 control-label">地区：</label>
+                                    <div class="col-sm-7  form-check-inline">
+                                        <div class="icheck-primary icheck-inline">
+                                            @Html.DropDownList("address", (ViewData["AddressList"] as List<string>).Select(s=>new SelectListItem{ Text=s,Value=s}),"--",new { @value= Html.ViewContext.HttpContext.Request.Query["address"] })
+
+</div>                                        
+                                    </div>
+                                </div>
+                                <div class="form-group  form-inline">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <button type="submit" class="btn btn-primary mt-3">查询</button>
+                                </div>
+                            </form>
+                            <div class="table100">
+                                <table>
+                                    <thead>
+                                        <tr class="table100-head">
+                                            <th class="column1">IP</th>
+                                            <th class="column2">Port</th>
+                                            <th class="column3">地理位置</th>
+                                            <th class="column4">类型</th>
+                                            <th class="column5">匿名度</th>
+                                            <th class="column6">响应速度</th>
+                                            <th class="column6">验证时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            string GetTime(DateTimeOffset? time1)
+                                            {
+                                                if (!time1.HasValue)
+                                                    return "-";
+                                                var time = DateTimeOffset.Now - time1.Value;
+
+                                                if (time.TotalHours > 24)
+                                                {
+                                                    return Math.Floor(time.TotalDays) + "天前";
+                                                }
+                                                if (time.TotalHours > 1)
+                                                {
+                                                    return Math.Floor(time.TotalHours) + "小时前";
+                                                }
+                                                if (time.TotalMinutes > 1)
+                                                {
+                                                    return Math.Floor(time.TotalMinutes) + "分钟前";
+                                                }
+                                                if(time.TotalSeconds > 1)
+                                                    return Math.Floor(time.TotalSeconds) + "秒前";
+                                                return Math.Floor(time.TotalMilliseconds/1000) + "秒前";
+                                            }
+                                        }
+                                        @foreach (var item in Model.Data)
+                                        {
+                                            <tr>
+                                                <td class="column1">@(item.IP)</td>
+                                                <td class="column2">@(item.Port)</td>
+                                                <td class="column3">@(item.Address)</td>
+                                                <td class="column4">@(item.Type)</td>
+                                                <td class="column5">@(item.Secret)</td>
+                                                <td class="column6">@(item.RSpeed)</td>
+                                                <td class="column6">@(GetTime(item.LastValidTime))</td>
+                                            </tr>
+                                        }
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        @await Html.PartialAsync("_Pager", Model)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+

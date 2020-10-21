@@ -1,0 +1,237 @@
+﻿@model QStack.Framework.Basic.ViewModel.Articles.ArticleDto
+@{
+    ViewData["Title"] = Model.Title;
+}
+@section header{
+    <meta name="keywords" content="@(Model.SeoKeyWord)" />
+    <meta name="description" content="@(Model.SeoDescription)" />
+    <link rel="stylesheet" href="~/lib/prism.css" />
+
+}
+<div class="lyear-wrapper">
+    <section class="mt-4 pb-4">
+        <div class="container">
+            <div class="row">
+                <!-- 文章阅读 -->
+                <div class="col-xl-8">
+                    <article class="lyear-arc">
+                        <div class="arc-header">
+                            <h2 class="arc-title"><a><span class="arc-type @(Model.ArticleType)">[@Model.ArticleType.GetDescription()]</span>@(Model.Title)</a></h2>
+                            <ul class="arc-meta">
+                                <li><i class="fa fa-clock-o"></i>  @(Model.PublishTime?.ToString("yyyy-MM-dd"))</li>
+                                <li><i class="fa fa-user-circle"></i> <span style="color:#11598d;"> @(Model.Author)</span></li>
+                                <li><i class="fa fa-folder-open-o"></i> @(Model.CatagoryName)</li>
+                                @if (Model.Tags.Count > 0)
+                                {
+                                    <li>
+                                        <i class="fa fa-tags"></i>
+                                        @Html.Raw(string.Join(",", Model.Tags.Select(t => $"<a href=/tag/\"{t.Id}\">{t.Name}</a>")))
+                                    </li>
+                                }
+                                <li><i class="fa fa-eye-slash"></i> <a>@(Model.PageViews) 浏览</a></li>
+                                <li><i class="fa fa-comments-o"></i> <a href="#comment"><b class="comment-count">0</b> 评论</a></li>
+                            </ul>
+                        </div>
+                        <div class="arc-summary">
+                            @if (!Model.Summary.IsNullOrWhiteSpace())
+                            {
+
+                                <blockquote>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;@Html.Raw(Model.Summary) &nbsp;</p>
+                                </blockquote>
+
+                            }
+                        </div>
+                        @*<div class="arc-preview">
+                            @if (!string.IsNullOrWhiteSpace(Model.CoverUrl))
+                            {
+                                <img src="@(Model.CoverUrl)" alt="" class="img-fluid rounded" />
+                            }
+
+                        </div>*@
+                        <div class="lyear-arc-detail">
+                            @Html.Raw(Model.ArticleContentHtml)
+                        </div>
+                        @{ await Html.RenderPartialAsync("_CCommon", Model);}
+                    </article>
+                    @{ await Html.RenderPartialAsync("_Comments");}
+                </div>
+                <!-- 侧边栏 -->
+                @await Component.InvokeAsync("SideBar")
+                <!-- 侧边栏 end -->
+            </div>
+        </div>
+    </section>
+</div>
+@section Scripts
+{   
+    <script src="~/lib/clipboard.min.js"></script>
+    <script src="~/lib/prism.js"></script>
+    <script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+    <script type="text/javascript">
+        var page = 1, pageSize = 10, pageCount = 1;
+        var articleId =@(ViewContext.RouteData.Values["id"]);
+        ; (function ($) {
+
+            var nickName = getLocalStorageItem("qy-nickname")|| getRandomName(4);
+            setLocalStorageItem("qy-nickname", nickName);
+
+            $("#author").val(nickName);
+            $("#comment_arc_id").val(articleId);
+            $(".lyear-comment,#page-container").on("click", function (e) {
+                var target = e.target || window.event.srcElement;
+                if ($(target).hasClass("noopener")) {
+                    var curPage = $(target).data("page");
+
+                    var commentId = $(target).data("commentid");
+                    loadData(curPage, pageSize, articleId, commentId);
+                    $(target).parents("p.lzl_more").remove();
+                }
+                if ($(target).hasClass("reply-btn")) {
+                    reloadReply(target);
+                }
+                if ($(target).hasClass("last-page")){
+                    if (page ===1)
+                        return;
+                    page--;
+                    loadData(page, pageSize, articleId);
+                }
+                if ($(target).hasClass("next-page")) {
+                    if (page === pageCount)
+                        return;
+                    page++;
+                    loadData(page, pageSize, articleId);
+                }
+            });
+
+            $(".thumbs_button").on("click", function (e) {
+                var zanNum = $(this).children(".badge").text();
+                if (zanNum === "")
+                    zanNum = 1;
+                else
+                    zanNum = parseInt(zanNum) + 1;
+                $(this).children(".badge").text(zanNum);
+                $.get("/api/article/zan/" + articleId);
+            });
+
+            var loadData = function (page, size, articleId, commentParentId) {
+                $.get("/api/comment/getCommentPage",
+                    { page: page, pageSize: size, articleId: articleId, commentParentId: commentParentId},
+                    function (response) {
+                        if (!response.data || (response.data.data && response.data.data.length==0))
+                            return;
+                        if (!commentParentId) {
+                            pageCount = response.data.pageCount;
+                            $(".comment-count").text(response.data.actualTotalCount);
+                            $("ul.lyear-comment").empty();
+                            for (var i = 0; i < response.data.data.length; i++) {
+                                var dataItem = response.data.data[i];
+                                dataItem.pageSize = pageSize;
+
+                                var tmpl = template('comment-tmpl', dataItem);
+                                $("ul.lyear-comment").append(tmpl);
+                            }
+                            var pagetmpl = template('comment-page-tmpl', response.data);
+                            $("#page-container").html(pagetmpl);
+                        }
+                        else {
+                            for (var i = 0; i < response.data.data.length; i++) {
+                                var dataItem = response.data.data[i];
+                                var tmpl = template('comment-children-tmpl', dataItem);
+                                $("#comment-" + commentParentId).append(tmpl);
+                            }
+
+                            var pageTmpl = template('comment-children-page-tmpl', response.data);
+                            $("#comment-" + commentParentId).append(pageTmpl);
+
+                        }
+                    }
+                );
+
+            }
+            loadData(page, pageSize, articleId);
+        })(jQuery);
+
+        var isPost = false;
+        function sumitForm(e) {
+
+            if (isPost)
+                return;
+
+            var jsonOject = $("#comment-form").serializeObject();
+            jsonOject.articleId = Number(jsonOject.articleId)|null;
+            jsonOject.parentId = jsonOject.parentId == '' ? null : Number(jsonOject.parentId);
+            if (!isEmailAvailable(jsonOject.email.toString()))
+                return;
+            isPost = true;
+            $("#submit").attr("disabled");
+            $.addCacheAjax(sumitForm);
+            $.ajax({
+                url: "/api/comment/PostComment",
+                method: "post",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(jsonOject),
+                timeout: 15000,
+                success: function (response) {
+                    cancelReply();
+                    if (response.data) {
+                        var dataItem = response.data;
+                        if (dataItem.parentId) {
+                            //var parentMedia = $("#media-" + dataItem.parentId);
+                            var tmpl = template("comment-children-tmpl", dataItem)
+                            $("#comment-" + dataItem.parentId).append(tmpl);
+                        }
+                        else {
+                            dataItem.pageSize = pageSize;
+
+                            var tmpl = template('comment-tmpl', dataItem);
+                            $("ul.lyear-comment").append(tmpl);
+                        }
+
+                    }
+                    $.removeCacheAjax();
+                },
+                complete: function (xhr, textStatus) {
+
+                    isPost = false;
+                    $("#submit").removeAttr("disabled");
+                }
+
+            });
+            return false;
+
+        }
+        function reloadReply(target) {
+            var parentLi = $(target).parents('.media').first(),
+                parentID = $(target).data('parentid'),
+                comentId = $(target).data('id'),
+                nickname = $(target).data('nickname'),
+                respond = $('#respond'),
+                respondHtml = respond.prop("outerHTML");
+
+            $("#respond").remove();
+            parentLi.after(respondHtml);
+            console.log(parentID);
+            if (parentID)
+                $("#parentId").val(parentID);
+            else
+                $("#parentId").val(comentId);
+            $("#replyTo").val(nickname);
+            $("#comment").attr("placeholder", "回复【" + nickname + "】");
+            $('.cancel-comment-reply').show();
+            $("#author").val(getLocalStorageItem("qy-nickname"));
+        }
+        function cancelReply() {
+            var respond = $('#respond'),
+                respondHtml = respond.prop("outerHTML");
+
+            respond.remove();
+            $('.lyear-comment').after(respondHtml);
+            $("#comment-form")[0].reset();
+            $("#comment").attr("placeholder", "想说的内容");
+            $('.cancel-comment-reply').hide();
+            $("#author").val(getLocalStorageItem("qy-nickname"));
+        }
+    </script>
+}

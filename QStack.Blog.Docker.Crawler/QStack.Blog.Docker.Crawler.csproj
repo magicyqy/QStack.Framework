@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>	
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="4.0.1" />
+    <PackageReference Include="Docker.DotNet" Version="3.125.4" />
+    <PackageReference Include="DotnetSpider-Private" Version="5.0.1-beta7" />
+    <PackageReference Include="DotnetSpider.RabbitMQ-Private" Version="5.0.1-beta6" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.12" />
+    <PackageReference Include="ncrontab" Version="3.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QStack.Framework.AspNetCore.Plugin.Contracts\QStack.Framework.AspNetCore.Plugin.Contracts.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Basic.IServices\QStack.Framework.Basic.IServices.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Basic.Services\Qstack.Framework.Basic.Services.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Core\QStack.Framework.Core.csproj" />
+  </ItemGroup>
+	
+</Project>

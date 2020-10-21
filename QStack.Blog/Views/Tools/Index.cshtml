@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = "工具箱";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@section header{
+    <environment include="Development">
+        <link rel="stylesheet" type="text/css" href="~/css/tools.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/tools.min.css" asp-append-version="true" />
+    </environment>
+}*@
+<div class="lyear-wrapper">
+    <section class="mt-4 pb-4">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-xl-12">
+                    <section id="navs" class="lyear-arc">
+                        <div class="items">
+                            <div class="item">
+                                <h2>在线工具</h2>
+                                <ul class="xoxo blogroll">
+                                    <li><a href="~/tools/aes/" title="AES 在线加解密" target="_blank">AES</a><br>AES 在线加解密</li>
+                                    <li><a href="~/tools/ascii/" title="ascii码转换" target="_blank">ascii码转换</a><br>ascii码转换</li>
+                                    <li><a href="~/tools/base64/" title="base64 在线编码/解码" target="_blank">Base64</a><br>Base64 在线编码/解码</li>
+                                    <li><a href="~/tools/codeonline/" title="CSS/JS/HTML 在线编辑器，实时编译运行" target="_blank">CSS/JS/HTML编辑器</a><br>CSS/JS/HTML 在线编辑器，实时编译运行</li>
+                                    <li><a href="~/tools/des/" title="DES 在线加解密" target="_blank">DES</a><br>DES 在线加解密</li>
+                                    <li><a href="~/tools/hash/" title="Hash哈希计算" target="_blank">Hash</a><br>Hash哈希码计算</li>
+                                    <li><a href="~/tools/img2base64/" title="图片转Base64编码" target="_blank">图片转Base64</a><br>图片转Base64编码</li>
+                                    <li><a href="~/tools//jinzhizhuanhuan/" title="二、八、十、十六进制转换" target="_blank">进制转换</a><br>二、八、十、十六进制转换</li>
+                                    <li><a href="~/tools/json/" title="json格式化" target="_blank">Json格式化</a><br>json字符串实时格式化</li>
+                                    <li><a href="~/tools/jsonandyaml/" title="json格式转yaml格式" target="_blank">Json To Yaml</a><br>json格式转yaml格式</li>
+                                    <li><a href="~/tools/ka/" title="在线卡密生成工具批量的自动生成自动发卡平台所需的卡号密码对儿" target="_blank">卡密生成器</a><br>在线卡密生成工具批量的自动生成自动发卡平台所需的卡号密码对儿</li>
+                                    <li><a href="~/tools/make_pic_antimate/" title="让你的图片动起来" target="_blank">图片动画</a><br>鼠标移动你的图片，程序将记录你的timeline，最后生成相应的动画效果</li>
+                                    <li><a href="~/tools/morse" title="morse摩斯密码生成器" target="_blank">摩斯密码</a><br>morse摩斯密码生成器</li>
+                                    <li><a href="~/tools/pdf2img/" title="pdf转img" target="_blank">pdf转img</a><br>pdf文件转img图片文件</li>
+                                    <li><a href="~/tools/webps/" title="在线ps，图片处理，裁剪、过滤、大小、美化" target="_blank">在线PS</a><br>在线ps，图片处理，裁剪、过滤、大小、美化</li>
+                                    <li><a href="~/tools/qrcode/" title="qrcode二维码生成器" target="_blank">qrcode生成</a><br>qrcode二维码图片生成器</li>
+                                    <li><a href="~/tools/timestamp/" title="timestamp时间戳生成" target="_blank">时间戳生成</a><br>timestamp时间戳生成</li>
+                                    <li><a href="~/tools/unicode/" title="Unicode编码转换,Unicode转中文，中文转Unicode" target="_blank">Unicode转换</a><br>Unicode编码转换,Unicode转中文，中文转Unicode</li>
+                                    <li><a href="~/tools/url/" title="URL编码/解码" target="_blank">URL编码/解码</a><br>URL编码/解码</li>
+                                    <li><a href="~/tools/useragent/" title="UserAgent检测" target="_blank">UserAgent检测</a><br>在线UserAgent检测</li>
+                                    <li><a href="~/tools/xmlandjson/" title="xml格式转json格式" target="_blank">Xml to Json</a><br>xml格式转json格式</li>
+
+                                </ul>
+                            </div>
+                          
+                          
+                          
+                            <div class="item">
+                                <h2>站长工具</h2>
+                                <ul class="xoxo blogroll">
+                                    <li><a href="http://www.quanbaike.com/icp/" title="一个很实用的备案查询工具" target="_blank">ICP备案查询</a><br>一个很实用的备案查询工具</li>
+                                    <li><a href="http://www.quanbaike.com/chapaiming/" title="站长的必备工具，方便站长查询多个或者大量的关键词排名情况，可以了解SEO数据变化，做出相应措施。" target="_blank">排名在线批量查询</a><br>站长的必备工具，方便站长查询多个或者大量的关键词排名情况，可以了解SEO数据变化，做出相应措施。</li>
+                                    <li><a href="http://www.quanbaike.com/weijinci/" title="在线检测文章是否存在不合理的敏感词和违禁词" target="_blank">违禁词查询工具</a><br>在线检测文章是否存在不合理的敏感词和违禁词</li>
+                                    <li><a href="http://www.quanbaike.com/paiban/" title="安全、无广告、免费在线文字一键排版工具" target="_blank">文字排版工具</a><br>安全、无广告、免费在线文字一键排版工具</li>
+                                    <li><a href="http://title.quanbaike.com/" title="免费提供在线AI标题生成服务" target="_blank">在线AI标题生成器</a><br>免费提供在线AI标题生成服务</li>
+                                    <li><a href="http://www.quanbaike.com/titles/" title="几秒钟生成上千个标题，“关键词”组合一键搞定！" target="_blank">标题组合器</a><br>几秒钟生成上千个标题，“关键词”组合一键搞定！</li>
+                                    <li><a href="http://www.quanbaike.com/jieri/" title="传统节日大全，国内传统节日时间日期简介。" target="_blank">传统节日大全</a><br>传统节日大全，国内传统节日时间日期简介。</li>
+                                    <li><a href="http://www.quanbaike.com/qatitle/" title="为企业提供知乎问答营销,免费生成不同维度的问答知识" target="_blank">问题标题生成器</a><br>为企业提供知乎问答营销,免费生成不同维度的问答知识</li>
+                                    <li><a href="http://www.quanbaike.com/webtools.html" title="前端人必备的在线工具箱" target="_blank">前端在线工具箱</a><br>前端人必备的在线工具箱</li>
+                                    <li><a href="http://www.quanbaike.com/tool/cha/" title="批量查询页面是否被百度收录、提取快照时间、导出Excel和统计的工具" target="_blank">百度收录批量查询</a><br>批量查询页面是否被百度收录、提取快照时间、导出Excel和统计的工具</li>
+                                    <li><a href="http://www.quanbaike.com/ai/" title="seo必备工具，减轻伪原创负担" target="_blank">AI文章伪原创</a><br>seo必备工具，减轻伪原创负担</li>
+                                    <li><a href="http://www.quanbaike.com/tool/htaccess/" title=".htaccess文件在线生成编辑器，简单完成您需要的301跳转、404自定义等复杂任务" target="_blank">.htaccess生成器</a><br>.htaccess文件在线生成编辑器，简单完成您需要的301跳转、404自定义等复杂任务</li>
+                                    <li><a href="http://www.quanbaike.com/tool/yingxiaohao/" title="各种营销号文案的生成器" target="_blank">营销号生成器</a><br>各种营销号文案的生成器</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- 侧边栏 -->
+                @*@await Component.InvokeAsync("SideBar")*@
+                <!-- 侧边栏 end -->
+            </div>
+        </div>
+    </section>
+</div>
+
+

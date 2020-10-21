@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="3.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QStack.Framework.AspNetCore.Plugin.Contracts\QStack.Framework.AspNetCore.Plugin.Contracts.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Basic.IServices\QStack.Framework.Basic.IServices.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Basic.Services\Qstack.Framework.Basic.Services.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Persistent.EFCore.External\QStack.Framework.Persistent.EFCore.External.csproj" />
+  </ItemGroup>
+
+</Project>

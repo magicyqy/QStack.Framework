@@ -1,0 +1,77 @@
+﻿@model Tuple< List<QStack.Framework.Basic.ViewModel.NavigationMenuDto>, List<QStack.Framework.Basic.ViewModel.NavigationMenuDto>>
+<header class="main_header_area" id="header">
+    <div class="container">       
+        <div class="header_menu">
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="/"><img src="~/images/banner_logo_1.png" alt=""></a>
+                <!-- Small Divice Menu-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar_supported" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+
+                <div class="collapse navbar-collapse navbar_supported">
+                    <ul class="navbar-nav">
+                        @foreach (var item in Model.Item1)
+                        {
+                            if (item.Children.Count == 0)
+                            {
+                                <li class="">
+                                    <a class="nav-link" href="@(item.Url)" role="button">@(item.Name)</a>
+
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="dropdown">
+                                    <a class="nav-link dropdown-toggle" href="@(item.Url)" aria-expanded="false">@(item.Name)</a>
+                                    @await Html.PartialAsync("_Recursion.cshtml", item.Children)
+                                </li>
+                            }
+                        }
+                        <li class="search_box">
+                            <div class="input-group">
+                                <!-- <input type="text" class="form-control" placeholder="Type and hit enter"> -->
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <ul class="search_button_content nav">
+                <li class="dropdown search_dropbown">
+                    <a class="nav-link dropdown-toggle" href="#"><i class="fa fa-search"></i></a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div id="main-search" class="container" style="display: none;">
+    <div class="">
+        <div id="searchbar">
+            <form id="searchform" name="search" method="get" action="/search">
+                <input type="text" name="q" placeholder="输入搜索内容">
+                <button type="submit" id="searchsubmit">搜索</button>
+            </form>
+        </div>
+       
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="pages_heder">
+
+        <ol class="breadcrumb">
+            <li><a href="/">首页</a></li>
+            @foreach (var item in Model.Item2)
+            {
+                <li><a href="@(item.Url)">@(item.Name)</a></li>
+            }
+            @*<li><a href="#">技术</a></li>
+            <li><a href="news.html" class="active">文章</a></li>*@
+        </ol>
+    </div>
+</div>

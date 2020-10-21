@@ -1,0 +1,90 @@
+﻿ @model QStack.Framework.Core.Entity.PageModel
+@{
+    var sb = new System.Text.StringBuilder();
+   
+    if (ViewBag.Url == null)
+    {
+        sb.Append("?page={0}&pagesize={1}");
+    }
+    else
+    {
+        sb.Append(ViewBag.Url + (ViewBag.Url.Contains("?") ? "&" : "?") + "page={0}&pagesize={1}");
+    }
+
+    string pageUrl = sb.ToString().ToLower();
+
+    //读取参数
+    foreach (var key in ViewContext.HttpContext.Request.Query.Keys.Where(k => !string.IsNullOrWhiteSpace(k)))
+    {
+        string name = key.ToLower(), value = ViewContext.HttpContext.Request.Query[key];
+        if (pageUrl.Contains(name) || string.IsNullOrWhiteSpace(value))
+        {
+            continue;
+        }
+
+        if (value.Split(',').Length > 1)
+        {
+            value = value.Split(',')[0];
+        }
+
+        if (!string.IsNullOrWhiteSpace(value) && !value.Contains('\'') && !value.Contains("\""))
+        {
+            sb.AppendFormat("&{0}={1}", name, value.Trim());
+        }
+    }
+
+    var url = sb.ToString();
+    int displays = 10;
+    int count = displays / 2;
+
+    var isShowDot = Model.PageCount > displays;
+
+    //起始页
+    int start = Model.Page > count ? Model.Page - count : 1;
+    start = start > (Model.PageCount - displays) && start > displays ? Model.PageCount - displays : start;
+
+    //结束页
+    int end = Model.Page + count < Model.PageCount ? Model.Page + count : Model.PageCount;
+    end = Model.PageCount > displays && end < displays ? displays : end;
+
+    //委托方法
+    Func<int, Microsoft.AspNetCore.Html.IHtmlContent> UrlHandler = (int a) =>
+    {
+        return Html.Raw(string.Format(url, a.ToString(), Model.PageSize.ToString()));
+    };
+} 
+ <!-- 分页 -->
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="pagination">
+            @if (Model.Page > 1)
+            {
+                <li class="page-item"><a class="page-link" href="@UrlHandler(1)">首页</a></li>
+                <li class="page-item"><a class="page-link" href="@UrlHandler(Model.Page - 1)"><i class="fa fa-chevron-left"></i></a></li>
+            }
+            @for (int index = start; index <= end; index++)
+            {
+                if (index == Model.Page)
+                {
+                    <li class="page-item active"><a class="page-link" href="javascript:void();">@(index)</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="@UrlHandler(index)">@(index)</a></li>
+                }
+            }
+            @if (end < Model.PageCount)
+            {
+                <li class="page-item"><a class="page-link" href="@UrlHandler(Model.Page + 1)"><i class="fa fa-chevron-right"></i></a></li>
+                <li class="page-item"><a class="page-link" href="@UrlHandler(Model.PageCount)">尾页</a></li>
+
+            }
+
+            @*<li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>*@
+           
+        </ul>
+    </div>
+</div>
+<!-- 分页 end -->

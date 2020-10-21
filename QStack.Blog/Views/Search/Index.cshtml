@@ -1,0 +1,90 @@
+﻿@model QStack.Framework.Core.Entity.PageModel<QStack.Framework.Basic.ViewModel.Articles.ArticleDto>
+@{
+    ViewData["Title"] = "搜索：";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header
+{
+  <style>
+
+  </style>
+}
+<div class="lyear-wrapper">
+    @*<ol class="cd-breadcrumb triangle">
+            <li><a asp-controller="Home" asp-action="Index">首页</a></li>
+            <li class="current"><em>@ViewBag.Title</em></li>
+        </ol>*@
+    <section class="mt-4 pb-4">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xl-8">
+                    <article class="lyear-arc">
+                        <div>
+                            @if (!string.IsNullOrEmpty(ViewBag.Keyword))
+                            {
+                                <h5>为您找到约 @Model.TotalCount 条<span class="text-navy">“@ViewBag.Keyword”</span>匹配或相关的搜索结果。</h5>
+                                <small>搜索用时(@ViewBag.Elapsed 毫秒)</small>
+                            }
+                        </div>
+                        <div class="search-form">
+                            <form action="/search" method="get">
+                                <div class="input-group">
+                                    <input type="text" placeholder="你要查找的关键词" id="search" name="q" maxlength="32" value="@ViewBag.Keyword" class="form-control input-lg">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="sr-only btn btn-default dropdown-toggle" data-toggle="dropdown" style="display: none"><span class="caret"></span></button>
+                                        <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
+                                        <button style="height:35px;" class="btn  btn-primary" type="submit">搜索</button>
+
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </article>
+
+
+                    @foreach (var item in Model.Data)
+                    {
+                        <article class="lyear-arc">
+                            <div class="arc-header">
+                                <h2 class="arc-title"><a href="@(Url.GetArticleUrl(item.Id))">@Html.Raw(item.Title)</a></h2>
+                                <ul class="arc-meta">
+                                    <li><i class="fa fa-calendar-minus-o"></i> @(item.PublishTime?.ToString("yyyy-MM-dd"))</li>
+                                    <li><i class="fa fa-folder-open-o"></i> @(item.CatagoryName)</li>
+                               
+                                    @if (item.Tags?.Count > 0)
+                                    {
+                                        <li>
+                                            <i class="fa fa-tags"></i>
+                                            @Html.Raw(string.Join(",", item.Tags.Select(t => $"<a href=\"/tag/{t.Id}\">{t.Name}</a>")))
+                                        </li>
+                                    }
+                                    <li><i class="fa fa-eye-slash"></i> <a>@(item.PageViews) 浏览</a></li>
+                                    @*<li><i class="mdi mdi-comment-multiple-outline"></i> <a href="#">3 评论</a></li>*@
+                                </ul>
+                            </div>
+
+                            <div class="arc-synopsis">
+                                <p>
+                                    @Html.Raw(item.ArticleContentHtml)
+                                </p>
+                            </div>
+                        </article>
+                    }
+
+                    @await Html.PartialAsync("_Pager", Model)
+                </div>
+                @if (!string.IsNullOrEmpty((string)ViewBag.ErrorMsg))
+                {
+                    <h3>@ViewBag.ErrorMsg</h3>
+                }
+                <!-- 侧边栏 -->
+                @await Component.InvokeAsync("SideBar")
+                <!-- 侧边栏 end -->
+            </div>
+        </div>
+    </section>
+</div>
+
+

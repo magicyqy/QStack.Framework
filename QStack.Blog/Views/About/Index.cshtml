@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header
+{
+    <environment include="Development">
+        <link rel="stylesheet" type="text/css" href="~/css/about.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/about.min.css" asp-append-version="true" />
+    </environment>   
+}
+<div class="lyear-wrapper">
+    <section class="mt-4 pb-4">
+        <div class="container">
+            <div class="container-inner">
+                <article>
+                    <section>
+                        <h1>关于我</h1>
+                        <p>
+                            从业近10年，前期在国企打杂，后面在小公司打转。前后端均有涉猎，技术杂而不精。白驹过隙，转眼间，头发渐稀，已是一大龄码农。
+                        </p>
+                        <span>
+                            可以通过以下方式联系到我：
+                        </span>
+                        <ul>
+                            <li>邮 箱 ：<a href="mailto:2858850122@qq.com">2858850122@qq.com</a></li>
+                        </ul>
+
+                    </section>
+                    <section>
+                        <h1>关于本站</h1>
+                        <p>
+                            很久以前就想采用.net的技术栈去实现一个自己的博客网站,但因为各种原因，一直都没动手。最近趁着搭建一个.net core的快速开发框架，就顺带在其上实现了简易的博客模块。
+                            基本上就是后台编辑发布，前台浏览评论，简简单单，算是兑现了多年来的想法。
+                        </p>
+                        <span>
+                            本站采用的技术架构：
+                        </span>
+                        <div class="tech-desc">
+                            <p>前台网站:</p>
+                            <p>
+                                <code>bootstrap模板</code><br />
+                                <code>Asp.Net Core MVC + WebApi + ServiceFramework</code>
+                            </p>
+                        </div>
+                        <div>
+                            <p>后台管理:</p>
+                            <p>
+                                <code>Vue + Element UI + TypeScript</code><br />
+                                <code>Asp.Net Core  WebApi+ ServiceFramework</code>
+                            </p>
+
+                        </div>
+                        <div>
+                            <p>ServiceFramework:</p>
+                            <p><code>基于.Net Core的基础开发框架</code></p>
+                        </div>
+
+                        <p>
+                            本站基于Asp.Net Core 3.1驱动，由CentOS Docker容器承载。
+                        </p>
+                    </section>
+                    <section>
+                        <h1>关于版权</h1>
+                        <p>
+                            本站采用「<a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/">知识共享署名-禁止演绎 4.0 国际许可协议</a>进行许可,转载请保留出处。
+                        </p>
+                    </section>
+                    <section>
+                        <h1>特别说明</h1>
+                        <ul>
+                            <li>本站文章题目标注的“原创”是指该文章由站长原创或二次创作，标注“转载”指该文章来源于第三方网站或者个人。</li>
+                            <li>如果文章内容、图片有涉及到版权问题，请联系我，我会尽快进行处理。</li>
+                            <li>限于水平问题，站长不能保证本站内容的真实性及正确性。对于引用本站内容如文章、代码等而导致的任何损失，本人不负任何法律责任。</li>
+                        </ul>
+                        <br />
+                    </section>
+                </article>
+            </div>
+        </div>
+    </section>
+</div>
+
+

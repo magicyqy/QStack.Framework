@@ -1,0 +1,72 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "出错了！";
+}
+@section header
+{
+    <style>
+        * {-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+
+     
+        /*body.error-page-wrapper,.error-page-wrapper.preview {background-position:center center;background-repeat:no-repeat;background-size:cover;position:relative;}
+        .error-page-wrapper .content-container {border-radius:2px;text-align:center;box-shadow:1px 1px 1px rgba(99,99,99,0.1);padding:50px;background-color:#fff;}
+        .error-page-wrapper .content-container.in {left:0px;opacity:1;}*/
+        .container-inner {
+            text-align: center;
+        }
+        .head-line {transition:color .2s linear;font-size:40px;line-height:60px;letter-spacing:-1px;margin-bottom:20px;color:#777;}
+       .subheader {transition:color .2s linear;font-size:32px;line-height:46px;color:#494949;}
+         .hr {height:1px;background-color:#eee;width:80%;max-width:350px;margin:25px auto;}
+        .context {transition:color .2s linear;font-size:16px;line-height:27px;color:#aaa;}
+       .context p {margin:0;}
+        .context p:nth-child(n+2) {margin-top:16px;}
+         .buttons-container {margin-top:35px;overflow:hidden;}
+        .buttons-container a {transition:text-indent .2s ease-out,color .2s linear,background-color .2s linear;text-indent:0px;font-size:14px;text-transform:uppercase;text-decoration:none;color:#fff;background-color:#2ecc71;border-radius:99px;padding:8px 0 8px;text-align:center;display:inline-block;overflow:hidden;position:relative;width:45%;}
+      .buttons-container a:hover {text-indent:15px;}
+       /*.buttons-container a:nth-child(1) {float:left;}
+        .buttons-container a:nth-child(2) {float:right;}*/
+        @@media screen and (max-width:580px) {
+            .error-page-wrapper {padding:30px 5%;}
+            .error-page-wrapper .content-container {padding:37px;position:static;left:0;margin-top:0;margin-left:0;}
+            .error-page-wrapper .head-line {font-size:36px;}
+            .error-page-wrapper .subheader {font-size:27px;line-height:37px;}
+            .error-page-wrapper .hr {margin:30px auto;width:215px;}
+        }
+        @@media screen and (max-width:450px) {
+            .error-page-wrapper {padding:30px;}
+            .error-page-wrapper .head-line {font-size:32px;}
+            .error-page-wrapper .hr {margin:25px auto;width:180px;}
+            .error-page-wrapper .context {font-size:15px;line-height:22px;}
+            .error-page-wrapper .context p:nth-child(n+2) {margin-top:10px;}
+            .error-page-wrapper .buttons-container {margin-top:29px;}
+            .error-page-wrapper .buttons-container a {float:none !important;width:65%;margin:0 auto;font-size:13px;padding:9px 0;}
+            .error-page-wrapper .buttons-container a:nth-child(2) {margin-top:12px;}
+        }
+    </style>
+
+}
+<div class="lyear-wrapper">
+    <section class="mt-4 pb-4">
+        <div class="container">
+            <div class="container-inner">
+                <div class="head-line">
+                    <img src="~/images/error.svg" alt="" width="120" />
+                </div>
+                <div class="subheader">
+                    HTTP @(Model.StatusCode) - @(Model.ErrorMessage)-你所浏览的页面暂时无法访问
+                </div>
+                <div class="hr"></div>
+                <div class="context">
+
+                    <p>
+                        你可以返回上一页重试，或通过邮箱<a href="mailto:2858850122@qq.com">2858850122@qq.com</a>向站长反馈错误报告
+                    </p>
+
+                </div>
+                <div class="buttons-container">
+                    <a href="/">返回主页</a>
+                </div>
+            </div>
+        </div>
+        </section>
+</div>
