@@ -18,7 +18,7 @@
                 "Name": "ByExcluding",
                 "Args": {
                   //¿‡sql–¥∑®
-                  "expression": "@Level <> 'Error' and StartsWith(SourceContext, 'ServiceFramework.')"
+                  "expression": "@Level <> 'Error' and StartsWith(SourceContext, 'QStack.')"
                 }
               }
             ]
@@ -186,7 +186,7 @@
               {
                 "Name": "ByIncludingOnly",
                 "Args": {
-                  "expression": "EnableAppInfo=true and StartsWith(SourceContext, 'ServiceFramework.')"
+                  "expression": "EnableAppInfo=true and StartsWith(SourceContext, 'QStack.')"
                 }
               },
               {
@@ -232,7 +232,7 @@
               {
                 "Name": "ByIncludingOnly",
                 "Args": {
-                  "expression": "StartsWith(SourceContext, 'ServiceFramework.')"
+                  "expression": "StartsWith(SourceContext, 'QStack.')"
                 }
               }
             ]
