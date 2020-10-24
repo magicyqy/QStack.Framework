@@ -76,48 +76,60 @@ namespace QStack.Blog.Comon
                             newServices.Add(service);
                             continue;
                         }
-                        var instance = oldProvider.GetRequiredService(service.ServiceType);
-                       
-                        var instanceType = instance.GetType();
-                        var canAddDirect = service.ImplementationType != null && (instanceType == service.ImplementationType || instanceType.IsAssignableFrom(service.ImplementationType));
-                        var sourceType = typeof(ServiceDescriptor);
 
-                        if (service.Lifetime == ServiceLifetime.Scoped)
+
+                        if (service.Lifetime != ServiceLifetime.Transient)
                         {
+                            var instance = oldProvider.GetRequiredService(service.ServiceType);
+
+                            var instanceType = instance.GetType();
+                            var canAddDirect = service.ImplementationType != null && (instanceType == service.ImplementationType || instanceType.IsAssignableFrom(service.ImplementationType));
+                            var sourceType = typeof(ServiceDescriptor);
                             if (canAddDirect)
                             {
-                                var scopedMethod = getMethod(sourceType, nameof(ServiceDescriptor.Scoped), new Type[] { service.ServiceType, service.ImplementationType }, new Type[] { typeof(Func<,>).MakeGenericType(typeof(IServiceProvider), service.ImplementationType) });
+                                var scopedMethod = getMethod(sourceType, service.Lifetime.ToString(), new Type[] { service.ServiceType, service.ImplementationType }, new Type[] { typeof(Func<,>).MakeGenericType(typeof(IServiceProvider), service.ImplementationType) });
                                 var func = GetLambdaFunc(service.ImplementationType, instance).Compile();
                                 var serviceDesc = (ServiceDescriptor)scopedMethod.Invoke(null, new object[] { func });
                                 newServices.Add(serviceDesc);
                             }
                             else
-                                newServices.AddScoped(service.ServiceType, p => instance);
-                        }
-
-                        if (service.Lifetime == ServiceLifetime.Singleton)
-                        {
-                            if (canAddDirect)
                             {
-                                var singletonMethod = getMethod(sourceType, nameof(ServiceDescriptor.Singleton), new Type[] { service.ServiceType, service.ImplementationType }, new Type[] { typeof(Func<,>).MakeGenericType(typeof(IServiceProvider), service.ImplementationType) });
-                                var func = GetLambdaFunc(service.ImplementationType, instance).Compile();
-                                var serviceDesc = (ServiceDescriptor)singletonMethod.Invoke(null, new object[] { func });
-                                newServices.Add(serviceDesc);
+                                if (service.Lifetime == ServiceLifetime.Singleton)
+                                    newServices.AddSingleton(service.ServiceType, p => instance);
+                                else
+                                    newServices.AddScoped(service.ServiceType, p => instance);
+
                             }
-                            else
-                                newServices.AddSingleton(service.ServiceType, p => instance);
-                        }
+                        }    
+
+                        //if (service.Lifetime == ServiceLifetime.Singleton)
+                        //{
+                        //    var instance = oldProvider.GetRequiredService(service.ServiceType);
+
+                        //    var instanceType = instance.GetType();
+                        //    var canAddDirect = service.ImplementationType != null && (instanceType == service.ImplementationType || instanceType.IsAssignableFrom(service.ImplementationType));
+                        //    var sourceType = typeof(ServiceDescriptor);
+                        //    if (canAddDirect)
+                        //    {
+                        //        var singletonMethod = getMethod(sourceType, nameof(ServiceDescriptor.Singleton), new Type[] { service.ServiceType, service.ImplementationType }, new Type[] { typeof(Func<,>).MakeGenericType(typeof(IServiceProvider), service.ImplementationType) });
+                        //        var func = GetLambdaFunc(service.ImplementationType, instance).Compile();
+                        //        var serviceDesc = (ServiceDescriptor)singletonMethod.Invoke(null, new object[] { func });
+                        //        newServices.Add(serviceDesc);
+                        //    }
+                        //    else
+                        //        newServices.AddSingleton(service.ServiceType, p => instance);
+                        //}
                         if (service.Lifetime == ServiceLifetime.Transient)
                         {
-                            if (canAddDirect)
-                            {
-                                var transientMethod = getMethod(sourceType, nameof(ServiceDescriptor.Transient), new Type[] { service.ServiceType, service.ImplementationType }, new Type[] { typeof(Func<,>).MakeGenericType(typeof(IServiceProvider), service.ImplementationType) });
-                                var func = GetLambdaFunc(service.ImplementationType, instance).Compile();
-                                var serviceDesc = (ServiceDescriptor)transientMethod.Invoke(null, new object[] { func });
-                                newServices.Add(serviceDesc);
-                            }
-                            else
-                                newServices.AddTransient(service.ServiceType, p => instance);
+                            //if (canAddDirect)
+                            //{
+                            //    var transientMethod = getMethod(sourceType, nameof(ServiceDescriptor.Transient), new Type[] { service.ServiceType, service.ImplementationType }, new Type[] { typeof(Func<,>).MakeGenericType(typeof(IServiceProvider), service.ImplementationType) });
+                            //    var func = GetLambdaFunc(service.ImplementationType, instance).Compile();
+                            //    var serviceDesc = (ServiceDescriptor)transientMethod.Invoke(null, new object[] { func });
+                            //    newServices.Add(serviceDesc);
+                            //}
+                            //else
+                           newServices.Add(service);
 
                         }
                     }

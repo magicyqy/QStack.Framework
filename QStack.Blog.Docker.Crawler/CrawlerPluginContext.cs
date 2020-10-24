@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using QStack.Framework.AspNetCore.Plugin.Contracts;
+using System;
 
 namespace QStack.Blog.Docker.Crawler
 {
@@ -44,6 +45,12 @@ namespace QStack.Blog.Docker.Crawler
 
                 services.AddSingleton<CrawlerOptions>(serviceProvider=> {
                     var configFile = Path.Combine(serviceProvider.GetService<IOptions<PluginOptions>>().Value.InstallBasePath, this.GetType().Assembly.GetName().Name, "settings.json");
+                    if (!File.Exists(configFile))
+                    {
+                        //debug路径
+                        configFile = Path.Combine(AppContext.BaseDirectory, "settings.json");
+
+                    }
                     return new CrawlerOptions(new ConfigurationBuilder().AddJsonFile(configFile).Build());
                 });
                 services.AddScoped<IDockerCrawlerService, DockerCrawlerService>();

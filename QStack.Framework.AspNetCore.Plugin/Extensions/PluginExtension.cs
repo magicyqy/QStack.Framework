@@ -55,7 +55,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Extensions
             IReferenceLoader loader = serviceProvider.GetService<IReferenceLoader>();
             var moduleSetup = serviceProvider.GetService<IMvcModuleSetup>();
             IPluginManagerService pluginManager = serviceProvider.GetService<IPluginManagerService>();
-            List<PluginInfoDto> allEnabledPlugins = pluginManager.GetAllEnabledPlugins().ConfigureAwait(false).GetAwaiter().GetResult();
+            List<PluginInfoDto> allEnabledPlugins = pluginManager.GetAllPlugins().ConfigureAwait(false).GetAwaiter().GetResult();
 
             ModuleChangeDelegate moduleStarted = (moduleEvent, context) =>
             {
@@ -88,7 +88,10 @@ namespace QStack.Framework.AspNetCore.Plugin.Extensions
                 string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, plugin.Name, $"{ plugin.Name}.dll");
 
                 option.AdditionalReferencePaths.Add(filePath);
-                moduleSetup.EnableModule(plugin.Name);
+                if (plugin.IsEnable)
+                    moduleSetup.EnableModule(plugin.Name);
+                else
+                    moduleSetup.LoadModule(plugin.Name, false);
             }
             moduleSetup.ModuleChangeEventHandler -= moduleStarted;
             AdditionalReferencePathHolder.AdditionalReferencePaths = option?.AdditionalReferencePaths;

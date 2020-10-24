@@ -133,12 +133,17 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
             ModuleChangeEventHandler?.Invoke(ModuleEvent.UnInstalled, context);
             //删除静态文件
             DirectoryInfo staticDirectory = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, moduleName, $"wwwroot"));
-            foreach (var item in staticDirectory.GetDirectories())
+            if (staticDirectory.Exists)
             {
-                DirectoryInfo tempdir = new DirectoryInfo(Path.Combine(_env.WebRootPath, item.Name));
-                tempdir.Delete(true);
+                foreach (var item in staticDirectory.GetDirectories())
+                 {
+                      DirectoryInfo tempdir = new DirectoryInfo(Path.Combine(_env.WebRootPath, item.Name));
+                      if(tempdir.Exists)
+                         tempdir.Delete(true);
 
+                 }
             }
+            
             DirectoryInfo directory = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, moduleName));
             directory.Delete(true);
            
@@ -156,9 +161,10 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
 
             if (!dir.Exists)
             {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDirName);
+                return;
+                //throw new DirectoryNotFoundException(
+                //    "Source directory does not exist or could not be found: "
+                //    + sourceDirName);
             }
 
             DirectoryInfo[] dirs = dir.GetDirectories();

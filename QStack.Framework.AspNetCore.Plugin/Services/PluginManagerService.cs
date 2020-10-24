@@ -66,7 +66,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
             ModuleChangeDelegate action = (moduleEvent, context) =>
             {
 
-                if (context.PluginName != plugininfo.Name || !plugininfo.IsMigration || context?.PluginContext == null || context?.PluginContext.PluginEntityAssemblies.Count() == 0)
+                if (context.PluginName != plugininfo.Name ||  context?.PluginContext == null || context?.PluginContext.PluginEntityAssemblies.Count() == 0)
                     return;
                 if (moduleEvent == ModuleEvent.UnInstalled)
                 {
@@ -85,15 +85,17 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
                         }
 
                     }
-                    using (var scope = _serviceProvider.CreateScope())
+                    if (plugininfo.IsMigration)
                     {
-                        var autoMigration = scope.ServiceProvider.GetService<AutoMigration>();
-                        autoMigration.GenerateMigrations();
+                        using (var scope = _serviceProvider.CreateScope())
+                        {
+                            var autoMigration = scope.ServiceProvider.GetService<AutoMigration>();
+                            autoMigration.GenerateMigrations();
 
-                        //if (context.PluginContext?.TestUrl.Any() == true)
-                        //    this.Update<PluginInfoDto>(p => p.Name == context.PluginName, p => new PluginInfoDto { TestUrl = context.PluginContext.TestUrl, RouteArea = context.PluginContext.RouteArea }).ConfigureAwait(false).GetAwaiter().GetResult();
+                            //if (context.PluginContext?.TestUrl.Any() == true)
+                            //    this.Update<PluginInfoDto>(p => p.Name == context.PluginName, p => new PluginInfoDto { TestUrl = context.PluginContext.TestUrl, RouteArea = context.PluginContext.RouteArea }).ConfigureAwait(false).GetAwaiter().GetResult();
+                        }
                     }
-
                     #endregion
                 }
             };
@@ -124,7 +126,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
             ModuleChangeDelegate action = (moduleEvent, context) =>
             {
 
-                if (context.PluginName!=plugininfo.Name|| !plugininfo.IsMigration|| context?.PluginContext == null || context?.PluginContext.PluginEntityAssemblies.Count() == 0)
+                if (context.PluginName!=plugininfo.Name|| context?.PluginContext == null || context?.PluginContext.PluginEntityAssemblies.Count() == 0)
                     return;
                 if (moduleEvent == ModuleEvent.Installed)
                 {
@@ -143,15 +145,17 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
                         }
 
                     }
-                    using (var scope = _serviceProvider.CreateScope())
+                    if (plugininfo.IsMigration)
                     {
-                        var autoMigration = scope.ServiceProvider.GetService<AutoMigration>();
-                        autoMigration.GenerateMigrations();
-                                           
-                        //if (context.PluginContext?.TestUrl.Any() == true)
-                        //    this.Update<PluginInfoDto>(p => p.Name == context.PluginName, p => new PluginInfoDto { TestUrl = context.PluginContext.TestUrl, RouteArea = context.PluginContext.RouteArea }).ConfigureAwait(false).GetAwaiter().GetResult();
-                    }
+                        using (var scope = _serviceProvider.CreateScope())
+                        {
+                            var autoMigration = scope.ServiceProvider.GetService<AutoMigration>();
+                            autoMigration.GenerateMigrations();
 
+                            //if (context.PluginContext?.TestUrl.Any() == true)
+                            //    this.Update<PluginInfoDto>(p => p.Name == context.PluginName, p => new PluginInfoDto { TestUrl = context.PluginContext.TestUrl, RouteArea = context.PluginContext.RouteArea }).ConfigureAwait(false).GetAwaiter().GetResult();
+                        }
+                    }
                     #endregion
                 }
             };
