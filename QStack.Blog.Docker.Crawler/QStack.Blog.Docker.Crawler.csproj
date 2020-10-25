@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="4.0.1" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Docker.DotNet" Version="3.125.4" />
     <PackageReference Include="DotnetSpider-Private" Version="5.0.1-beta7" />
     <PackageReference Include="DotnetSpider.RabbitMQ-Private" Version="5.0.1-beta6" />
