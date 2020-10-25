@@ -40,6 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="app_data\Migrations\sfdb\ve-2A05.tmp" />
     <None Remove="app_data\secrets\DaoFactories_0_ConnectionString_pwd0" />
     <None Remove="app_data\secrets\DaoFactories_1_ConnectionString_pwd1" />
     <None Remove="app_data\secrets\OAuths_QQ_AppId_qqappid" />

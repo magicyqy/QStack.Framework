@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ServiceFramework.AutoMigration.spiderdb.Migrations
+namespace QStack.Framework.AutoMigration.spiderdb.Migrations
 {
     public partial class _20201012211237_spiderdbMigrations : Migration
     {

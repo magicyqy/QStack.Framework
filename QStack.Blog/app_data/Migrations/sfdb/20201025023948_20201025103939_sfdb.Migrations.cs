@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ServiceFramework.AutoMigration.sfdb.Migrations
+namespace QStack.Framework.AutoMigration.sfdb.Migrations
 {
-    public partial class _20201009225158_sfdbMigrations : Migration
+    public partial class _20201025103939_sfdbMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

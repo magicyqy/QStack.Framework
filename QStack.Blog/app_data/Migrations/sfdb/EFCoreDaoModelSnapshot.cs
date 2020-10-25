@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QStack.Framework.Persistent.EFCore;
 
-namespace ServiceFramework.AutoMigration.sfdb.Migrations
+namespace QStack.Framework.AutoMigration.sfdb.Migrations
 {
     [DbContext(typeof(EFCoreDao))]
     partial class EFCoreDaoModelSnapshot : ModelSnapshot

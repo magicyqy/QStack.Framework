@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QStack.Framework.Persistent.EFCore;
 
-namespace ServiceFramework.AutoMigration.spiderdb.Migrations
+namespace QStack.Framework.AutoMigration.spiderdb.Migrations
 {
     [DbContext(typeof(EFCoreDao))]
     [Migration("20201012131242_20201012211237_spiderdb.Migrations")]

@@ -101,7 +101,7 @@ namespace QStack.Framework.Persistent.EFCore
 				}
 				var path = Path.Combine(basePath, $"{factory.FactoryName}");
 				var migrationName = $"{DateTimeOffset.Now.ToString("yyyyMMddHHmmss")}_{factory.FactoryName}.Migrations";
-				var rootNameSpace = $"ServiceFramework.AutoMigration.{factory.FactoryName}";
+				var rootNameSpace = $"QStack.Framework.AutoMigration.{factory.FactoryName}";
 			
 				if (!Directory.Exists(path))
 				{
