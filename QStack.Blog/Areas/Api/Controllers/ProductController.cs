@@ -92,7 +92,7 @@ namespace QStack.Blog.Areas.Api.Controllers
         {
             var result = new ResponseResult();
 
-            if (await _productService.Count<ProductDto>(a => a.ProductCategoryId == id) > 0)
+            if (await _productService.CountAsync<ProductDto>(a => a.ProductCategoryId == id) > 0)
             {
                 result.Message = nameof(BusinessCode.Record_Cascade_Exist);
                 result.Code = BusinessCode.Record_Cascade_Exist;

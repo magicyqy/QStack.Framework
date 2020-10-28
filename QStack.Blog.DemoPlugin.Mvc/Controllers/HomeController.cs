@@ -14,10 +14,11 @@ namespace QStack.Blog.DemoPlugin.Mvc.Controllers
         public HomeController(ITestService testService)
         {
             _testService = testService;
+            
         }
         public IActionResult Index()
         {
-            return Ok($"{this.GetType().AssemblyQualifiedName}  is running.");
+            return Ok($"{this.GetType().AssemblyQualifiedName}  is running.\r\n{_testService.GetType().AssemblyQualifiedName} injected");
         }
         public async Task<IActionResult> Save()
         {

@@ -19,6 +19,33 @@ namespace QStack.Framework.AutoMigration.sfdb.Migrations
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("QStack.Blog.DemoPlugin.Mvc.Models.TestModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime?>("CreateDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("CreateUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("LastModifyDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("LastModifyUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TestModel");
+                });
+
             modelBuilder.Entity("QStack.Framework.AspNetCore.Plugin.Models.PluginInfo", b =>
                 {
                     b.Property<int>("Id")

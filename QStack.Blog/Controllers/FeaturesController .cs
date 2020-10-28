@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using QStack.Framework.Basic.IServices;
 using QStack.Framework.AspNetCore.Plugin.Core;
+using System;
+using System.Text;
 
 namespace QStack.Blog.Controllers
 {
@@ -53,6 +55,30 @@ namespace QStack.Blog.Controllers
             var datas = dataAuthService.GetDaoFactoryEntityInfo();
 
             return Json(datas.Values.SelectMany(v=>v).Select(v=>v.EntityName));
+        }
+
+        public IActionResult DefaultAssemblies()
+        {
+            GC.Collect();
+            var dynamicAssemblies= System.Runtime.Loader.AssemblyLoadContext.Default.Assemblies.Where(a => a.FullName.Contains("AspectCore.DynamicProxy.Generator"));
+            var names=System.Runtime.Loader.AssemblyLoadContext.Default.Assemblies.Select(a => a.FullName).OrderBy(n=>n);
+
+            return Ok(names.Count()+"\r\n"+string.Join("\r\n", names));
+        }
+
+        public IActionResult AllAppContext()
+        {
+            var contexts = System.Runtime.Loader.AssemblyLoadContext.All;
+            StringBuilder sb = new StringBuilder();
+            foreach(var context in contexts )
+            {
+                sb.AppendLine(context.Name);
+                sb.Append(string.Join("\r\n", context.Assemblies.Select(a => a.FullName)));
+                sb.AppendLine();
+                sb.AppendLine();
+            }
+
+            return Ok(sb.ToString());
         }
     }
 

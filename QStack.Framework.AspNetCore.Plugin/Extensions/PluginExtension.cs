@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using QStack.Framework.AspNetCore.Plugin.Contracts;
 using QStack.Framework.AspNetCore.Plugin.Core;
@@ -39,6 +40,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Extensions
             services.AddSingleton<IReferenceContainer, DefaultReferenceContainer>();
             services.AddSingleton<IReferenceLoader, DefaultReferenceLoader>();
             services.AddSingleton<IPluginsAssemblyLoadContexts, PluginsAssemblyLoadContexts>();
+            services.AddSingleton<PluginPackageManager>();
 
         }
 
@@ -85,7 +87,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Extensions
 
             foreach (var plugin in allEnabledPlugins)
             {
-                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, plugin.Name, $"{ plugin.Name}.dll");
+                string filePath = Path.Combine(serviceProvider.GetService<IHostEnvironment>().ContentRootPath, _pluginOptions.InstallBasePath, plugin.Name, $"{ plugin.Name}.dll");
 
                 option.AdditionalReferencePaths.Add(filePath);
                 if (plugin.IsEnable)

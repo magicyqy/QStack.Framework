@@ -10,6 +10,7 @@ using System.Text;
 using ZipTool = System.IO.Compression.ZipArchive;
 namespace QStack.Framework.AspNetCore.Plugin.Core
 {
+    [Obsolete]
     public class PluginPackage
     {
        
@@ -64,12 +65,14 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
             }
         }
 
-        public void SetupFolder()
+        public void SetupFolder(string destFolder=null)
         {
             ZipTool archive = new ZipTool(_zipStream, ZipArchiveMode.Read);
             _zipStream.Position = 0;
-            _folderName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, $"{_pluginInfo.Name}");
-
+            if(string.IsNullOrWhiteSpace(destFolder))
+                _folderName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, $"{_pluginInfo.Name}");
+            else
+                _folderName=destFolder;
             archive.ExtractToDirectory(_folderName, true);
             _pluginInfo.IntallPath =Path.GetRelativePath(AppDomain.CurrentDomain.BaseDirectory, _folderName);
             DirectoryInfo folder = new DirectoryInfo(_tempFolderName);

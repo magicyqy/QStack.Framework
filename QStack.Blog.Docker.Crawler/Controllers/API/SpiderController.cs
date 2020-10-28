@@ -53,7 +53,7 @@ namespace DotnetSpider.Portal.Controllers.API
 
             if (ModelState.IsValid)
             {
-                var exists = await _dockerCrawlerService.Count<SpiderDto>(x =>
+                var exists = await _dockerCrawlerService.CountAsync<SpiderDto>(x =>
                     x.Name == viewModel.Name);
                 if (exists > 0)
                 {
@@ -100,7 +100,7 @@ namespace DotnetSpider.Portal.Controllers.API
                     throw new ApplicationException($"Spider {id} exists");
                 }
 
-                var exists = await _dockerCrawlerService.Count<SpiderDto>(x =>
+                var exists = await _dockerCrawlerService.CountAsync<SpiderDto>(x =>
                     x.Name == viewModel.Name && x.Id != id);
                 if (exists > 0)
                 {

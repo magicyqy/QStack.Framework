@@ -22,7 +22,7 @@ namespace QStack.Blog.Docker.Crawler.Controllers
 			//ViewData["Agent"] = await _dbContext.Set<DownloaderAgent>().CountAsync();
 			//ViewData["OnlineAgent"] = await _dbContext.Set<DownloaderAgent>().CountAsync();
 			
-			ViewData["Spider"] = await _dockerCrawlerService.Count<SpiderDto>(s=>true);
+			ViewData["Spider"] = await _dockerCrawlerService.CountAsync<SpiderDto>();
 			ViewData["RunningSpider"] = await _dockerCrawlerService.CountRunningContainers();
 				
 			return View();

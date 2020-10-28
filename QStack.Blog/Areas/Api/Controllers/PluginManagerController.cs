@@ -19,11 +19,13 @@ namespace QStack.Blog.Areas.Api.Controllers
     public class PluginManagerController : ApiBaseController
     {
         IPluginManagerService _pluginManager;
-        PluginOptions pluginOptions;
-        public PluginManagerController(IPluginManagerService pluginManager,IOptions<PluginOptions> options)
+       
+        PluginPackageManager _pluginPackageManager;
+        public PluginManagerController(IPluginManagerService pluginManager,PluginPackageManager pluginPackageManager)
         {
             _pluginManager = pluginManager;
-            pluginOptions = options.Value;
+            _pluginPackageManager = pluginPackageManager;
+           
          }
        
  
@@ -39,13 +41,25 @@ namespace QStack.Blog.Areas.Api.Controllers
             }
             var contentRootPath = HttpContext.RequestServices.GetService<IHostEnvironment>().ContentRootPath;
             var fullpath = Path.Combine(contentRootPath, package.Trim().TrimStart('/'));
-            using (FileStream fs = new FileStream(fullpath, FileMode.Open))
+           
+            if(_pluginPackageManager.UnZipPackage(fullpath, out PluginInfoDto pluginInfo))
             {
-                var pluginPackage = new PluginPackage(fs, fullpath, pluginOptions);
-                pluginPackage.SetupFolder();
-                pluginPackage.PluginInfo.IsMigration = IsMigration;
-                await _pluginManager.AddPlugins(pluginPackage.PluginInfo);
+                pluginInfo.IsMigration = IsMigration;
+                await _pluginManager.AddPlugins(pluginInfo);
             }
+            else
+            {
+                result.Code = 500;
+                result.Message = "unzip error";
+            }
+
+            //using (FileStream fs = new FileStream(fullpath, FileMode.Open))
+            //{
+            //    var pluginPackage = new PluginPackage(fs, fullpath, pluginOptions);
+            //    pluginPackage.SetupFolder();
+            //    pluginPackage.PluginInfo.IsMigration = IsMigration;
+            //    await _pluginManager.AddPlugins(pluginPackage.PluginInfo);
+            //}
             return result;
         }
 

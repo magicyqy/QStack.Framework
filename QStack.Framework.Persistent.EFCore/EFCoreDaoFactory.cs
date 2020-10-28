@@ -55,7 +55,7 @@ namespace QStack.Framework.Persistent.EFCore
             {
                 foreach(var item in assemblies)
                     _options.EntityAssemblies.Add(item);
-                
+                _options.UpdateCacheVersion();
             }
         }
 
@@ -68,6 +68,7 @@ namespace QStack.Framework.Persistent.EFCore
             var names = assemblies.Select(x => x.GetName().Name);
 
             _options.EntityAssemblies.RemoveWhere(a => names.Contains(a.GetName().Name));
+            _options.UpdateCacheVersion();
         }
        
         public DaoFactoryOption DaoFactoryOption => _options;

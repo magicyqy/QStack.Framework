@@ -20,6 +20,11 @@ namespace QStack.Framework.Core
         public bool EnableAutoMigration { get; set; }
 
         string[] _entityAssemblyNames;
+        /// <summary>
+        /// 用于强制更新efcore dbcontext model cache的版本号
+        /// 此处是EntityAssemblies变化时必须变更这个字段
+        /// </summary>
+        long _version = DateTimeOffset.Now.Ticks;
         public string[] EntityAssemblyNames
         {
             get { return _entityAssemblyNames; }
@@ -50,6 +55,10 @@ namespace QStack.Framework.Core
 
         public HashSet<Assembly> EntityAssemblies { get; } = new HashSet<Assembly>();
 
+        /// <summary>
+        /// 通过hashcode强制刷新dbcontext model cache
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             HashCode hashCode = new HashCode();
@@ -61,7 +70,13 @@ namespace QStack.Framework.Core
             hashCode.Add(EnableAutoMigration);
             foreach(var assembly in EntityAssemblies)
                 hashCode.Add(assembly.FullName);
+            hashCode.Add(_version);
             return hashCode.ToHashCode();
+        }
+
+        public void UpdateCacheVersion()
+        {
+            _version = DateTimeOffset.Now.Ticks;
         }
     }
 }

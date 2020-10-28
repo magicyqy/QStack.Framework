@@ -14,6 +14,9 @@ using QStack.Framework.AspNetCore.Plugin.ViewModels;
 using QStack.Framework.Basic.ViewModel.Auth;
 using QStack.Framework.Core.Log;
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -24,6 +27,8 @@ namespace QStack.Blog.Comon
     public class CustomServiceBasedControllerActivator : IControllerActivator
     {
         ILogger<CustomServiceBasedControllerActivator> _logger;
+
+        static ConcurrentDictionary<string, IServiceProvider> _pluginProviders = new ConcurrentDictionary<string, IServiceProvider>();
         public CustomServiceBasedControllerActivator(ILogger<CustomServiceBasedControllerActivator> logger)
         {
             _logger = logger;
@@ -55,22 +60,52 @@ namespace QStack.Blog.Comon
             try
             {
                 var controller = actionContext.HttpContext.RequestServices.GetRequiredService(controllerType);
-                 return controller;
+                return controller;
             }
             catch
             {
+                ///*
+                try
+                { 
+                    var oldSsevices = actionContext.HttpContext.RequestServices.GetService<IServiceCollection>();
+                    var myServices = oldSsevices.Where(s => s.ServiceType.FullName.Contains("QStack"));
+                    var oldProvider = actionContext.HttpContext.RequestServices;
 
+                    _pluginProviders.TryAdd(Activity.Current?.Id ?? actionContext.HttpContext.TraceIdentifier, oldProvider);
+
+                    var area = actionContext.RouteData.Values["area"]?.ToString().ToLower();
+                     var assemblyLoadContext = oldProvider.GetService<IPluginsAssemblyLoadContexts>().All().SingleOrDefault(p => p.PluginContext.RouteArea?.ToLower() == area);
+                    var newServices = assemblyLoadContext.ConfigureServices(oldSsevices, oldProvider);
+                    var myServices1 = newServices.Where(s => s.ServiceType.FullName.Contains("QStack"));
+                    //actionContext.HttpContext.RequestServices = newServiceProvider;
+                    foreach (var item in newServices.Select(s => s.ServiceType.FullName).OrderBy(n => n))
+                        Console.WriteLine(item);
+                    var serviceProvider = newServices.BuildServiceProvider();
+                    newProviders.TryAdd(Activity.Current?.Id, serviceProvider);
+                    return serviceProvider.GetRequiredService(controllerType);
+                }
+                catch(Exception e)
+                {
+                    _logger.LogException(e);
+                    Console.WriteLine(this.GetType().FullName);
+                    return null;
+                }
+                //*/
+               /*
                 try
                 {
 
-
+                    //if (newProvider != null)
+                    //    return newProvider.GetRequiredService(controllerType);
                     var oldSsevices = actionContext.HttpContext.RequestServices.GetService<IServiceCollection>();
                     var oldProvider = actionContext.HttpContext.RequestServices;
+                    _pluginProviders.TryAdd(Activity.Current?.Id ?? actionContext.HttpContext.TraceIdentifier, oldProvider);
                     var newServices = new ServiceCollection();
                     newServices.AddOptions();
                     newServices.AddScoped(controllerType);
                     foreach (var service in oldSsevices)
                     {
+                        Console.WriteLine(service.ServiceType.FullName);
                         if (service.ServiceType.IsGenericType && service.ServiceType.GenericTypeArguments.Length == 0)
                         {
                             newServices.Add(service);
@@ -85,21 +120,21 @@ namespace QStack.Blog.Comon
                             var instanceType = instance.GetType();
                             var canAddDirect = service.ImplementationType != null && (instanceType == service.ImplementationType || instanceType.IsAssignableFrom(service.ImplementationType));
                             var sourceType = typeof(ServiceDescriptor);
-                            if (canAddDirect)
-                            {
-                                var scopedMethod = getMethod(sourceType, service.Lifetime.ToString(), new Type[] { service.ServiceType, service.ImplementationType }, new Type[] { typeof(Func<,>).MakeGenericType(typeof(IServiceProvider), service.ImplementationType) });
-                                var func = GetLambdaFunc(service.ImplementationType, instance).Compile();
-                                var serviceDesc = (ServiceDescriptor)scopedMethod.Invoke(null, new object[] { func });
-                                newServices.Add(serviceDesc);
-                            }
-                            else
-                            {
+                            //if (canAddDirect)
+                            //{
+                            //    var scopedMethod = getMethod(sourceType, service.Lifetime.ToString(), new Type[] { service.ServiceType, service.ImplementationType }, new Type[] { typeof(Func<,>).MakeGenericType(typeof(IServiceProvider), service.ImplementationType) });
+                            //    var func = GetLambdaFunc(service.ImplementationType, service.ServiceType).Compile();
+                            //    var serviceDesc = (ServiceDescriptor)scopedMethod.Invoke(null, new object[] { func });
+                            //    newServices.Add(serviceDesc);
+                            //}
+                            //else
+                            //{
                                 if (service.Lifetime == ServiceLifetime.Singleton)
                                     newServices.AddSingleton(service.ServiceType, p => instance);
                                 else
                                     newServices.AddScoped(service.ServiceType, p => instance);
 
-                            }
+                            //}
                         }    
 
                         //if (service.Lifetime == ServiceLifetime.Singleton)
@@ -155,7 +190,7 @@ namespace QStack.Blog.Comon
               
                     newServices.AddSingleton<IProxyTypeGenerator, ProxyTypeGenerator>();
                     var newProvider = newServices.BuildDynamicProxyProvider();
-
+                    newProviders.TryAdd(Activity.Current.Id, newProvider);
                     var controller = newProvider.GetRequiredService(controllerType);
                     return controller;
                 }
@@ -165,10 +200,25 @@ namespace QStack.Blog.Comon
                     Console.WriteLine(this.GetType().FullName);
                     return null;
                 }
+               */
             }
 
         }
-
+        static Dictionary<string,IServiceProvider> newProviders=new Dictionary<string, IServiceProvider>();
+        static object GetServiceProvider(Type serviceType)
+        {
+            return _pluginProviders.GetValueOrDefault(Activity.Current.Id).GetRequiredService(serviceType);
+        }
+        private LambdaExpression GetLambdaFunc(Type type, Type serviceType)
+        {
+            var method = typeof(CustomServiceBasedControllerActivator).GetMethod("GetServiceProvider", BindingFlags.Static| BindingFlags.NonPublic| BindingFlags.Public);
+            var p = Expression.Parameter(typeof(IServiceProvider), "p");
+            var contans = Expression.Convert(Expression.Call(method,
+                            Expression.Constant(serviceType)
+                        ),type);
+            var delegateType = typeof(Func<,>).MakeGenericType(typeof(IServiceProvider), type);
+            return Expression.Lambda(delegateType, contans, p);
+        }
         private LambdaExpression GetLambdaFunc(Type type, object value)
         {
 
@@ -180,6 +230,11 @@ namespace QStack.Blog.Comon
         /// <inheritdoc />
         public virtual void Release(ControllerContext context, object controller)
         {
+            Console.WriteLine(controller.GetType().FullName);
+            var provider = newProviders.GetValueOrDefault(Activity.Current.Id) as ServiceProvider;
+            provider?.Dispose();
+            GC.Collect();
+            //System.Runtime.Loader.AssemblyLoadContext.Default.Assemblies.
         }
     }
 }

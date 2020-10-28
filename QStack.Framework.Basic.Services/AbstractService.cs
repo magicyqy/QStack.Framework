@@ -153,12 +153,20 @@ namespace QStack.Framework.Basic.Services
 
         }
 
-        public virtual async Task<int> Count<T>(Expression<Func<T, bool>> filterExpression)
+        public virtual async Task<int> CountAsync<T>(Expression<Func<T, bool>> filterExpression)
         {
             var filterExp = Mapper.MapExpression<Expression<Func<TEntity, bool>>>(filterExpression);
-            var count= Daos.CurrentDao.DbSet<TEntity>().Count(filterExp);
+            return await Daos.CurrentDao.CountAsync<TEntity>(filterExp);
+        }
+        public virtual async Task<int> CountAsync<T>()
+        {
+             return await Daos.CurrentDao.CountAsync<TEntity>();
+         
+        }
 
-            return await Task.FromResult(count);
+        public virtual async Task<bool> AnyAsync()
+        {
+            return await Daos.CurrentDao.AnyAsync<TEntity>();
         }
     }
 }

@@ -21,6 +21,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
         private readonly PluginOptions _pluginOptions;
         public event ModuleChangeDelegate ModuleChangeEventHandler;
         readonly IWebHostEnvironment _env;
+        readonly string _baseDirectory;
         public MvcModuleSetup(ApplicationPartManager partManager, IReferenceLoader referenceLoader,
             IPluginsAssemblyLoadContexts pluginsLoadContexts, DynamicChangeTokenProvider dynamicChangeTokenProvider,
              INotificationRegister notificationRegister,IOptions<PluginOptions> options, IWebHostEnvironment webHostEnvironment)
@@ -32,7 +33,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
             _notificationRegister = notificationRegister;
             _pluginOptions = options.Value;
             _env = webHostEnvironment;
-
+            _baseDirectory = AppContext.BaseDirectory;
 
 
         }
@@ -43,8 +44,8 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
             {
                 CollectibleAssemblyLoadContext context = new CollectibleAssemblyLoadContext(moduleName);
 
-                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, moduleName, $"{moduleName}.dll");
-                string referenceFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, moduleName);
+                string filePath = Path.Combine(_baseDirectory, _pluginOptions.InstallBasePath, moduleName, $"{moduleName}.dll");
+                string referenceFolderPath = Path.Combine(_baseDirectory, _pluginOptions.InstallBasePath, moduleName);
                 using (FileStream fs = new FileStream(filePath, FileMode.Open))
                 {
                     Assembly assembly = context.LoadFromStream(fs);
@@ -58,7 +59,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
                
                    
                 }
-                var viewsFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, moduleName, $"{moduleName}.Views.dll");
+                var viewsFilePath = Path.Combine(_baseDirectory, _pluginOptions.InstallBasePath, moduleName, $"{moduleName}.Views.dll");
                 if (File.Exists(viewsFilePath))
                 {
                     using (FileStream fs = new FileStream(viewsFilePath, FileMode.Open))
@@ -69,7 +70,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
                       
                     }
                 }
-                var pluginWebRoot = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, moduleName, $"wwwroot");
+                var pluginWebRoot = Path.Combine(_baseDirectory, _pluginOptions.InstallBasePath, moduleName, $"wwwroot");
                 DirectoryCopy(pluginWebRoot, _env.WebRootPath, true);
                 _pluginsLoadContexts.Add(moduleName, context);
                 if (isInstall)
@@ -132,7 +133,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
             }
             ModuleChangeEventHandler?.Invoke(ModuleEvent.UnInstalled, context);
             //删除静态文件
-            DirectoryInfo staticDirectory = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, moduleName, $"wwwroot"));
+            DirectoryInfo staticDirectory = new DirectoryInfo(Path.Combine(_baseDirectory, _pluginOptions.InstallBasePath, moduleName, $"wwwroot"));
             if (staticDirectory.Exists)
             {
                 foreach (var item in staticDirectory.GetDirectories())
@@ -144,7 +145,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
                  }
             }
             
-            DirectoryInfo directory = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pluginOptions.InstallBasePath, moduleName));
+            DirectoryInfo directory = new DirectoryInfo(Path.Combine(_baseDirectory, _pluginOptions.InstallBasePath, moduleName));
             directory.Delete(true);
            
         }

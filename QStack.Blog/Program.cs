@@ -10,6 +10,7 @@ using System;
 using System.Reflection;
 using System.Linq;
 using AspectCore.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace QStack.Blog
 {
@@ -72,6 +73,21 @@ namespace QStack.Blog
                      //.Enrich.FromLogContext();
 
                  })
-                .UseServiceProviderFactory(new DynamicProxyServiceProviderFactory());
+                .UseServiceProviderFactory(new CutomDynamicProxyServiceProviderFactory());
+    }
+
+    public class CutomDynamicProxyServiceProviderFactory : IServiceProviderFactory<IServiceCollection>
+    {
+        public IServiceCollection CreateBuilder(IServiceCollection services)
+        {
+            services = services.WeaveDynamicProxyService();
+            services.AddSingleton<IServiceCollection>(services);
+            return services;
+        }
+
+        public IServiceProvider CreateServiceProvider(IServiceCollection containerBuilder)
+        {
+            return containerBuilder.BuildServiceProvider();
+        }
     }
 }

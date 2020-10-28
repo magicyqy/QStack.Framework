@@ -70,7 +70,7 @@ namespace DotnetSpider.Portal.Controllers.API
 		[HttpDelete("{id}")]
 		public async Task<IApiResult> DeleteAsync(string id)
 		{
-			if (await _spiderAgentService.Count<AgentInfoDto>(x => x.Id == id)<=0)
+			if (await _spiderAgentService.CountAsync<AgentInfoDto>(x => x.Id == id)<=0)
 			{
 				return new FailedResult("Agent is not exists");
 			}
@@ -85,7 +85,7 @@ namespace DotnetSpider.Portal.Controllers.API
 		[HttpPut("{id}/exit")]
 		public async Task<IApiResult> ExitAsync(string id)
 		{
-			if ((await _spiderAgentService.Count<AgentInfoDto>(x => x.Id == id))<=0)
+			if ((await _spiderAgentService.CountAsync<AgentInfoDto>(x => x.Id == id))<=0)
 			{
 				return new FailedResult("Agent is not exists");
 			}

@@ -117,7 +117,9 @@ namespace QStack.Framework.Core.Persistent
         Task<T> AddOrUpdate<T,TKey>(T entity) where T : class;
         Task<PageModel<T>> QueryPage<T>(int pageIndex = 1, int pageSize = 20, Expression<Func<T, bool>> whereExpression = null, IEnumerable<string> paths = null, string strOrderByFileds = null) where T : class;
         IEnumerable<Type> GetEntityTypes();
-       
+        Task<int> CountAsync<T>(Expression<Func<T, bool>> predicate) where T : class;
+        Task<int> CountAsync<T>() where T : class;
+        Task<bool> AnyAsync<T>() where T : class;
     }//end IDao
 
 }//end namespace Persistent

@@ -34,12 +34,14 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
                 if (stream != null)
                 {
                     _logger.LogDebug($"Found the cached reference '{name}' v.{version}");
-                    context.LoadFromStream(stream);
+                    assembly = context.Assemblies.FirstOrDefault(a => a.GetName().Name == name);
+                    if(assembly==null)
+                        assembly=context.LoadFromStream(stream);
                 }
                 else
                 {
 
-                    if (IsSharedFreamwork(name) || name.Contains("ServiceFramework.") || IsLoadedByDefault(item.FullName))
+                    if (IsSharedFreamwork(name) ||  IsLoadedByDefault(item.FullName))
                     {
                         continue;
                     }
@@ -55,7 +57,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
 
                     using (FileStream fs = new FileStream(filePath, FileMode.Open))
                     {
-                        Assembly referenceAssembly = context.LoadFromStream(fs);
+                        assembly = context.LoadFromStream(fs);
 
                         MemoryStream memoryStream = new MemoryStream();
 
@@ -65,9 +67,10 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
                         memoryStream.Position = 0;
                         _referenceContainer.SaveStream(name, version, memoryStream);
 
-                        LoadStreamsIntoContext(context, moduleFolder, referenceAssembly);
+                       
                     }
                 }
+                LoadStreamsIntoContext(context, moduleFolder, assembly);
             }
         }
 

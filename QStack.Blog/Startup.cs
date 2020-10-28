@@ -188,7 +188,7 @@ namespace QStack.Blog
                 config => config.AddInterceptor(Configuration)
             );
 
-            services.AddSingleton<IServiceCollection>(services);
+          
             services.PluginSetup(Configuration);
             services.AddHangFire(Configuration);
             services.AddCapWithRabbitMQ(Configuration, options => { options.UseDashboard(); });

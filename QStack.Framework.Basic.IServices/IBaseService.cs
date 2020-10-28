@@ -36,6 +36,8 @@ namespace QStack.Framework.Basic.IServices
         Task<IList<T>> QueryInclude<T>(Expression<Func<T, bool>> whereExpression, params string[] paths) where T : class;
         Task<T> Get<T>(Expression<Func<T, bool>> filterExpression);
         Task<List<T>> GetAll<T>();
-        Task<int> Count<T>(Expression<Func<T, bool>> filterExpression);
+        Task<int> CountAsync<T>(Expression<Func<T, bool>> filterExpression);
+        Task<int> CountAsync<T>();
+        Task<bool> AnyAsync();
     }
 }

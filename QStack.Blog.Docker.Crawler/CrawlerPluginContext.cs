@@ -44,10 +44,10 @@ namespace QStack.Blog.Docker.Crawler
                 //var crawlerOptions = new CrawlerOptions(new ConfigurationBuilder().AddJsonFile(configFile).Build());
 
                 services.AddSingleton<CrawlerOptions>(serviceProvider=> {
-                    var configFile = Path.Combine(serviceProvider.GetService<IOptions<PluginOptions>>().Value.InstallBasePath, this.GetType().Assembly.GetName().Name, "settings.json");
+                    var configFile = Path.Combine(AppContext.BaseDirectory,serviceProvider.GetService<IOptions<PluginOptions>>().Value.InstallBasePath, this.GetType().Assembly.GetName().Name, "settings.json");
                     if (!File.Exists(configFile))
                     {
-                        //debug路径
+                        //QStack.Blog.Plugins.Build路径
                         configFile = Path.Combine(AppContext.BaseDirectory, "settings.json");
 
                     }

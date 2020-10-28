@@ -182,7 +182,14 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
             _mvcModuleSetup.ModuleChangeEventHandler -= action;
             var pluginContext = _puginsAssemblyLoadContexts.Get(plugininfo.Name).PluginContext;
             if (pluginContext.TestUrl?.Any() == true)
-                await Daos.CurrentDao.Update<PluginInfo>(p => p.Name == plugininfo.Name, p => new PluginInfo { TestUrl = pluginContext.TestUrl, RouteArea = pluginContext.RouteArea });
+            {
+                var model = await Daos.CurrentDao.SingleAsync<PluginInfo>(p => p.Name == plugininfo.Name);
+                model.TestUrl = pluginContext.TestUrl;
+                model.RouteArea = pluginContext.RouteArea;
+                await Daos.CurrentDao.Flush();
+                //await Daos.CurrentDao.Update<PluginInfo>(p => p.Name == plugininfo.Name, p => new PluginInfo { TestUrl = pluginContext.TestUrl, RouteArea = pluginContext.RouteArea });
+            }
+
         }
         [TransactionInterceptor]
         private async Task InitializePlugin(PluginInfoDto pluginInfo)
@@ -206,7 +213,10 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
                 throw new InvalidOperationException("the plugin is running.please stop it before upgradePlugin");
 
             _mvcModuleSetup.ReLoadModule(newPlugin.Name);
-            await Daos.CurrentDao.Update<PluginInfo>(p => p.Id == oldPlugin.Id, p => new PluginInfo { Version = newPlugin.Version });
+            var model = await Daos.CurrentDao.Get<PluginInfo>(oldPlugin.Id);
+            model.Version = newPlugin.Version;
+            await Daos.CurrentDao.Flush();
+            //await Daos.CurrentDao.Update<PluginInfo>(p => p.Id == oldPlugin.Id, p => new PluginInfo { Version = newPlugin.Version });
 
         }
         [TransactionInterceptor]
@@ -217,7 +227,10 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
           
           
             _mvcModuleSetup.ReLoadModule(oldPlugin.Name);
-            await Daos.CurrentDao.Update<PluginInfo>(p => p.Id == oldPlugin.Id, p => new PluginInfo { Version = newPlugin.Version });
+            var model = await Daos.CurrentDao.Get<PluginInfo>(oldPlugin.Id);
+            model.Version = newPlugin.Version;
+            await Daos.CurrentDao.Flush();
+            //await Daos.CurrentDao.Update<PluginInfo>(p => p.Id == oldPlugin.Id, p => new PluginInfo { Version = newPlugin.Version });
         }
 
        

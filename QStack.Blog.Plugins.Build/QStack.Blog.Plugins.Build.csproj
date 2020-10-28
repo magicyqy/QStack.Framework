@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="app_data\pluginpackages\QStack.Blog.DemoPlugin.Mvc\1.0.0.1\" />
+  </ItemGroup>
 	<Target Name="Build-Demo" AfterTargets="Build-Crawler">
 		<ItemGroup>
 			<PluginProjects Remove="@(PluginProjects)" />
@@ -31,11 +35,11 @@
 			</RootFolders>
 
 		</ItemGroup>
-		<MakeDir Directories="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)" />
+		<MakeDir Directories="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)\$(Configuration)" />
 		<Message Importance="high" Text="plugin-version:%(RootFolders.Version)" />
 		<MSBuild BuildInParallel="true" Projects="@(PluginProjects)" Targets="Publish" Properties="Cofiguration=$(Configuration)">
 		</MSBuild>
-		<ZipDirectory Overwrite="true" SourceDirectory="%(RootFolders.Identity)\bin\$(Configuration)\$(TargetFramework)\publish" DestinationFile="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)\%(RootFolders.PluginName).zip"></ZipDirectory>
+		<ZipDirectory Overwrite="true" SourceDirectory="%(RootFolders.Identity)\bin\$(Configuration)\$(TargetFramework)\publish" DestinationFile="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)\$(Configuration)\%(RootFolders.PluginName).zip"></ZipDirectory>
 
 	</Target>
 
@@ -62,11 +66,11 @@
 			</RootFolders>
 
 		</ItemGroup>
-		<MakeDir Directories="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)" />
+		<MakeDir Directories="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)\$(Configuration)" />
 		<Message Importance="high" Text="plugin-version:%(RootFolders.Version)" />
 		<MSBuild BuildInParallel="true" Projects="@(PluginProjects)" Targets="Publish" Properties="Cofiguration=$(Configuration)">		
 		</MSBuild>
-		<ZipDirectory Overwrite="true" SourceDirectory="%(RootFolders.Identity)\bin\$(Configuration)\$(TargetFramework)\publish" DestinationFile="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)\%(RootFolders.PluginName).zip"></ZipDirectory>
+		<ZipDirectory Overwrite="true" SourceDirectory="%(RootFolders.Identity)\bin\$(Configuration)\$(TargetFramework)\publish" DestinationFile="$(ProjectDir)\app_data\pluginpackages\%(RootFolders.PluginName)\%(RootFolders.Version)\$(Configuration)\%(RootFolders.PluginName).zip"></ZipDirectory>
 
 	</Target>
 </Project>

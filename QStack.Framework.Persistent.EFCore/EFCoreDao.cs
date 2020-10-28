@@ -53,7 +53,7 @@ namespace QStack.Framework.Persistent.EFCore
             HashCode hash = new HashCode();
             hash.Add(_daoFactoryOption.GetHashCode());
             hash.Add(Convert.ToInt32(_sessionContext?.GetHashCode()));
-            //hash.Add(base.GetHashCode());
+          
             return hash.ToHashCode();
         }
 
@@ -269,7 +269,7 @@ namespace QStack.Framework.Persistent.EFCore
 
         public IQueryable<T> DbSet<T>() where T : class
         {
-            return this.Set<T>();
+            return (IQueryable<T>)this.Set<T>();
         }
 
         public async Task<T> Get<T>(object id) where T : class
@@ -277,7 +277,18 @@ namespace QStack.Framework.Persistent.EFCore
             return (T)await base.FindAsync(typeof(T), id);
         }
 
-     
+        public async Task<int> CountAsync<T>() where T:class
+        {
+            return await this.Set<T>().CountAsync();
+        }
+        public async Task<int> CountAsync<T>(Expression<Func<T, bool>> predicate) where T : class
+        {
+            return await this.Set<T>().CountAsync(predicate);
+        }
+        public async Task<bool> AnyAsync<T>() where T : class
+        {
+            return await this.Set<T>().AnyAsync();
+        }
 
         public async Task<IList<T>> QueryInclude<T>(Expression<Func<T, bool>> whereExpression, params Expression<Func<T, object>>[] paths) where T : class
         {
