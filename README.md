@@ -17,18 +17,12 @@ QStack.Framework是一个面向服务的快速开发框架，采用.netcore3.1+E
 ##### 	动态插件化(运行时安装、升级、降级)
 
 QStack.Blog是基于QStack.Framework框架，采用asp.net core3.1开发的简易博客应用系统。
-详细信息访问[https://magicyqy.cn](https://qystack.top/article/1.html)
+详细信息访问[https://qystack.top](https://qystack.top/article/1.html)
 
 ## 相关项目
 
 [QStack.VueAdmin](https://github.com/magicyqy/QStack.VueAdmin)
 
-## 演示
 
-##### 后台管理
-<https://demo.qystack.top>	账号：admin	密码：123456
-
-##### 前台网站	
-<https://www.qystack.top>
 
 
