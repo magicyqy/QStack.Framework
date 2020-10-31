@@ -6,7 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Runtime.CompilerServices;
-
+using System.Runtime.Loader;
+using System.Linq;
 namespace QStack.Framework.HangFire
 {
     public static class HangFireServiceExtensions
@@ -17,6 +18,15 @@ namespace QStack.Framework.HangFire
             services.AddHangfire((servieProvider,configuration) => configuration
                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                .UseSimpleAssemblyNameTypeSerializer()
+               .UseTypeResolver(typeName =>
+               {
+                   typeName=typeName.Split(",")[0];
+                   var type = Type.GetType(typeName);
+                   if(type==null)
+                        type= AssemblyLoadContext.All.SelectMany(c => c.Assemblies).SelectMany(a => a.GetTypes()).SingleOrDefault(t => t.FullName.Equals(typeName));
+                  
+                   return type;
+               })
                .UseRecommendedSerializerSettings()
                .UsePostgreSqlStorage(servieProvider.GetRequiredService<IOptions<HangFireOptions>>().Value.ConnectionString, new PostgreSqlStorageOptions
                {
@@ -44,8 +54,18 @@ namespace QStack.Framework.HangFire
                 Authorization = new[] { new HangFireAuthorizationFilter() }
             });
 
-            //var backgroundJobs = app.ApplicationServices.GetRequiredService<IBackgroundJobClient>();
-            //    backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
+            var backgroundJobs = app.ApplicationServices.GetRequiredService<IRecurringJobManager>();
+            backgroundJobs.AddOrUpdate<TestJob>("testjob",
+                x =>x.Run(),
+                "0 1 0 * * ?");
+        }
+
+        public class TestJob
+        {
+            public void Run()
+            {
+                Console.WriteLine("Hello world from Hangfire!");
+            }
         }
     }
 }

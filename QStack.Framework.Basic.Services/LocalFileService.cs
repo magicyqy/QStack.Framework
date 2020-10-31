@@ -262,7 +262,7 @@ namespace QStack.Framework.Basic.Services
         public static void MergeFile(string[] inputFilePaths, string outputFilePath)
         {
 
-            Console.WriteLine("Number of files: {0}.", inputFilePaths.Length);
+            Debug.WriteLine("Number of files: {0}.", inputFilePaths.Length);
             using (var outputStream = File.Create(outputFilePath))
             {
                 foreach (var inputFilePath in inputFilePaths)
@@ -272,7 +272,7 @@ namespace QStack.Framework.Basic.Services
                         // Buffer size can be passed as the second argument.
                         inputStream.CopyTo(outputStream);
                     }
-                    Console.WriteLine("The file {0} has been processed.", inputFilePath);
+                    Debug.WriteLine("The file {0} has been processed.", inputFilePath);
                 }
             }
         }

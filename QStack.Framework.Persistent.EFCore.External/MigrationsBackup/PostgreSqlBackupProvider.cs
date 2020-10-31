@@ -78,7 +78,7 @@ namespace QStack.Framework.Persistent.EFCore.External.MigrationsBackup
                 {
                     string batchContent = "";
                     batchContent += $"{dumpCommand}";
-                    Console.WriteLine($"backup command: {batchContent}");
+                    Debug.WriteLine($"backup command: {batchContent}");
                     File.WriteAllText(batFilePath, batchContent, new UTF8Encoding(false));
 
                     ProcessStartInfo info = ProcessInfoByOS(batFilePath);

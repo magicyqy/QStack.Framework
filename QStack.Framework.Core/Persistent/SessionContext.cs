@@ -6,6 +6,7 @@ using ServiceFramework.Common;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -40,7 +41,7 @@ namespace QStack.Framework.Core.Persistent
             if (Daos.ContainsKey(factoryName))
             {
 #if DEBUG_SESSIONCONTEXT
-                Console.WriteLine("获取Dao:{0}", Daos[factoryName].GetHashCode());
+                Debug.WriteLine("获取Dao:{0}", Daos[factoryName].GetHashCode());
 #endif
                 return Daos[factoryName];
             }
@@ -56,7 +57,7 @@ namespace QStack.Framework.Core.Persistent
                 CreateDaoEvent?.Invoke(dao);
 
 #if DEBUG_SESSIONCONTEXT
-                Console.WriteLine($"创建并获取Dao:{dao.GetHashCode()} -{Thread.CurrentThread.ManagedThreadId}" );
+                Debug.WriteLine($"创建并获取Dao:{dao.GetHashCode()} -{Thread.CurrentThread.ManagedThreadId}" );
 #endif
                 return dao;
             }
@@ -123,7 +124,7 @@ namespace QStack.Framework.Core.Persistent
                     await dao.DisposeAsync();
                 }
             }
-            Console.WriteLine("dispose sessioncontext:" + this.GetHashCode());
+            Debug.WriteLine("dispose sessioncontext:" + this.GetHashCode());
         }
 
       

@@ -26,13 +26,13 @@ namespace QStack.Framework.Core.Persistent
             //                SessionContext.SetContext(sessionContext);
 
             //#if DEBUG_SESSIONCONTEXT
-            //                Console.WriteLine("注册SessionContext:{0}", sessionContext.GetHashCode());
+            //                Debug.WriteLine("注册SessionContext:{0}", sessionContext.GetHashCode());
             //#endif
             //                registered = true;
             //            }
             sessionContext = serviceProvider.GetRequiredService<SessionContext>();
             AddOne();
-            Console.WriteLine("注册SessionContext:{0}", sessionContext.GetHashCode());
+            Debug.WriteLine("注册SessionContext:{0}", sessionContext.GetHashCode());
 
             
         }
@@ -86,7 +86,7 @@ namespace QStack.Framework.Core.Persistent
 
 
 #if DEBUG_SESSIONCONTEXT
-                Console.WriteLine("注销SessionContext:{0}", sessionContext.GetHashCode());
+                Debug.WriteLine("注销SessionContext:{0}", sessionContext.GetHashCode());
 #endif
 
             }

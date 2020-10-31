@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace QStack.Blog.Docker.Crawler
 {
+    [Obsolete]
     public class CapMessagePackSerializer : DotNetCore.CAP.Serialization.ISerializer
     {
         private static readonly MessagePackSerializerOptions SerializerOptions =

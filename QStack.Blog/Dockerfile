@@ -12,8 +12,8 @@ WORKDIR /src
 #RUN dotnet restore "QStack.Blog/QStack.Blog.csproj"
 COPY . .
 
-WORKDIR "/src/QStack.Blog.DemoPlugin.Mvc"
-RUN dotnet build "QStack.Blog.DemoPlugin.Mvc.csproj" -c Release
+#WORKDIR "/src/QStack.Blog.DemoPlugin.Mvc"
+#RUN dotnet build "QStack.Blog.DemoPlugin.Mvc.csproj" -c Release
 WORKDIR "/src/QStack.Blog"
 RUN dotnet build "QStack.Blog.csproj" -c Release -o /app/build
 

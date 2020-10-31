@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace QStack.Blog.Comon
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error writing app settings | {0}", ex.Message);
+                Debug.WriteLine("Error writing app settings | {0}", ex.Message);
             }
         }
 

@@ -27,10 +27,13 @@ namespace QStack.Blog.Docker.Crawler
                 ? new string[0]
                 : _configuration["DockerVolumes"].Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 
-        public string RabbitMQ_HostName=> _configuration["RabbitMQ:HostName"];
-        public string RabbitMQ_UserName => _configuration["RabbitMQ:UserName"];
-        public string RabbitMQ_Password => _configuration["RabbitMQ:Password"];
-        public string RabbitMQ_Exchange => _configuration["RabbitMQ:Exchange"];
+        public string[] ExtraHosts=>
+            string.IsNullOrWhiteSpace(_configuration["ExtraHosts"])
+                ? new string[0]
+                : _configuration["ExtraHosts"].Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+        
+        public string NetworkMode => _configuration["NetworkMode"];
+
     }
 
 }

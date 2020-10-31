@@ -119,7 +119,8 @@ namespace DotnetSpider.Portal.Controllers.API
           
                 spider.Name = viewModel.Name;
                 spider.Cron = viewModel.Cron;
-
+                spider.Image = viewModel.Image;
+                spider.Volume = viewModel.Volume;
                 spider.Environment = viewModel.Environment;
 
                 spider.LastModificationTime = DateTimeOffset.Now;

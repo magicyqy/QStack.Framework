@@ -5,6 +5,7 @@ using AutoMapper.Configuration;
 using Lucene.Net.Support;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
@@ -78,8 +79,8 @@ namespace QStack.Blog.Comon
                     var newServices = assemblyLoadContext.ConfigureServices(oldSsevices, oldProvider);
                     var myServices1 = newServices.Where(s => s.ServiceType.FullName.Contains("QStack"));
                     //actionContext.HttpContext.RequestServices = newServiceProvider;
-                    foreach (var item in newServices.Select(s => s.ServiceType.FullName).OrderBy(n => n))
-                        Console.WriteLine(item);
+                    //foreach (var item in newServices.Select(s => s.ServiceType.FullName).OrderBy(n => n))
+                    //    Console.WriteLine(item);
                     var serviceProvider = newServices.BuildServiceProvider();
                     newProviders.TryAdd(Activity.Current?.Id, serviceProvider);
                     return serviceProvider.GetRequiredService(controllerType);
@@ -87,7 +88,8 @@ namespace QStack.Blog.Comon
                 catch(Exception e)
                 {
                     _logger.LogException(e);
-                    Console.WriteLine(this.GetType().FullName);
+                   
+                  
                     return null;
                 }
                 //*/
@@ -230,11 +232,11 @@ namespace QStack.Blog.Comon
         /// <inheritdoc />
         public virtual void Release(ControllerContext context, object controller)
         {
-            Console.WriteLine(controller.GetType().FullName);
+          
             var provider = newProviders.GetValueOrDefault(Activity.Current.Id) as ServiceProvider;
             provider?.Dispose();
             GC.Collect();
-            //System.Runtime.Loader.AssemblyLoadContext.Default.Assemblies.
+          
         }
     }
 }

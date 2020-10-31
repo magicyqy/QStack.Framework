@@ -82,7 +82,9 @@ namespace QStack.Blog.Docker.Crawler.Services
 					volumes.Add(volume);
 				}
 
-				parameters.HostConfig.Binds = volumes.ToList(); ;
+				parameters.HostConfig.Binds = volumes.ToList();
+				parameters.HostConfig.NetworkMode = _crawlerOptions.NetworkMode??"";
+				parameters.HostConfig.ExtraHosts = _crawlerOptions.ExtraHosts.ToList();
 				var result = await client.Containers.CreateContainerAsync(parameters);
 
 				if (result.ID == null)
@@ -101,8 +103,6 @@ namespace QStack.Blog.Docker.Crawler.Services
 				};
 
 				spiderContainer = await _dockerCrawlerService.AddSpiderContainer(spiderContainer);
-
-
 				var startResult =
 					await client.Containers.StartContainerAsync(result.ID, new ContainerStartParameters());
 				await _dockerCrawlerService.UpdateSpiderContainerStatus(spiderContainer.Id, startResult ? "Success" : "Failed");

@@ -4,6 +4,7 @@ using Lucene.Net.Store;
 using QStack.Framework.SearchEngine.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace QStack.Framework.SearchEngine.Imps
@@ -106,7 +107,7 @@ namespace QStack.Framework.SearchEngine.Imps
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -170,7 +171,7 @@ namespace QStack.Framework.SearchEngine.Imps
             catch (IndexNotFoundException ex)
             {
                 _directory.ClearLock("write.lock");
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return 0;
             }
         }

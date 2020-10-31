@@ -30,8 +30,9 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
         private IPluginContext _pluginContext = null;
         private IList<ApplicationPart> _pluginAssemblyParts = new List<ApplicationPart>();
 
-        public CollectibleAssemblyLoadContext(string pluginName) : base(isCollectible: true)
+        public CollectibleAssemblyLoadContext(string pluginName) : base(pluginName,isCollectible: true)
         {
+            
             _pluginName = pluginName;
         }
 

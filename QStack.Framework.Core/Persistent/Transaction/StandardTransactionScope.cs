@@ -2,6 +2,7 @@
 
 using ServiceFramework.Common;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -33,7 +34,7 @@ namespace QStack.Framework.Core.Transaction
 
                 AddOne();
             }
-            Console.WriteLine($"{this.GetType().Name} threadid {System.Threading.Thread.CurrentThread.ManagedThreadId}");
+            Debug.WriteLine($"{this.GetType().Name} threadid {System.Threading.Thread.CurrentThread.ManagedThreadId}");
         }
 
         public bool IsExistTransactionScope()
@@ -51,7 +52,7 @@ namespace QStack.Framework.Core.Transaction
             CallContext.SetData("StandardTransactionScopeFlag", 1);
 
 #if DEBUG_TRANSACTION
-            Console.WriteLine("启动事务:{0}", transactionScope.GetHashCode());
+            Debug.WriteLine("启动事务:{0}", transactionScope.GetHashCode());
 #endif
         }
 
@@ -62,7 +63,7 @@ namespace QStack.Framework.Core.Transaction
                 transactionScope.Complete();
 
 #if DEBUG_TRANSACTION
-                Console.WriteLine("提交事务:{0}", transactionScope.GetHashCode());
+                Debug.WriteLine("提交事务:{0}", transactionScope.GetHashCode());
 #endif
             }
             return Task.CompletedTask;
@@ -80,7 +81,7 @@ namespace QStack.Framework.Core.Transaction
                 SubOne();
 
 #if DEBUG_TRANSACTION
-                Console.WriteLine("释放事务:{0}", transactionScope.GetHashCode());
+                Debug.WriteLine("释放事务:{0}", transactionScope.GetHashCode());
 #endif
 
             }
