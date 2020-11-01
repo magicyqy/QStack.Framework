@@ -10,8 +10,8 @@ using QStack.Framework.Persistent.EFCore;
 namespace QStack.Framework.AutoMigration.spiderdb.Migrations
 {
     [DbContext(typeof(EFCoreDao))]
-    [Migration("20201009145612_20201009225612_spiderdb.Migrations")]
-    partial class _20201009225612_spiderdbMigrations
+    [Migration("20201031144014_20201031224013_spiderdb.Migrations")]
+    partial class _20201031224013_spiderdbMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

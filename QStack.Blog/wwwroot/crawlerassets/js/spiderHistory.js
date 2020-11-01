@@ -34,13 +34,28 @@ $(function () {
                 }, function () {
                     let id = $(event.toElement).parent().parent().parent().attr('id');
                     debugger
-                        http.put('/crawler/api/v1.0/spiders/' + id + '/exit', null, function () {
+                    http.put('/crawler/api/v1.0/spiders/' + id + '/exit', null, function () {
                         swal('Success', 'Send signal success', "success");
                     }, function () {
                         swal('Error', 'Stop spider failed', "error");
                     });
                 });
             },
+            remove: function (event) {
+                swal({
+                    title: "Sure to remove container of this spider?",
+                    type: "warning",
+                    showCancelButton: true
+                }, function () {
+                    let id = $(event.toElement).parent().parent().parent().attr('id');
+                    debugger
+                    http.put('/crawler/api/v1.0/spiders/' + id + '/remove', null, function () {
+                        swal('Success', 'Send signal success', "success");
+                    }, function () {
+                        swal('Error', 'Remove spidercontainer failed', "error");
+                    });
+                });
+            }
         }
     });
 });

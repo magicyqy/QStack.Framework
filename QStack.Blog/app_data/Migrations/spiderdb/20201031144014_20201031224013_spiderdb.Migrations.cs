@@ -2,7 +2,7 @@
 
 namespace QStack.Framework.AutoMigration.spiderdb.Migrations
 {
-    public partial class _20201012211237_spiderdbMigrations : Migration
+    public partial class _20201031224013_spiderdbMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

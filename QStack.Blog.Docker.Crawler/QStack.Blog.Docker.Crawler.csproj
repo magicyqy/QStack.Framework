@@ -2,7 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <OutputType>Library</OutputType>	
+    <OutputType>Library</OutputType>
+	  <!-- add from this line: -->
+	  <!--<CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>-->
+	  <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+	  <AssemblyVersion>1.0.0.1</AssemblyVersion>
+	  <FileVersion>1.0.0.1</FileVersion>
+	  <!--<CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>-->
+	  <!--<MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>-->
+	  <!--<RazorCompileOnBuild>false</RazorCompileOnBuild>-->
+	  <!-- to this line. -->
   </PropertyGroup>
 
   <ItemGroup>

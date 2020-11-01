@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NCrontab;
 using QStack.Framework.Core.Entity;
+using Docker.DotNet;
+using Docker.DotNet.Models;
 
 namespace DotnetSpider.Portal.Controllers.API
 {
@@ -338,6 +340,39 @@ namespace DotnetSpider.Portal.Controllers.API
             }
         }
 
+        [HttpPut("{id}/remove")]
+        public async Task<bool> RemoveContainerAsync(int id)
+        {
+            try
+            {
+                var spiderHistory = await _dockerCrawlerService.GetHistory(id);
+                if (spiderHistory == null)
+                {
+                    throw new ApplicationException("Spider history is not exits");
+                }
 
+                var containerId = spiderHistory.ContainerId;
+                if (string.IsNullOrWhiteSpace(containerId))
+                {
+                    throw new ApplicationException("Spider container is not exits");
+                }
+                var client = new DockerClientConfiguration(
+                        new Uri(_crawlerOptions.Docker))
+                    .CreateClient();
+                if (await client.Containers.StopContainerAsync(containerId, new ContainerStopParameters()))
+                    await client.Containers.RemoveContainerAsync(containerId, new ContainerRemoveParameters());
+                else
+                {
+                    throw new ApplicationException("Spider container stop failed");
+                }
+                await _dockerCrawlerService.UpdateSpiderContainerStatus(spiderHistory.Id, "Removed");
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"关闭失败: {e}");
+                return false;
+            }
+        }
     }
 }

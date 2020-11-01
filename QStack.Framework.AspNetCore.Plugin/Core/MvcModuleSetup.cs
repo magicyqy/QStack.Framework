@@ -75,6 +75,8 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
                 _pluginsLoadContexts.Add(moduleName, context);
                 if (isInstall)
                     ModuleChangeEventHandler?.Invoke(ModuleEvent.Installed, context);
+                else
+                    ModuleChangeEventHandler?.Invoke(ModuleEvent.Loaded, context);
             }
 
         }

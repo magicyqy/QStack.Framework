@@ -7,6 +7,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
     public enum ModuleEvent
     {
         Installed,
+        Loaded,
         Started,
         Stoped,
         UnInstalled

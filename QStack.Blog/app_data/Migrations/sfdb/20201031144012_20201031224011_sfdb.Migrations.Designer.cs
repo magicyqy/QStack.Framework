@@ -10,8 +10,8 @@ using QStack.Framework.Persistent.EFCore;
 namespace QStack.Framework.AutoMigration.sfdb.Migrations
 {
     [DbContext(typeof(EFCoreDao))]
-    [Migration("20201028054208_20201028134158_sfdb.Migrations")]
-    partial class _20201028134158_sfdbMigrations
+    [Migration("20201031144012_20201031224011_sfdb.Migrations")]
+    partial class _20201031224011_sfdbMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,33 +20,6 @@ namespace QStack.Framework.AutoMigration.sfdb.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
-
-            modelBuilder.Entity("QStack.Blog.DemoPlugin.Mvc.Models.TestModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<DateTime?>("CreateDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int?>("CreateUserId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("LastModifyDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int?>("LastModifyUserId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TestModel");
-                });
 
             modelBuilder.Entity("QStack.Framework.AspNetCore.Plugin.Models.PluginInfo", b =>
                 {

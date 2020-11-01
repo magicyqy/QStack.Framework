@@ -6,3 +6,4 @@
 # User-specific files
 #app_data/secrets/*
 app_data/lucene_index/*
+#app_data/Migrations/*

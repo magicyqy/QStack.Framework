@@ -43,6 +43,9 @@
                     <button v-if="!item.exit" title="exit" class="btn btn-sm btn-outline-primary" v-on:click="exit">
                         <i class="fa fa-fw fa-stop"></i>
                     </button>
+                    <button v-if="item.exit" title="remove container" class="btn btn-sm btn-outline-primary" v-on:click="remove">
+                        <i class="fa fa-fw fa-trash"></i>
+                    </button>
                 </td>
             </tr>
             </tbody>

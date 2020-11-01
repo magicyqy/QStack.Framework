@@ -62,44 +62,8 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
 
         public async Task DeletePlugin(int pluginId)
         {
+           
             PluginInfo plugininfo = await Daos.CurrentDao.Get<PluginInfo>(pluginId);
-            ModuleChangeDelegate action = (moduleEvent, context) =>
-            {
-
-                if (context.PluginName != plugininfo.Name ||  context?.PluginContext == null || context?.PluginContext.PluginEntityAssemblies.Count() == 0)
-                    return;
-                if (moduleEvent == ModuleEvent.UnInstalled)
-                {
-                    //var pluginContexts = pluginsLoadContexts.All().Select(c => c.PluginContext).SkipWhile(c => c == null);
-
-                    #region 重置实体类及数据库
-                    var daoFactories = _serviceProvider.GetServices<IDaoFactory>();
-                    foreach (var factory in daoFactories)
-                    {
-                        if (context.PluginContext.PluginEntityAssemblies.ContainsKey(factory.FactoryName))
-                        {
-
-                            factory.RemoveExtraEntityAssemblies(context.PluginContext.PluginEntityAssemblies[factory.FactoryName].ToArray());
-
-                          
-                        }
-
-                    }
-                    if (plugininfo.IsMigration)
-                    {
-                        using (var scope = _serviceProvider.CreateScope())
-                        {
-                            var autoMigration = scope.ServiceProvider.GetService<AutoMigration>();
-                            autoMigration.GenerateMigrations();
-
-                            //if (context.PluginContext?.TestUrl.Any() == true)
-                            //    this.Update<PluginInfoDto>(p => p.Name == context.PluginName, p => new PluginInfoDto { TestUrl = context.PluginContext.TestUrl, RouteArea = context.PluginContext.RouteArea }).ConfigureAwait(false).GetAwaiter().GetResult();
-                        }
-                    }
-                    #endregion
-                }
-            };
-            _mvcModuleSetup.ModuleChangeEventHandler += action;
          
 
             if (plugininfo.IsEnable)
@@ -109,7 +73,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
             await Daos.CurrentDao.Delete(plugininfo);
             await Daos.CurrentDao.Flush();
             _mvcModuleSetup.DeleteModule(plugininfo.Name);
-            _mvcModuleSetup.ModuleChangeEventHandler -= action;
+          
         }
 
         public async Task DisablePlugin(int pluginId)
@@ -122,44 +86,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
 
         public async Task AddPlugins(PluginInfoDto plugininfo)
         {
-            //监听安装事件
-            ModuleChangeDelegate action = (moduleEvent, context) =>
-            {
-
-                if (context.PluginName!=plugininfo.Name|| context?.PluginContext == null || context?.PluginContext.PluginEntityAssemblies.Count() == 0)
-                    return;
-                if (moduleEvent == ModuleEvent.Installed)
-                {
-                    //var pluginContexts = pluginsLoadContexts.All().Select(c => c.PluginContext).SkipWhile(c => c == null);
-
-                    #region 重置实体类及数据库
-                    var daoFactories = _serviceProvider.GetServices<IDaoFactory>();
-                    foreach (var factory in daoFactories)
-                    {
-                        if (context.PluginContext.PluginEntityAssemblies.ContainsKey(factory.FactoryName))
-                        {
-                          
-                            factory.RemoveExtraEntityAssemblies(context.PluginContext.PluginEntityAssemblies[factory.FactoryName].ToArray());
-                         
-                            factory.AddExtraEntityAssemblies(context.PluginContext.PluginEntityAssemblies[factory.FactoryName].ToArray());
-                        }
-
-                    }
-                    if (plugininfo.IsMigration)
-                    {
-                        using (var scope = _serviceProvider.CreateScope())
-                        {
-                            var autoMigration = scope.ServiceProvider.GetService<AutoMigration>();
-                            autoMigration.GenerateMigrations();
-
-                            //if (context.PluginContext?.TestUrl.Any() == true)
-                            //    this.Update<PluginInfoDto>(p => p.Name == context.PluginName, p => new PluginInfoDto { TestUrl = context.PluginContext.TestUrl, RouteArea = context.PluginContext.RouteArea }).ConfigureAwait(false).GetAwaiter().GetResult();
-                        }
-                    }
-                    #endregion
-                }
-            };
-            _mvcModuleSetup.ModuleChangeEventHandler += action;
+           
 
             PluginInfoDto existedPlugin =await this.Get<PluginInfoDto>(p=>p.Name== plugininfo.Name);
 
@@ -179,7 +106,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
             {
                 await DegradePlugin(plugininfo, existedPlugin);
             }
-            _mvcModuleSetup.ModuleChangeEventHandler -= action;
+     
             var pluginContext = _puginsAssemblyLoadContexts.Get(plugininfo.Name).PluginContext;
             if (pluginContext.TestUrl?.Any() == true)
             {
@@ -194,14 +121,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
         [TransactionInterceptor]
         private async Task InitializePlugin(PluginInfoDto pluginInfo)
         {
-            //PluginInfo plugin = new PluginInfo
-            //{
-            //    Name = pluginInfo.Name,
-            //    DisplayName = pluginInfo.DisplayName,
-            //    UniqueKey = pluginInfo.UniqueKey,
-            //    Version = pluginInfo.Version
-            //};
-
+           
             PluginInfo plugin = Mapper.Map<PluginInfo>(pluginInfo);
             _mvcModuleSetup.LoadModule(pluginInfo.Name);
             await Daos.CurrentDao.AddAsync(plugin); ;
