@@ -99,9 +99,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Extensions
                     moduleSetup.EnableModule(plugin.Name);
                 else
                     moduleSetup.LoadModule(plugin.Name, false);
-                var assembly= pluginsLoadContexts.All().SingleOrDefault(a => a.PluginName == plugin.Name)?.Assemblies.SingleOrDefault(a => a.GetName().Name == $"{ plugin.Name}.Views");
-                option.FileProviders.Add(   // <-------
-                    new EmbeddedFileProvider(assembly));
+       
             }
            
             AdditionalReferencePathHolder.AdditionalReferencePaths = option?.AdditionalReferencePaths;
