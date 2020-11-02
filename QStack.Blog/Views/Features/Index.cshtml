@@ -6,31 +6,40 @@
 
 <h1>Features</h1>
 
-<b>Controllers:</b>
-<div class="pre-scrollable" style="max-height:100px">
+<b>Controllers11:</b>
+<div class="pre-scrollable">
     <ul>
         @foreach (var item in Model.Controllers)
         {
-            <li>@item.Name</li>
+            <li>@(item.Name+"\t"+item.Assembly.FullName)</li>
         }
     </ul>
 </div>
 
 <b>Tag Helpers:</b>
-<div class="pre-scrollable" style="max-height: 100px">
+<div class="pre-scrollable">
     <ul>
         @foreach (var item in Model.TagHelpers)
         {
-            <li>@item.Name</li>
+            <li>@(item.Name+"\t"+item.Assembly.FullName)</li>
         }
     </ul>
 </div>
 <b>View Components:</b>
-<div class="pre-scrollable" style="max-height: 100px">
+<div class="pre-scrollable">
     <ul>
         @foreach (var item in Model.ViewComponents)
         {
-            <li>@item.Name</li>
+            <li>@(item.Name+"\t"+item.Assembly.FullName)</li>
+        }
+    </ul>
+</div>
+<b>Views:</b>
+<div class="pre-scrollable">
+    <ul>
+        @foreach (var item in Model.Views)
+        {
+            <li>@(item.Name+"\t"+item.Assembly.FullName)</li>
         }
     </ul>
 </div>

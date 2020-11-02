@@ -23,16 +23,17 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
         private readonly IMvcModuleSetup _mvcModuleSetup = null;
         private readonly IPluginsAssemblyLoadContexts _puginsAssemblyLoadContexts;
         readonly IServiceProvider _serviceProvider;
+        readonly AutoMigration _autoMigration;
 
         public PluginManagerService(IMapper mapper,
             IMvcModuleSetup mvcModuleSetup,
-            IPluginsAssemblyLoadContexts puginsAssemblyLoadContexts,IServiceProvider serviceProvider)
+            IPluginsAssemblyLoadContexts puginsAssemblyLoadContexts,AutoMigration autoMigration)
         {
             Mapper = mapper;
            
             _mvcModuleSetup = mvcModuleSetup;
             _puginsAssemblyLoadContexts = puginsAssemblyLoadContexts;
-            _serviceProvider = serviceProvider;
+            _autoMigration = autoMigration;
         }
 
         public async Task<List<PluginInfoDto>> GetAllPlugins()
@@ -73,7 +74,8 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
             await Daos.CurrentDao.Delete(plugininfo);
             await Daos.CurrentDao.Flush();
             _mvcModuleSetup.DeleteModule(plugininfo.Name);
-          
+            if(plugininfo.IsMigration)
+               _autoMigration.GenerateMigrations();
         }
 
         public async Task DisablePlugin(int pluginId)
@@ -106,7 +108,8 @@ namespace QStack.Framework.AspNetCore.Plugin.Services
             {
                 await DegradePlugin(plugininfo, existedPlugin);
             }
-     
+            if (plugininfo.IsMigration)
+                _autoMigration.GenerateMigrations();
             var pluginContext = _puginsAssemblyLoadContexts.Get(plugininfo.Name).PluginContext;
             if (pluginContext.TestUrl?.Any() == true)
             {

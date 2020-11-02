@@ -27,6 +27,12 @@ namespace QStack.Blog.Docker.Crawler.Controllers
 			return View();
 		}
 
+		[HttpGet("test")]
+		public IActionResult Test()
+		{
+			return Ok("test");
+		}
+
 		[HttpGet("{id}/histories")]
 		public IActionResult History(int id)
 		{

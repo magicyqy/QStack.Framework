@@ -10,6 +10,7 @@ using QStack.Framework.Basic.IServices;
 using QStack.Framework.AspNetCore.Plugin.Core;
 using System;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
 namespace QStack.Blog.Controllers
 {
@@ -40,6 +41,9 @@ namespace QStack.Blog.Controllers
             _partManager.PopulateFeature(viewComponentFeature);
             viewModel.ViewComponents = viewComponentFeature.ViewComponents.ToList();
 
+            var feature = new ViewsFeature();
+            _partManager.PopulateFeature(feature);
+            viewModel.Views = feature.ViewDescriptors.Select(v => v.Type.GetTypeInfo()).ToList();
             return View(viewModel);
         }
 
@@ -90,6 +94,8 @@ namespace QStack.Blog.Controllers
             public List<TypeInfo> TagHelpers { get; set; }
 
             public List<TypeInfo> ViewComponents { get; set; }
+            
+            public List<TypeInfo> Views { get; set; }
         }
 
 }

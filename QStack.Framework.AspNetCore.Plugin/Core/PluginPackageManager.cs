@@ -21,7 +21,8 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
         {
             _hostEnvironment = environment;
             _pluginOptions = options.Value;
-            _baseDirectory = AppContext.BaseDirectory;
+            //_baseDirectory = AppContext.BaseDirectory;
+            _baseDirectory = environment.ContentRootPath;
         }
 
         public bool UnZipPackage(string zipFile,out PluginInfoDto pluginInfoDto)

@@ -38,6 +38,7 @@ using Savorboard.CAP.InMemoryMessageQueue;
 using QStack.Framework.Core.MessageQueue;
 using QStack.Framework.AspNetCore.Plugin.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 
 //using System.Net.Http;
@@ -90,7 +91,7 @@ namespace QStack.Blog
                 services.Remove(defaultActivator);
                 services.AddSingleton<IControllerActivator, CustomServiceBasedControllerActivator>();
             }
-
+           
 
             services.Configure<FileManagerOptions>(options => Configuration.GetSection("FileOptions").Bind(options));
 

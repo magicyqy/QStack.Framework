@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -35,7 +37,6 @@ namespace QStack.Framework.AspNetCore.Plugin.Extensions
             services.AddSingleton<IMvcModuleSetup, MvcModuleSetup>();
             services.AddScoped<IPluginManagerService, PluginManagerService>();
 
-
             services.AddSingleton<INotificationRegister, NotificationRegister>();
             services.AddSingleton<DynamicChangeTokenProvider>()
                                .AddSingleton<IActionDescriptorChangeProvider>(provider => provider.GetRequiredService<DynamicChangeTokenProvider>());
@@ -43,6 +44,17 @@ namespace QStack.Framework.AspNetCore.Plugin.Extensions
             services.AddSingleton<IReferenceLoader, DefaultReferenceLoader>();
             services.AddSingleton<IPluginsAssemblyLoadContexts, PluginsAssemblyLoadContexts>();
             services.AddSingleton<PluginPackageManager>();
+
+
+            //services.RemoveAll<IRazorViewEngine>();
+            //services.TryAddSingleton<IRazorViewEngine, CustomRazorViewEngine>();
+
+            //services.RemoveAll<Microsoft.AspNetCore.Mvc.Razor.Compilation.IViewCompilerProvider>();       
+            //services.TryAddSingleton<IViewCompilerProvider, CustomRuntimeViewCompilerProvider>();
+
+            //services.TryAddSingleton<CustomRuntimeCompilationFileProvider>();
+            //services.TryAddSingleton<CustomRazorReferenceManager>();
+            //services.TryAddSingleton<CustomCSharpCompiler>();
 
         }
 
@@ -89,17 +101,17 @@ namespace QStack.Framework.AspNetCore.Plugin.Extensions
 
             };
             moduleSetup.ModuleChangeEventHandler += moduleStarted;
-
+            var env = serviceProvider.GetService<IHostEnvironment>();
             foreach (var plugin in allEnabledPlugins)
             {
-                string filePath = Path.Combine(AppContext.BaseDirectory, _pluginOptions.InstallBasePath, plugin.Name, $"{ plugin.Name}.dll");
-                option.FileProviders.Add(new PhysicalFileProvider(Directory.GetParent(filePath).FullName));
+                string filePath = Path.Combine(env.ContentRootPath, _pluginOptions.InstallBasePath, plugin.Name, $"{ plugin.Name}.dll");
+                //option.FileProviders.Add(new PhysicalFileProvider(Path.Combine(AppContext.BaseDirectory, _pluginOptions.InstallBasePath, plugin.Name)));
                 option.AdditionalReferencePaths.Add(filePath);
                 if (plugin.IsEnable)
                     moduleSetup.EnableModule(plugin.Name);
                 else
                     moduleSetup.LoadModule(plugin.Name, false);
-       
+             
             }
            
             AdditionalReferencePathHolder.AdditionalReferencePaths = option?.AdditionalReferencePaths;
@@ -146,15 +158,16 @@ namespace QStack.Framework.AspNetCore.Plugin.Extensions
                 }
 
             }
-           using (var scope = serviceProvider.CreateScope())
-           {
-                var autoMigration = scope.ServiceProvider.GetService<AutoMigration>();
-                autoMigration.GenerateMigrations();
+            // had remove to PluginManagerService
+            //using (var scope = serviceProvider.CreateScope())
+            //{
+            //     var autoMigration = scope.ServiceProvider.GetService<AutoMigration>();
+            //     autoMigration.GenerateMigrations();
 
-                    //if (context.PluginContext?.TestUrl.Any() == true)
-                    //    this.Update<PluginInfoDto>(p => p.Name == context.PluginName, p => new PluginInfoDto { TestUrl = context.PluginContext.TestUrl, RouteArea = context.PluginContext.RouteArea }).ConfigureAwait(false).GetAwaiter().GetResult();
-           }
-          
+            //         //if (context.PluginContext?.TestUrl.Any() == true)
+            //         //    this.Update<PluginInfoDto>(p => p.Name == context.PluginName, p => new PluginInfoDto { TestUrl = context.PluginContext.TestUrl, RouteArea = context.PluginContext.RouteArea }).ConfigureAwait(false).GetAwaiter().GetResult();
+            //}
+
             #endregion
         }
 
@@ -170,14 +183,14 @@ namespace QStack.Framework.AspNetCore.Plugin.Extensions
                 }
 
             }
+            // had remove to PluginManagerService
+            //using (var scope = serviceProvider.CreateScope())
+            //{
+            //    var autoMigration = scope.ServiceProvider.GetService<AutoMigration>();
+            //    autoMigration.GenerateMigrations();
 
-            using (var scope = serviceProvider.CreateScope())
-            {
-                var autoMigration = scope.ServiceProvider.GetService<AutoMigration>();
-                autoMigration.GenerateMigrations();
 
-
-            }
+            //}
         }
         //had remove to program.cs
         private static void AssemblyLoadContextResoving(IPluginsAssemblyLoadContexts pluginsLoadContexts)

@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Razor.Compilation;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using QStack.Framework.AspNetCore.Plugin.Contracts;
+using QStack.Framework.AspNetCore.Plugin.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,9 +27,11 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
         public event ModuleChangeDelegate ModuleChangeEventHandler;
         readonly IWebHostEnvironment _env;
         readonly string _baseDirectory;
+        readonly IRazorViewEngine _razorViewEngine;
+        readonly IViewCompilerProvider _viewCompiler;
         public MvcModuleSetup(ApplicationPartManager partManager, IReferenceLoader referenceLoader,
             IPluginsAssemblyLoadContexts pluginsLoadContexts, DynamicChangeTokenProvider dynamicChangeTokenProvider,
-             INotificationRegister notificationRegister,IOptions<PluginOptions> options, IWebHostEnvironment webHostEnvironment)
+             INotificationRegister notificationRegister,IOptions<PluginOptions> options, IWebHostEnvironment webHostEnvironment, IRazorViewEngine razorViewEngine, IViewCompilerProvider viewCompiler)
         {
             _partManager = partManager;
             _referenceLoader = referenceLoader;
@@ -33,8 +40,10 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
             _notificationRegister = notificationRegister;
             _pluginOptions = options.Value;
             _env = webHostEnvironment;
-            _baseDirectory = AppContext.BaseDirectory;
-
+            //_baseDirectory = AppContext.BaseDirectory;
+            _baseDirectory = _env.ContentRootPath;
+            _razorViewEngine = razorViewEngine;
+            _viewCompiler = viewCompiler;
 
         }
 
@@ -63,11 +72,11 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
                 if (File.Exists(viewsFilePath))
                 {
                     using (FileStream fs = new FileStream(viewsFilePath, FileMode.Open))
-                    { 
-                        Assembly assembly = context.LoadFromStream(fs); 
+                    {
+                        Assembly assembly = context.LoadFromStream(fs);
                         context.PluginAssemblyParts.Add(new CompiledRazorAssemblyPart(assembly));
-                        _referenceLoader.LoadStreamsIntoContext(context, referenceFolderPath, assembly);                      
-                      
+                        _referenceLoader.LoadStreamsIntoContext(context, referenceFolderPath, assembly);
+
                     }
                 }
                 var pluginWebRoot = Path.Combine(_baseDirectory, _pluginOptions.InstallBasePath, moduleName, $"wwwroot");
@@ -88,7 +97,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
                 foreach (var part in context.PluginAssemblyParts)
                     _partManager.ApplicationParts.Remove(part);
                 _pluginsLoadContexts.Remove(moduleName);
-              
+                ResetControllActions();
 
             }
             LoadModule(moduleName, isReInstall);
@@ -114,7 +123,8 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
         }
 
         public void DisableModule(string moduleName)
-        { 
+        {
+            var ss = System.Runtime.Loader.AssemblyLoadContext.All;
             var context = _pluginsLoadContexts.Get(moduleName);
             foreach(var part in context.PluginAssemblyParts)
                 _partManager.ApplicationParts.Remove(part);
@@ -123,6 +133,7 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
             ModuleChangeEventHandler?.Invoke(ModuleEvent.Stoped, context);
             _notificationRegister.UnRegisterFrom(context);
             ResetControllActions();
+            ss = System.Runtime.Loader.AssemblyLoadContext.All;
         }
 
         public void DeleteModule(string moduleName)
@@ -154,6 +165,39 @@ namespace QStack.Framework.AspNetCore.Plugin.Core
 
         private void ResetControllActions()
         {
+            //((CustomRazorViewEngine)_razorViewEngine).ClearCache();
+            //((CustomRuntimeViewCompiler)_viewCompiler.GetCompiler()).ClearCache();
+            #region 通过反射清空缓存
+            //注意：以下反射的是内部类，随着版本升级字段名可能不同
+            var viewLookupCacheField = _razorViewEngine.GetType().GetProperty("ViewLookupCache", BindingFlags.Instance | BindingFlags.NonPublic) ;
+            var viewLookupCache = viewLookupCacheField.GetValue(_razorViewEngine) as MemoryCache;
+            viewLookupCache?.Clear();
+            var viewCompiler = _viewCompiler.GetCompiler();
+            var precompiledViewCacheField = viewCompiler.GetType().GetField("_cache", BindingFlags.Instance | BindingFlags.NonPublic);
+            var precompiledViewCache = precompiledViewCacheField.GetValue(viewCompiler) as MemoryCache;
+            precompiledViewCache?.Clear();
+            var precompiledViewsField= viewCompiler.GetType().GetField("_precompiledViews", BindingFlags.Instance | BindingFlags.NonPublic);
+            
+            var precompiledViews= precompiledViewsField.GetValue(viewCompiler)  as Dictionary<string, CompiledViewDescriptor>;
+         
+            var feature = new ViewsFeature();
+            _partManager.PopulateFeature(feature);
+            foreach (var precompiledView in feature.ViewDescriptors)
+            {
+                if (!precompiledViews.ContainsKey(precompiledView.RelativePath))
+                {
+                    // View ordering has precedence semantics, a view with a higher precedence was
+                    // already added to the list.
+                    precompiledViews.Add(precompiledView.RelativePath, precompiledView);
+                }
+                else
+                {
+                    var oldPreCompiledView = precompiledViews[precompiledView.RelativePath];
+                    if (oldPreCompiledView.Type != precompiledView.Type)
+                        precompiledViews[precompiledView.RelativePath] = precompiledView;
+                }
+            }
+            #endregion
             _dynamicChangeTokenProvider.NotifyChanges();
         }
 
