@@ -7,4 +7,5 @@
 #app_data/secrets/*
 app_data/lucene_index/*
 app_data/plugins/*
+wwwroot/crawlerassets/*
 #app_data/Migrations/*
