@@ -83,7 +83,8 @@ namespace QStack.Blog.Comon
                     //    Console.WriteLine(item);
                     var serviceProvider = newServices.BuildServiceProvider();
                     newProviders.TryAdd(Activity.Current?.Id, serviceProvider);
-                    return serviceProvider.GetRequiredService(controllerType);
+                    var obj=serviceProvider.GetRequiredService(controllerType);
+                    return obj;
                 }
                 catch(Exception e)
                 {
@@ -232,11 +233,11 @@ namespace QStack.Blog.Comon
         /// <inheritdoc />
         public virtual void Release(ControllerContext context, object controller)
         {
-          
-            //var provider = newProviders.GetValueOrDefault(Activity.Current.Id) as ServiceProvider;
-            //provider?.Dispose();
-            //GC.Collect();
-          
+
+            var provider = newProviders.GetValueOrDefault(Activity.Current.Id) as ServiceProvider;
+            provider?.Dispose();
+            GC.Collect();
+
         }
     }
 }

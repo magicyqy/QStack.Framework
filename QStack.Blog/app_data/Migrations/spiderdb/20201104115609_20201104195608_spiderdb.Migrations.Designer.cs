@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QStack.Framework.Persistent.EFCore;
@@ -9,9 +10,10 @@ using QStack.Framework.Persistent.EFCore;
 namespace QStack.Framework.AutoMigration.spiderdb.Migrations
 {
     [DbContext(typeof(EFCoreDao))]
-    partial class EFCoreDaoModelSnapshot : ModelSnapshot
+    [Migration("20201104115609_20201104195608_spiderdb.Migrations")]
+    partial class _20201104195608_spiderdbMigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
