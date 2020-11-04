@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using QStack.Framework.Basic;
 using QStack.Framework.Basic.IServices;
 using QStack.Framework.Basic.ViewModel;
-
+using System.Linq;
 namespace QStack.Blog.Areas.Api.Controllers
 {
     [Route("{area:exists}/[controller]/[action]/{id?}")]
@@ -22,7 +22,7 @@ namespace QStack.Blog.Areas.Api.Controllers
         {
             var result = new ResponseResult<List<NavigationMenuDto>>();
 
-            var list = await _navigationService.GetAll<NavigationMenuDto>();
+            var list = (await _navigationService.GetAll<NavigationMenuDto>()).OrderBy(n=>n.FlowNo).ToList();
             list = GetForTree(list, null);
             result.Data = list;
 

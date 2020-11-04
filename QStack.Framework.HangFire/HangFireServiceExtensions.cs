@@ -54,10 +54,10 @@ namespace QStack.Framework.HangFire
                 Authorization = new[] { new HangFireAuthorizationFilter() }
             });
 
-            var backgroundJobs = app.ApplicationServices.GetRequiredService<IRecurringJobManager>();
-            backgroundJobs.AddOrUpdate<TestJob>("testjob",
-                x =>x.Run(),
-                "0 1 0 * * ?");
+            //var backgroundJobs = app.ApplicationServices.GetRequiredService<IRecurringJobManager>();
+            //backgroundJobs.AddOrUpdate<TestJob>("testjob",
+            //    x =>x.Run(),
+            //    "0 1 0 * * ?");
         }
 
         public class TestJob

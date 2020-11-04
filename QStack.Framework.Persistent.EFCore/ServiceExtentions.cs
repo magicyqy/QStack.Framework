@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using QStack.Framework.Core;
 using QStack.Framework.Core.Persistent;
 using QStack.Framework.Core.Transaction;
@@ -35,6 +36,9 @@ namespace QStack.Framework.Persistent.EFCore
                 optionConfigAction?.Invoke(daoFactoryOption);
                 services.AddSingleton<IDaoFactory>(serviceProvider => {
                     var builder = new DbContextOptionsBuilder<EFCoreDao>();
+                    var loggerFatory = serviceProvider.GetService<ILoggerFactory>();
+                    if (loggerFatory != null)
+                        builder.UseLoggerFactory(loggerFatory);
                     switch (daoFactoryOption.DbType)
                     {
                         case DbTypes.MsSqlServer:

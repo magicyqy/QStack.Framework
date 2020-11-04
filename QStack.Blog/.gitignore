@@ -5,6 +5,7 @@
 
 # User-specific files
 #app_data/secrets/*
+app_data/logs/*
 app_data/lucene_index/*
 app_data/plugins/*
 wwwroot/crawlerassets/*

@@ -18,7 +18,7 @@
                 "Name": "ByExcluding",
                 "Args": {
                   //¿‡sql–¥∑®
-                  "expression": "@Level <> 'Error' and StartsWith(SourceContext, 'QStack.')"
+                  "expression": "@Level <> 'Error' and StartsWith(SourceContext, 'QStack.') or StartsWith(SourceContext, 'Microsoft.EntityFrameworkCore')"
                 }
               }
             ]
@@ -132,7 +132,7 @@
                       "Name": "File",
                       "Args": {
                         "RestrictedToMinimumLevel": "Information",
-                        "path": "app_data/logs/sql-.log",
+                        "path": "app_data/logs/sql/.log",
                         "shared": true,
                         "rollingInterval": "Day",
                         "fileSizeLimitBytes": 512000,
@@ -148,7 +148,7 @@
               {
                 "Name": "ByIncludingOnly",
                 "Args": {
-                  "expression": "EnableSql=true and SourceContext = 'Microsoft.EntityFrameworkCore.Database.Command' "
+                  "expression": "EnableSql='True' and SourceContext = 'Microsoft.EntityFrameworkCore.Database.Command' "
                 }
               }
             ]
@@ -236,6 +236,26 @@
                 }
               }
             ]
+          }
+        }
+      },
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "LevelSwitches": { "$controlSwitch": "Information" },
+            "MinimumLevel": { "ControlledBy": "$controlSwitch" },           
+            "WriteTo": [
+              {
+                "Name": "Seq",
+                "Args": {
+                  "serverUrl": "http://localhost:5341",
+                  "apiKey": "OKHAyCpbffMAh1vKd7yy",
+                  "controlLevelSwitch": "$controlSwitch"
+                }
+              }
+            ],
+            "Filter": []
           }
         }
       }

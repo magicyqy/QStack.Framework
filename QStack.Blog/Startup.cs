@@ -47,14 +47,14 @@ namespace QStack.Blog
 {
     public class Startup
     {
-        public static readonly ILoggerFactory MyLoggerFactory
-            = LoggerFactory.Create(builder => { builder.AddConsole(); });
-        public static readonly ILoggerFactory EFCoreLoggerFactory
-               = LoggerFactory.Create(builder => { builder.AddProvider(new EFLoggerProvider()); });
+        //public static readonly ILoggerFactory MyLoggerFactory
+        //    = LoggerFactory.Create(builder => { builder.AddConsole(); });
+        //public static readonly ILoggerFactory EFCoreLoggerFactory
+        //       = LoggerFactory.Create(builder => { builder.AddProvider(new EFLoggerProvider()); });
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
+         
         }
 
         public IConfiguration Configuration { get; }

@@ -87,6 +87,7 @@
     <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
@@ -104,6 +105,7 @@
   <ItemGroup>
     <Folder Include="app_data\logs\app\" />
     <Folder Include="app_data\logs\web\" />
+    <Folder Include="app_data\logs\sql\" />
     <Folder Include="app_data\Migrations\" />
     <Folder Include="app_data\Migrations\spiderdb\" />
     <Folder Include="app_data\pluginpackages\QStack.Blog.DemoPlugin.Mvc\" />
