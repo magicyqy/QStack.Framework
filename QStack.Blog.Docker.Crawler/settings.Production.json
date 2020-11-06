@@ -1,0 +1,3 @@
+{
+  "Docker": "tcp://host.docker.internal:2375"
+}

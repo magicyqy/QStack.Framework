@@ -234,9 +234,9 @@ namespace QStack.Blog.Comon
         public virtual void Release(ControllerContext context, object controller)
         {
 
-            var provider = newProviders.GetValueOrDefault(Activity.Current.Id) as ServiceProvider;
-            provider?.Dispose();
-            GC.Collect();
+            //var provider = newProviders.GetValueOrDefault(Activity.Current.Id) as ServiceProvider;
+            //provider?.Dispose();
+            //GC.Collect();
 
         }
     }

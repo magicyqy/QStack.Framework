@@ -46,14 +46,18 @@ namespace QStack.Blog.Docker.Crawler
 
                 services.AddSingleton<CrawlerOptions>(serviceProvider=> {
                     var env = serviceProvider.GetService<IHostEnvironment>();
-                    var configFile = Path.Combine(env.ContentRootPath,serviceProvider.GetService<IOptions<PluginOptions>>().Value.InstallBasePath, this.GetType().Assembly.GetName().Name, "settings.json");
-                    //if (!File.Exists(configFile))
-                    //{
-                    //    //QStack.Blog.Plugins.Build路径
-                    //    configFile = Path.Combine(AppContext.BaseDirectory, "settings.json");
+                    var pluginOptions = serviceProvider.GetService<IOptions<PluginOptions>>().Value;
+                    var configFile = Path.Combine(env.ContentRootPath, pluginOptions.InstallBasePath, this.GetType().Assembly.GetName().Name, "settings.json");
+                    if (!File.Exists(configFile))
+                    {
+                        //QStack.Blog.Plugins.Debug路径
+                        configFile = Path.Combine(AppContext.BaseDirectory, "settings.json");
 
-                    //}
-                    return new CrawlerOptions(new ConfigurationBuilder().AddJsonFile(configFile).Build());
+                    }
+                    var configurationBuilder = new ConfigurationBuilder().AddJsonFile(configFile);
+                    if (env.EnvironmentName == Environments.Production)
+                        configurationBuilder.AddJsonFile(Path.Combine(env.ContentRootPath, pluginOptions.InstallBasePath, this.GetType().Assembly.GetName().Name, $"settings.{env.EnvironmentName}.json"));
+                    return new CrawlerOptions(configurationBuilder.Build());
                 });
                 services.AddScoped<IDockerCrawlerService, DockerCrawlerService>();
                 services.AddScoped<ISpiderAgentService, SpiderAgentService>();

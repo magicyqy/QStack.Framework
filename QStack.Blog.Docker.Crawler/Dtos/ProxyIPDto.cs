@@ -19,6 +19,7 @@ namespace QStack.Blog.Docker.Crawler.Dtos
         public string Type { get; set; }
         [Description("归属地")]
         public string Address { get; set; }
+        public string CountryId { get; set; }
         [Description("运营商")]
         public string ISP { get; set; }
         [Description("响应速度")]

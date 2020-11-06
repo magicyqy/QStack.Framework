@@ -18,6 +18,7 @@ using NCrontab;
 using QStack.Framework.Core.Entity;
 using Docker.DotNet;
 using Docker.DotNet.Models;
+using QStack.Framework.Core.Log;
 
 namespace DotnetSpider.Portal.Controllers.API
 {
@@ -195,8 +196,8 @@ namespace DotnetSpider.Portal.Controllers.API
             }
             catch (Exception e)
             {
-                _logger.LogError($"启动失败: {e}");
-             
+          
+                _logger.LogException(e, $"启动失败");
             }
             return await Task.FromResult(false);
         }
@@ -235,7 +236,8 @@ namespace DotnetSpider.Portal.Controllers.API
             }
             catch (Exception e)
             {
-                _logger.LogError($"禁用失败: {e}");
+                _logger.LogException(e, $"禁用失败");
+         
                 return StatusCode((int)HttpStatusCode.InternalServerError, new { e.Message });
             }
         }
@@ -259,7 +261,9 @@ namespace DotnetSpider.Portal.Controllers.API
             }
             catch (Exception e)
             {
-                _logger.LogError($"启用失败: {e}");
+
+                _logger.LogException(e, $"启用失败");
+          
                 return StatusCode((int)HttpStatusCode.InternalServerError, new { e.Message });
             }
         }
@@ -335,7 +339,7 @@ namespace DotnetSpider.Portal.Controllers.API
             }
             catch (Exception e)
             {
-                _logger.LogError($"关闭失败: {e}");
+                _logger.LogException(e, $"关闭失败");
                 return false;
             }
         }
@@ -359,18 +363,15 @@ namespace DotnetSpider.Portal.Controllers.API
                 var client = new DockerClientConfiguration(
                         new Uri(_crawlerOptions.Docker))
                     .CreateClient();
-                if (await client.Containers.StopContainerAsync(containerId, new ContainerStopParameters()))
-                    await client.Containers.RemoveContainerAsync(containerId, new ContainerRemoveParameters());
-                else
-                {
-                    throw new ApplicationException("Spider container stop failed");
-                }
+                await client.Containers.StopContainerAsync(containerId, new ContainerStopParameters());
+                await client.Containers.RemoveContainerAsync(containerId, new ContainerRemoveParameters());              
+                
                 await _dockerCrawlerService.UpdateSpiderContainerStatus(spiderHistory.Id, "Removed");
                 return true;
             }
             catch (Exception e)
             {
-                _logger.LogError($"关闭失败: {e}");
+                _logger.LogException(e,$"关闭失败");
                 return false;
             }
         }

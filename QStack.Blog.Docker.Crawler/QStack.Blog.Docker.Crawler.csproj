@@ -6,8 +6,8 @@
 	  <!-- add from this line: -->
 	  <!--<CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>-->
 	  <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
-	  <AssemblyVersion>1.0.0.1</AssemblyVersion>
-	  <FileVersion>1.0.0.1</FileVersion>
+	  <AssemblyVersion>1.0.0.2</AssemblyVersion>
+	  <FileVersion>1.0.0.2</FileVersion>
 	  <!--<CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>-->
 	  <!--<MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>-->
 	  <!--<RazorCompileOnBuild>false</RazorCompileOnBuild>-->
