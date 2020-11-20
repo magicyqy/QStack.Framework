@@ -313,7 +313,7 @@ i[class*='mdi'] {
     padding: 5px 0;
     background: #fff;
     z-index: 999;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.05);*/
     transform: translateY(70px);
     transition: transform 500ms ease, background 900ms ease;
     -webkit-transition: transform 500ms ease, background 900ms ease;

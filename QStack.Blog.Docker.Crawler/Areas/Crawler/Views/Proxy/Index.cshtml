@@ -74,11 +74,11 @@
                 }
 
             table td, table th {
-                text-align: center;
+                text-align: left;
             }
 
                 table td.l, table th.l {
-                    text-align: center;
+                    text-align: right;
                 }
 
                 table td.c, table th.c {
@@ -88,7 +88,6 @@
                 table td.r, table th.r {
                     text-align: center;
                 }
-
 
         .table100-head th {
             font-family: OpenSans-Regular;
@@ -197,27 +196,30 @@
                         }
 
                         table tbody tr td:nth-child(1):before {
-                            content: "Date";
+                            content: "IP";
                         }
 
                         table tbody tr td:nth-child(2):before {
-                            content: "Order ID";
+                            content: "Port";
                         }
 
                         table tbody tr td:nth-child(3):before {
-                            content: "Name";
+                            content: "地理位置";
                         }
 
                         table tbody tr td:nth-child(4):before {
-                            content: "Price";
+                            content: "类型";
                         }
 
                         table tbody tr td:nth-child(5):before {
-                            content: "Quantity";
+                            content: "匿名度";
                         }
 
                         table tbody tr td:nth-child(6):before {
-                            content: "Total";
+                            content: "响应速度";
+                        }
+                        table tbody tr td:nth-child(7):before {
+                            content: "验证时间";
                         }
 
             .column4,
@@ -249,6 +251,12 @@
 
         .icheck-primary {
             margin-right: 20px;
+        }
+        .form-check-inline {
+            flex-flow: row wrap;
+        }
+        .form-check-inline select{
+            width:100%;
         }
     </style>
 }

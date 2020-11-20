@@ -13,14 +13,14 @@
 	<ItemGroup>
 		<Folder Include="Controllers\" />
 	</ItemGroup>
-	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
-		<Content Include="..\Leaf.Blog\app_data\**\*.*">
+	<ItemGroup>
+		<Content Include="..\QStack.Web\app_data\**\*.*">
 			<Link>app_data\%(RecursiveDir)%(FileName)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
-		<Content Include="..\Leaf.Blog\wwwroot\**\*.*">
+		<Content Include="..\QStack.Blog\wwwroot\**\*.*">
 			<Link>wwwroot\%(RecursiveDir)%(FileName)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>

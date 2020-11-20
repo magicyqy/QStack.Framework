@@ -1,0 +1,200 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\0.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\1.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\10.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\11.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\12.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\13.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\14.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\15.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\16.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\17.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\18.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\19.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\2.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\20.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\21.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\22.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\23.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\24.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\25.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\26.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\27.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\28.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\29.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\3.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\30.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\31.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\32.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\33.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\34.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\35.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\36.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\37.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\38.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\39.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\4.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\40.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\41.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\42.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\43.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\44.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\45.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\46.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\47.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\48.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\49.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\5.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\50.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\51.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\52.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\53.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\54.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\55.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\56.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\57.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\58.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\59.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\6.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\7.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\8.jpg" />
+    <Content Remove="wwwroot\captcha\slideimages\_300_200\9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="app_data\secrets\DaoFactories_0_ConnectionString_pwd0" />
+    <None Remove="app_data\secrets\DaoFactories_1_ConnectionString_pwd1" />
+    <None Remove="app_data\secrets\OAuths_QQ_AppId_qqappid" />
+    <None Remove="app_data\secrets\OAuths_QQ_AppKey_qqappkey" />
+    <None Remove="Comon\ve-A4DC.tmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="app_data\secrets\DaoFactories_0_ConnectionString_pwd0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app_data\secrets\DaoFactories_1_ConnectionString_pwd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app_data\secrets\OAuths_QQ_AppId_qqappid">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app_data\secrets\OAuths_QQ_AppKey_qqappkey">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\0.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\1.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\10.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\11.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\12.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\13.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\14.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\15.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\16.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\17.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\18.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\19.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\2.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\20.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\21.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\22.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\23.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\24.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\25.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\26.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\27.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\28.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\29.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\3.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\30.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\31.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\32.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\33.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\34.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\35.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\36.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\37.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\38.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\39.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\4.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\40.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\41.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\42.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\43.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\44.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\45.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\46.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\47.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\48.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\49.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\5.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\50.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\51.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\52.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\53.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\54.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\55.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\56.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\57.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\58.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\59.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\6.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\7.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\8.jpg" />
+    <EmbeddedResource Include="wwwroot\captcha\slideimages\_300_200\9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.dockerignore" Link=".dockerignore">
+      <DependentUpon>$(DockerDefaultDockerfile)</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="app_data\logs\app\" />
+    <Folder Include="app_data\logs\sql\" />
+    <Folder Include="app_data\logs\web\" />
+    <Folder Include="app_data\MigrationsBackup\sfdb\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspectCore.Abstractions" Version="2.1.0" />
+    <PackageReference Include="AspNetCoreRateLimit" Version="3.2.2" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="3.1.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.28" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.7" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Expressions" Version="1.0.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="3.1.0" />
+    <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QStack.Framework.AspNetCore.Plugin\QStack.Framework.AspNetCore.Plugin.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Basic.IServices\QStack.Framework.Basic.IServices.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Basic.Models\QStack.Framework.Basic.Model.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Core\QStack.Framework.Core.csproj" />
+    <ProjectReference Include="..\QStack.Framework.HangFire\QStack.Framework.HangFire.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Persistent.EFCore.External\QStack.Framework.Persistent.EFCore.External.csproj" />
+    <ProjectReference Include="..\QStack.Framework.SearchEngine\QStack.Framework.SearchEngine.csproj" />
+  </ItemGroup>
+
+
+</Project>

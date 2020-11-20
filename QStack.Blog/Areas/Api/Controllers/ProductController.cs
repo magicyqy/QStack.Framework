@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using QStack.Blog.Areas.Api.Models;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QStack.Framework.Basic;
@@ -10,6 +10,8 @@ using QStack.Framework.Basic.IServices;
 using QStack.Framework.Basic.ViewModel.Shop;
 using QStack.Framework.Core.Entity;
 using QStack.Framework.Util;
+using QStack.Web.Areas.Api.Controllers;
+using QStack.Web.Areas.Api.Models;
 
 namespace QStack.Blog.Areas.Api.Controllers
 {

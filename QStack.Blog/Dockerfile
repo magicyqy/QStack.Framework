@@ -8,12 +8,12 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 
-#COPY ["QStack.Blog/QStack.Blog.csproj", "QStack.Blog/"]
-#RUN dotnet restore "QStack.Blog/QStack.Blog.csproj"
+#COPY ["QStack.Web/QStack.Web.csproj", "QStack.Web/"]
+#RUN dotnet restore "QStack.Web/QStack.Web.csproj"
 COPY . .
 
-#WORKDIR "/src/QStack.Blog.DemoPlugin.Mvc"
-#RUN dotnet build "QStack.Blog.DemoPlugin.Mvc.csproj" -c Release
+#WORKDIR "/src/QStack.Web.DemoPlugin.Mvc"
+#RUN dotnet build "QStack.Web.DemoPlugin.Mvc.csproj" -c Release
 WORKDIR "/src/QStack.Blog"
 RUN dotnet build "QStack.Blog.csproj" -c Release -o /app/build
 

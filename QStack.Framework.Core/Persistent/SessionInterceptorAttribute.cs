@@ -19,7 +19,7 @@ namespace QStack.Framework.Core.Persistent
 
         public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
-            Console.WriteLine("start intercept method:" + context.ImplementationMethod.Name);
+            //Console.WriteLine("start intercept method:" + context.ImplementationMethod.Name);
             //通过ServiceProvider获取的sessionscope在ServiceProviderScope期间都是唯一的，
             //即整个requet请求期间都是唯一，所以如果存在拦截器嵌套的情况，要通过内部计数器来确保flush,dispose方法
             //在最外层的拦截器才真正执行，

@@ -8,16 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="app_data\pluginpackages\1.0.0.1\**" />
     <Compile Remove="Resources\**" />
     <Compile Remove="wwwroot\tools\webps\新文件夹\**" />
-    <Content Remove="app_data\pluginpackages\1.0.0.1\**" />
     <Content Remove="Resources\**" />
     <Content Remove="wwwroot\tools\webps\新文件夹\**" />
-    <EmbeddedResource Remove="app_data\pluginpackages\1.0.0.1\**" />
     <EmbeddedResource Remove="Resources\**" />
     <EmbeddedResource Remove="wwwroot\tools\webps\新文件夹\**" />
-    <None Remove="app_data\pluginpackages\1.0.0.1\**" />
     <None Remove="Resources\**" />
     <None Remove="wwwroot\tools\webps\新文件夹\**" />
   </ItemGroup>
@@ -40,7 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="app_data\Migrations\sfdb\ve-2A05.tmp" />
     <None Remove="app_data\secrets\DaoFactories_0_ConnectionString_pwd0" />
     <None Remove="app_data\secrets\DaoFactories_1_ConnectionString_pwd1" />
     <None Remove="app_data\secrets\OAuths_QQ_AppId_qqappid" />
@@ -49,7 +44,7 @@
     <None Remove="Program.cs~RFc630d601.TMP" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+  <ItemGroup>
     <Content Include="app_data\secrets\DaoFactories_0_ConnectionString_pwd0">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -65,33 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspectCore.Abstractions" Version="2.1.0" />
-    <PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="2.1.0" />
-    <PackageReference Include="AspNet.Security.OAuth.QQ" Version="3.1.1" />
-    <PackageReference Include="AspNetCoreRateLimit" Version="3.0.5" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
-    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
-    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="3.1.1" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
-    <PackageReference Include="Serilog" Version="2.9.0" />
-    <PackageReference Include="Serilog.Extensions.Hosting" Version="3.1.0" />
-    <PackageReference Include="Serilog.Filters.Expressions" Version="2.1.0" />
-    <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
-    <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
-    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
-    <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
-    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\QStack.Framework.AspNetCore.Plugin\QStack.Framework.AspNetCore.Plugin.csproj" />
     <ProjectReference Include="..\QStack.Framework.Basic.IServices\QStack.Framework.Basic.IServices.csproj" />
     <ProjectReference Include="..\QStack.Framework.Basic.Services\Qstack.Framework.Basic.Services.csproj" />
@@ -100,16 +68,11 @@
     <ProjectReference Include="..\QStack.Framework.Persistent.EFCore\QStack.Framework.Persistent.EFCore.csproj" />
     <ProjectReference Include="..\QStack.Framework.SearchEngine\QStack.Framework.SearchEngine.csproj" />
 	  <ProjectReference Include="..\QStack.Framework.Util\QStack.Framework.Util.csproj" />
+	  <ProjectReference Include="..\QStack.Web\QStack.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="app_data\logs\app\" />
-    <Folder Include="app_data\logs\web\" />
-    <Folder Include="app_data\logs\sql\" />
-    <Folder Include="app_data\Migrations\" />
-    <Folder Include="app_data\Migrations\spiderdb\" />
-    <Folder Include="app_data\pluginpackages\QStack.Blog.DemoPlugin.Mvc\" />
-    <Folder Include="app_data\plugins\" />
+    <Folder Include="app_data\MigrationsBackup\sfdb\" />
     <Folder Include="wwwroot\tools\ascii\" />
     <Folder Include="wwwroot\tools\codeonline\Tiny-editor-master\" />
     <Folder Include="wwwroot\tools\ka\flash\" />
@@ -120,6 +83,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.dockerignore" Link=".dockerignore">
+      <DependentUpon>$(DockerDefaultDockerfile)</DependentUpon>
+    </None>
     <None Include="wwwroot\tools\aes\encrypt_aes.js" />
     <None Include="wwwroot\tools\codeonline\Tiny-editor.js" />
     <None Include="wwwroot\tools\des\encrypt_des.js" />
@@ -534,12 +500,64 @@
     <None Include="wwwroot\tools\timestamp\timestamp.js" />
     <None Include="wwwroot\tools\useragent\Browser.js" />
     <None Include="wwwroot\tools\yasuotu\tinyimg.js" />
-  </ItemGroup>
-
+  </ItemGroup> 
   <ItemGroup>
     <Reference Include="Z.EntityFramework.Extensions.EFCore">
       <HintPath>..\lib\Z.EntityFramework.Extensions.EFCore.dll</HintPath>
     </Reference>
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <Content Update="app_data\config\appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="app_data\config\appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="app_data\config\appsettings.Production.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="app_data\config\IpRateLimiting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="app_data\config\serilogConfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="app_data\plugins\QStack.Blog.DemoPlugin.Mvc\Leaf.Blog.DemoPlugin.Mvc.deps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="app_data\plugins\QStack.Blog.Docker.Crawler\bundleconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="app_data\plugins\QStack.Blog.Docker.Crawler\QStack.Blog.Docker.Crawler.deps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="app_data\plugins\QStack.Blog.Docker.Crawler\settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="app_data\plugins\QStack.Blog.Docker.Crawler\web.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>

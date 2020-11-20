@@ -34,7 +34,7 @@
     }
 
     var url = sb.ToString();
-    int displays = 10;
+    int displays =Context.Request.FromBrowserIsMobile()?5: 10;
     int count = displays / 2;
 
     var isShowDot = Model.PageCount > displays;
@@ -59,7 +59,7 @@
         <ul class="pagination">
             @if (Model.Page > 1)
             {
-                <li class="page-item"><a class="page-link" href="@UrlHandler(1)">首页</a></li>
+                <li class="page-item"><a class="page-link" href="@UrlHandler(1)"><i class="fa fa-angle-double-left"></i></a></li>
                 <li class="page-item"><a class="page-link" href="@UrlHandler(Model.Page - 1)"><i class="fa fa-chevron-left"></i></a></li>
             }
             @for (int index = start; index <= end; index++)
@@ -76,7 +76,7 @@
             @if (end < Model.PageCount)
             {
                 <li class="page-item"><a class="page-link" href="@UrlHandler(Model.Page + 1)"><i class="fa fa-chevron-right"></i></a></li>
-                <li class="page-item"><a class="page-link" href="@UrlHandler(Model.PageCount)">尾页</a></li>
+                <li class="page-item"><a class="page-link" href="@UrlHandler(Model.PageCount)"><i class="fa fa-angle-double-right"></i></a></li>
 
             }
 

@@ -7,5 +7,6 @@ namespace QStack.Framework.HangFire
     public class HangFireOptions
     {
         public string ConnectionString { get; set; }
+        public string DbType { get; set; }
     }
 }

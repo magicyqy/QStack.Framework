@@ -6,9 +6,9 @@ using System.Reflection;
 using System.Runtime.Loader;
 using System.Threading.Tasks;
 using AutoMapper;
-using QStack.Blog.Comon;
+
 using QStack.Blog.Docker.Crawler;
-using QStack.Blog.Filters;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
@@ -43,10 +43,13 @@ namespace QStack.Blog.Plugins.Debug
                 }
                 return null;
             };
+
+        
+
             //SettingsHelpers.AddOrUpdateAppSetting("HadMigration", false, Path.Combine("app_data", "config", $"appsettings.Development.json"));
             var hostBuilder = QStack.Blog.Program.CreateHostBuilder(args);
             hostBuilder.ConfigureServices((context, services) => {
-                services.AddMvc(options => options.Filters.Add<TitleFilter>())
+                services.AddMvc(options => options.Filters.Add<Web.Filters.TitleFilter>())
                 .AddRazorRuntimeCompilation()
                 .ConfigureApplicationPartManager(apm =>
                 {
@@ -75,4 +78,5 @@ namespace QStack.Blog.Plugins.Debug
             await host.RunAsync();
         }
     }
+
 }

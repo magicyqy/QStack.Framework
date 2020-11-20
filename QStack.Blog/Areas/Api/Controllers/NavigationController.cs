@@ -5,6 +5,8 @@ using QStack.Framework.Basic;
 using QStack.Framework.Basic.IServices;
 using QStack.Framework.Basic.ViewModel;
 using System.Linq;
+using QStack.Web.Areas.Api.Controllers;
+
 namespace QStack.Blog.Areas.Api.Controllers
 {
     [Route("{area:exists}/[controller]/[action]/{id?}")]

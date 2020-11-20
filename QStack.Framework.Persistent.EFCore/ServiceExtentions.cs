@@ -42,8 +42,18 @@ namespace QStack.Framework.Persistent.EFCore
                     switch (daoFactoryOption.DbType)
                     {
                         case DbTypes.MsSqlServer:
-                            //todo
-                            break;
+                            {
+                                var assembly = AssemblyLoadContext.All.SelectMany(a => a.Assemblies).FirstOrDefault(a => a.GetName().Name.Equals("Microsoft.EntityFrameworkCore.SqlServer"));
+                                if (assembly == null)
+                                    assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.Combine(AppContext.BaseDirectory, "Microsoft.EntityFrameworkCore.SqlServer.dll"));
+                                var type = Type.GetType("Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions,Microsoft.EntityFrameworkCore.SqlServer");
+                                var method = type.GetMethods().Where(m => m.Name.Equals("UseSqlServer")).First();
+                                //var method= type.GetMethod("UseNpgsql",new Type[] {typeof(DbContextOptionsBuilder),typeof(string),typeof(Action<>) });
+                                //var gm = method.MakeGenericMethod(new Type[] { typeof(EFCoreDao) });
+                                method.Invoke(null, new object[] { builder, daoFactoryOption.ConnectionString, null });
+                                break;
+                                break;
+                            }
                         case DbTypes.MySql:
                             //todo
                             break;

@@ -1,6 +1,6 @@
 {
   "Serilog": {
-    "MinimumLevel": "Information", //<- global error level. Ovveride all local error level
+    "MinimumLevel": "Information", //<- global error level. Overide all local error level
     "WriteTo": [
       //配置console过滤
       {
@@ -18,7 +18,7 @@
                 "Name": "ByExcluding",
                 "Args": {
                   //类sql写法
-                  "expression": "@Level <> 'Error' and StartsWith(SourceContext, 'QStack.') or StartsWith(SourceContext, 'Microsoft.EntityFrameworkCore')"
+                  "expression": "(@l <> 'Error' and StartsWith(SourceContext, 'QStack.Framework.')) or StartsWith(SourceContext, 'Microsoft.EntityFrameworkCore')"
                 }
               }
             ]
@@ -47,7 +47,7 @@
                         "rollingInterval": "Day",
                         "fileSizeLimitBytes": 512000,
                         "rollOnFileSizeLimit": true
-                        //,"formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Blog"
+                        //,"formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Web"
                       }
                     }
                   ]
@@ -59,7 +59,7 @@
                 "Name": "ByIncludingOnly",
                 "Args": {
                   //类sql写法
-                  // "expression": "SourceContext = 'QStack.Blog'"
+                  // "expression": "SourceContext = 'QStack.Web'"
                   "expression": " StartsWith(SourceContext,'Microsoft') and SourceContext <> 'Microsoft.EntityFrameworkCore.Database.Command' "
                 }
               },
@@ -67,7 +67,7 @@
                 "Name": "ByExcluding",
                 "Args": {
                   //类sql写法
-                  "expression": "@Level = 'Error'"
+                  "expression": "@l = 'Error'"
                 }
               }
             ]
@@ -96,7 +96,7 @@
                         "rollingInterval": "Day",
                         "fileSizeLimitBytes": 512000,
                         "rollOnFileSizeLimit": true
-                        //,"formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Blog"
+                        //,"formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Web"
                       }
                     }
                   ]
@@ -108,7 +108,7 @@
                 "Name": "ByIncludingOnly",
                 "Args": {
                   //类sql写法
-                  "expression": "StartsWith(SourceContext,'Microsoft') or  StartsWith(SourceContext,'QStack.Blog')"
+                  "expression": "StartsWith(SourceContext,'Microsoft') or  StartsWith(SourceContext,'QStack.Blog') or StartsWith(SourceContext,'QStack.Web')"
                 }
               }
             ]
@@ -175,7 +175,7 @@
                         "rollingInterval": "Day",
                         "fileSizeLimitBytes": 512000,
                         "rollOnFileSizeLimit": true,
-                        "formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Blog"
+                        "formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Web"
                       }
                     }
                   ]
@@ -193,7 +193,7 @@
                 "Name": "ByExcluding",
                 "Args": {
                   //类sql写法
-                  "expression": "@Level = 'Error'"
+                  "expression": "@l = 'Error'"
                 }
               }
 
@@ -221,7 +221,7 @@
                         "rollingInterval": "Day",
                         "fileSizeLimitBytes": 512000,
                         "rollOnFileSizeLimit": true,
-                        "formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Blog"
+                        "formatter": "Serilog.Formatting.Compact.NewCompactJsonFormatter, QStack.Web"
                       }
                     }
                   ]

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using QStack.Blog.Areas.Api.Models;
+
 using Microsoft.AspNetCore.Mvc;
 
 using QStack.Framework.Basic.Enum;
@@ -13,6 +13,8 @@ using QStack.Framework.SearchEngine.Imps;
 using System.Linq.Expressions;
 using QStack.Framework.Util;
 using QStack.Framework.Basic;
+using QStack.Web.Areas.Api.Models;
+using QStack.Web.Areas.Api.Controllers;
 
 namespace QStack.Blog.Areas.Api.Controllers
 {
