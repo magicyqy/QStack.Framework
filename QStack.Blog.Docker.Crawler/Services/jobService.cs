@@ -26,6 +26,35 @@ namespace QStack.Blog.Docker.Crawler.Services
 
 		public async Task ExecuteJob(int spiderId)
 		{
+			var client = new DockerClientConfiguration(
+						new Uri(_crawlerOptions.Docker))
+					.CreateClient();
+			try
+            {
+				var containers = await client.Containers.ListContainersAsync(new ContainersListParameters
+				{
+					All = true,
+					Filters = new Dictionary<string, IDictionary<string, bool>>
+					{
+						 {
+							   "name", new Dictionary<string, bool>
+										{
+											{ "dotnetspider*", true }
+										}
+						 }
+					}
+				});
+
+				foreach(var container in containers)
+                {
+					if(container.State== "exited")
+                    {
+						await client.Containers.RemoveContainerAsync(container.ID, new ContainerRemoveParameters());
+					}
+                }
+
+			}
+            catch { }
 
 			try
 			{
@@ -44,9 +73,7 @@ namespace QStack.Blog.Docker.Crawler.Services
 					return;
 				}
 
-				var client = new DockerClientConfiguration(
-						new Uri(_crawlerOptions.Docker))
-					.CreateClient();
+				
 				var batch = Guid.NewGuid().ToString("N");
 				var env = new List<string>((spider.Environment ?? "").Split(new[] { " ", "\n" },
 					StringSplitOptions.RemoveEmptyEntries))
