@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using QStack.Framework.Basic.Enum;
 using QStack.Framework.Basic.IServices;
 using QStack.Framework.Basic.ViewModel.Articles;
-using QStack.Framework.Core.Entity;
+
 using QStack.Framework.SearchEngine.Interfaces;
 using QStack.Framework.SearchEngine.Imps;
 using System.Linq.Expressions;
@@ -15,6 +15,9 @@ using QStack.Framework.Util;
 using QStack.Framework.Basic;
 using QStack.Web.Areas.Api.Models;
 using QStack.Web.Areas.Api.Controllers;
+using QStack.Framework.Core.Model;
+using QStack.Framework.Core.CommonSearch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace QStack.Blog.Areas.Api.Controllers
 {
@@ -201,6 +204,7 @@ namespace QStack.Blog.Areas.Api.Controllers
         #endregion
 
         #region other
+        [AllowAnonymous]
         public async Task<IActionResult> Zan(int id)
         {
             await _articleService.AddZan(id);

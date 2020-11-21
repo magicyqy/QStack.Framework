@@ -3,14 +3,15 @@ using QStack.Framework.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text.Json;
-using static QStack.Framework.Core.Entity.Query;
 
-namespace QStack.Framework.Core.Entity
+using QStack.Framework.Core.CommonSearch;
+using static QStack.Framework.Core.Model.Query;
+using QStack.Framework.Core.Model;
+
+namespace QStack.Framework.Core.DataPrivilege
 {
     //public enum Operators
     //{
@@ -35,14 +36,7 @@ namespace QStack.Framework.Core.Entity
     /// <summary>
     /// 组合过滤的条件属性种类，包含实体属性种类(Reference, ICollection, ValueType)，及上下文环境种类EnvType（userid,roleid）
     /// </summary>
-    public enum FieldKind
-    {
-        Reference=1, //实体导航属性是一对一
-        ICollection=2,//实体导航属性是一对多
-        ValueType=3, //非导航属性
-        EnvType=4
-    }
-
+    
 
     public class DataPrivilegeRule 
     {

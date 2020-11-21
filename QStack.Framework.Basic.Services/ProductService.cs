@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace QStack.Framework.Basic.Services
 {
     [SessionInterceptor]
-    public class ProductService:AbstractService<Product>,IProductService
+    public class ProductService : AbstractService<Product>, IProductService
     {
         public ProductService(IMapper mapper)
         {

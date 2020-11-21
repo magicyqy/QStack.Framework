@@ -1,5 +1,5 @@
 ﻿using QStack.Framework.Basic.Enum;
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.Model;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;

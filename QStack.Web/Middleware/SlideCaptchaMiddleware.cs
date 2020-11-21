@@ -80,7 +80,7 @@ namespace QStack.Web.Middleware
         //裁剪的小图大小
         private const int _shearSize = 40;
         //原始图片所在路径 300*300
-        private string path = string.Format("wwwroot{0}captcha{0}slideimages{0}300_200", Path.DirectorySeparatorChar);
+        private string path = string.Format("wwwroot{0}captcha{0}slideimages{0}_300_200", Path.DirectorySeparatorChar);
         //原始图片数量
         private const int _ImgNum = 60;
         //原始图片宽px
@@ -225,13 +225,13 @@ namespace QStack.Web.Middleware
             int[] a = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
             int[] array = a.OrderBy(x => Guid.NewGuid()).ToArray();
             Bitmap bmp;
-            var capchaPic = (new Random()).Next(0, _ImgNum - 1) + ".jpg";
-            var filename = Path.Combine(environment.ContentRootPath, path, capchaPic);
+            var capchaPic =Path.Combine(path, (new Random()).Next(0, _ImgNum - 1) + ".jpg");
+            var filename = Path.Combine(environment.ContentRootPath, capchaPic);
             if(!File.Exists(filename))
             {
                 var embeddedFileProvider = new Microsoft.Extensions.FileProviders.EmbeddedFileProvider(this.GetType().Assembly, this.GetType().Assembly.GetName().Name);
                 var allResources = embeddedFileProvider.GetDirectoryContents(string.Empty);
-                var embedFile=  embeddedFileProvider.GetFileInfo(path.Replace(Path.DirectorySeparatorChar,'.'));
+                var embedFile=  embeddedFileProvider.GetFileInfo(capchaPic.Replace(Path.DirectorySeparatorChar,'.'));
                 if (!embedFile.Exists)
                     throw new ArgumentNullException("can not found captcha picture");
                 bmp = new Bitmap(embedFile.CreateReadStream());

@@ -1,5 +1,5 @@
 ﻿using QStack.Framework.Basic.Model.ViewModel;
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;

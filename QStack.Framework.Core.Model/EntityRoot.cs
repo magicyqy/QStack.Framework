@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace QStack.Framework.Core.Entity
+namespace QStack.Framework.Core.Model
 {
     public class EntityRoot: IEntityRoot
     {

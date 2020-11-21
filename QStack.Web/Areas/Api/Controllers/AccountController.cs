@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using QStack.Web.Areas.Api.Models;
@@ -11,15 +10,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using QStack.Framework.Basic;
 using QStack.Framework.Basic.Enum;
 using QStack.Framework.Basic.IServices;
-using QStack.Framework.Basic.Model;
 using QStack.Framework.Basic.ViewModel.Auth;
-using QStack.Framework.Core.Entity;
 using QStack.Framework.Util;
+using QStack.Framework.Core.Model;
+using QStack.Framework.Core.CommonSearch;
 
 namespace QStack.Web.Areas.Api.Controllers
 {

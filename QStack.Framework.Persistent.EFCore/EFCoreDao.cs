@@ -10,13 +10,13 @@ using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using QStack.Framework.Core.Persistent;
-using QStack.Framework.Core.Entity;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Threading;
 using AspectCore.Extensions.Reflection;
 using Microsoft.EntityFrameworkCore.Metadata;
 using QStack.Framework.Core;
+using QStack.Framework.Core.Model;
 //using QStack.Framework.Basic.Model.Auth;
 
 namespace QStack.Framework.Persistent.EFCore

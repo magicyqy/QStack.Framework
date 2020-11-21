@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\QStack.Framework.Basic.Models\QStack.Framework.Basic.Model.csproj" />
+    <ProjectReference Include="..\QStack.Framework.Core.Model\QStack.Framework.Core.Model.csproj" />
   </ItemGroup>
 
 </Project>

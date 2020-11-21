@@ -8,7 +8,8 @@ using QStack.Blog.Docker.Crawler.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.Model;
+
 namespace DotnetSpider.Portal.Controllers.API
 {
     [Area(CrawlerPluginContext.Area)]

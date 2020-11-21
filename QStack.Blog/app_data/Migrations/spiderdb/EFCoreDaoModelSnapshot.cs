@@ -19,7 +19,7 @@ namespace QStack.Framework.AutoMigration.spiderdb.Migrations
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("QStack.Web.Docker.Crawler.Models.AgentHeartbeat", b =>
+            modelBuilder.Entity("QStack.Blog.Docker.Crawler.Models.AgentHeartbeat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,7 +53,7 @@ namespace QStack.Framework.AutoMigration.spiderdb.Migrations
                     b.ToTable("agent_heartbeat");
                 });
 
-            modelBuilder.Entity("QStack.Web.Docker.Crawler.Models.AgentInfo", b =>
+            modelBuilder.Entity("QStack.Blog.Docker.Crawler.Models.AgentInfo", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("character varying(36)")
@@ -88,7 +88,7 @@ namespace QStack.Framework.AutoMigration.spiderdb.Migrations
                     b.ToTable("agent");
                 });
 
-            modelBuilder.Entity("QStack.Web.Docker.Crawler.Models.Spider", b =>
+            modelBuilder.Entity("QStack.Blog.Docker.Crawler.Models.Spider", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -152,7 +152,7 @@ namespace QStack.Framework.AutoMigration.spiderdb.Migrations
                     b.ToTable("spider");
                 });
 
-            modelBuilder.Entity("QStack.Web.Docker.Crawler.Models.SpiderHistory", b =>
+            modelBuilder.Entity("QStack.Blog.Docker.Crawler.Models.SpiderHistory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -206,7 +206,7 @@ namespace QStack.Framework.AutoMigration.spiderdb.Migrations
                     b.ToTable("SPIDER_HISTORIES");
                 });
 
-            modelBuilder.Entity("QStack.Web.Docker.Crawler.Models.SpiderStatistics", b =>
+            modelBuilder.Entity("QStack.Blog.Docker.Crawler.Models.SpiderStatistics", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnName("id")

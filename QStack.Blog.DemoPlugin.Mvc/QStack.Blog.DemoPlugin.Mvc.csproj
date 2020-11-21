@@ -17,7 +17,6 @@
     <ProjectReference Include="..\QStack.Framework.AspNetCore.Plugin.Contracts\QStack.Framework.AspNetCore.Plugin.Contracts.csproj" />
     <ProjectReference Include="..\QStack.Framework.Basic.IServices\QStack.Framework.Basic.IServices.csproj" />
     <ProjectReference Include="..\QStack.Framework.Basic.Services\Qstack.Framework.Basic.Services.csproj" />
-    <ProjectReference Include="..\QStack.Framework.Core\QStack.Framework.Core.csproj" />
   </ItemGroup>
 
 

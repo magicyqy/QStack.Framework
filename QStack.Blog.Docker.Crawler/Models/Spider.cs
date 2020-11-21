@@ -1,12 +1,13 @@
-using QStack.Framework.Core.Entity;
+
+using QStack.Framework.Core.Model;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QStack.Blog.Docker.Crawler.Models
 {
-	
-	[Table("spider")]
+
+    [Table("spider")]
 	public class Spider : EntityBase
 	{
 

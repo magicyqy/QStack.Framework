@@ -9,7 +9,7 @@ using QStack.Framework.Basic.IServices;
 using QStack.Framework.Basic.Model.Articles;
 using QStack.Framework.Basic.ViewModel.Articles;
 using QStack.Framework.Core.Cache;
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.Model;
 using QStack.Framework.SearchEngine;
 using QStack.Framework.SearchEngine.Imps;
 using QStack.Framework.SearchEngine.Interfaces;

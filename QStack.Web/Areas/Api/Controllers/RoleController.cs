@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using QStack.Web.Areas.Api.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QStack.Framework.Basic;
 using QStack.Framework.Basic.IServices;
-using QStack.Framework.Basic.Model.Auth;
 using QStack.Framework.Basic.ViewModel.Auth;
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.Model;
+using QStack.Framework.Core.CommonSearch;
 
 namespace QStack.Web.Areas.Api.Controllers
 {

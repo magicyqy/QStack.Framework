@@ -2,7 +2,7 @@
 using QStack.Framework.Basic.IServices;
 using QStack.Framework.Basic.Model.Articles;
 using QStack.Framework.Basic.ViewModel.Articles;
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.Model;
 using QStack.Framework.Util;
 using System.Collections.Generic;
 using System.Linq;

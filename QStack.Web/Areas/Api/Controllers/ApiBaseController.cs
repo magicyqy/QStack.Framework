@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using QStack.Framework.Basic;
 using QStack.Framework.Basic.IServices;
-using QStack.Framework.Basic.ViewModel;
 using QStack.Framework.Basic.ViewModel.Auth;
-using QStack.Framework.Core.Entity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using QStack.Framework.Core.Model;
+using QStack.Framework.Core.CommonSearch;
 
 namespace QStack.Web.Areas.Api.Controllers
 {

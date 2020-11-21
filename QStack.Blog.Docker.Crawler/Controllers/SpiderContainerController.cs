@@ -1,15 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using DotNetCore.CAP;
-using QStack.Blog.Docker.Crawler.Dtos;
-using QStack.Blog.Docker.Crawler.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using QStack.Framework.Core.Entity;
 
 namespace QStack.Blog.Docker.Crawler.Controllers
 {

@@ -6,8 +6,8 @@ using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Linq;
-using QStack.Framework.Core.Entity;
-
+using QStack.Framework.Core.Model;
+using QStack.Framework.Core.Model;
 namespace QStack.Framework.Core.Persistent
 {
 

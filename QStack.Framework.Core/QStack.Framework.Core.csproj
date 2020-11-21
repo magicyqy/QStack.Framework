@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QStack.Framework.Core.Model\QStack.Framework.Core.Model.csproj" />
     <ProjectReference Include="..\QStack.Framework.Util\QStack.Framework.Util.csproj" />
   </ItemGroup>
 

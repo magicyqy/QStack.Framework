@@ -1,13 +1,10 @@
-using QStack.Framework.Basic.ViewModel;
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.Model;
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QStack.Blog.Docker.Crawler.Dtos
 {
-	
-	public class SpiderHistoryDto : BaseDto
+
+    public class SpiderHistoryDto : BaseDto
 	{
 
 		public int SpiderId { get; set; }

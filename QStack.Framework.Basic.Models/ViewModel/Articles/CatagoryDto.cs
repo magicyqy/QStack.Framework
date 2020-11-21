@@ -1,4 +1,5 @@
 ﻿using QStack.Framework.Basic.Model.ViewModel;
+using QStack.Framework.Core.Model;
 using System.Collections.Generic;
 
 namespace QStack.Framework.Basic.ViewModel.Articles

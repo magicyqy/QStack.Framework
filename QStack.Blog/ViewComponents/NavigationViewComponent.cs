@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using QStack.Framework.Basic.ViewModel;
 using QStack.Framework.Basic.ViewModel.Articles;
-using QStack.Framework.Core.Entity;
+
 using QStack.Framework.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using QStack.Framework.Core.Model;
 
 namespace QStack.Blog.ViewComponents
 {

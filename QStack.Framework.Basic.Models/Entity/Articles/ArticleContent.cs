@@ -1,4 +1,4 @@
-﻿using QStack.Framework.Core.Entity;
+﻿using QStack.Framework.Core.Model;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace QStack.Framework.Core.Entity
+namespace QStack.Framework.Core.Model
 {
     public class PageModel
     {

@@ -6,7 +6,8 @@ using QStack.Framework.Basic.Model.Auth;
 using QStack.Framework.Basic.Model.ViewModel.Auth;
 using QStack.Framework.Core;
 using QStack.Framework.Core.Cache;
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.DataPrivilege;
+using QStack.Framework.Core.Model;
 using QStack.Framework.Core.Persistent;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 

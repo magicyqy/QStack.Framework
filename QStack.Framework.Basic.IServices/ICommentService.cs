@@ -1,5 +1,5 @@
 ﻿using QStack.Framework.Basic.ViewModel.Articles;
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.Model;
 using System.Threading.Tasks;
 
 namespace QStack.Framework.Basic.IServices

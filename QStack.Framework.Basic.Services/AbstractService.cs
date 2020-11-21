@@ -2,15 +2,14 @@
 using AutoMapper.Extensions.ExpressionMapping;
 using QStack.Framework.Basic.IServices;
 using ServiceFramework.Common;
-using QStack.Framework.Core.Entity;
 using QStack.Framework.Core.Persistent;
 using QStack.Framework.Core.Transaction;
 using QStack.Framework.Util;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using QStack.Framework.Core.Model;
 
 namespace QStack.Framework.Basic.Services
 {

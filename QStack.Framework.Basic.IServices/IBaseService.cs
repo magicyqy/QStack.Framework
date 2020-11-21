@@ -1,6 +1,4 @@
-﻿using ServiceFramework.Common;
-using QStack.Framework.Core.Entity;
-using QStack.Framework.Core.Persistent;
+﻿using QStack.Framework.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -8,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QStack.Framework.Basic.IServices
 {
-   
+
     public interface IBaseService
     {
 

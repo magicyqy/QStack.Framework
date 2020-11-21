@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using QStack.Framework.Core.Model;
+using System.ComponentModel;
 
 namespace QStack.Framework.Basic.ViewModel.Auth
 {

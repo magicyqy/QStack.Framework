@@ -1,7 +1,7 @@
 ﻿using QStack.Framework.Basic.Model;
 using QStack.Framework.Basic.Model.ViewModel.Auth;
 using QStack.Framework.Core.Cache;
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;

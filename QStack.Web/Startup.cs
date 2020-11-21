@@ -71,26 +71,7 @@ namespace QStack.Web
                .WithOrigins(Configuration.GetSection("SiteSetting:CorsOrigin").Get<string[]>())));
             //services.AddControllersWithViews().AddControllersAsServices()
             //    .AddRazorRuntimeCompilation();
-            services.AddMvc(options => options.Filters.Add<TitleFilter>())
-                .AddRazorRuntimeCompilation()
-#if DEBUG
-                //.AddApplicationPart(typeof(Docker.Crawler.CrawlerOptions).Assembly)
-#endif
-                .AddControllersAsServices()
-                .AddJsonOptions(options =>
-                {
-                    //options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-                    options.JsonSerializerOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
-                    options.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter());
-                    options.JsonSerializerOptions.Converters.Add(new DateTimeOffsetConverter());
-                });
-
-            var defaultActivator = services.FirstOrDefault(c => c.ServiceType == typeof(IControllerActivator));
-            if (defaultActivator != null)
-            {
-                services.Remove(defaultActivator);
-                services.AddSingleton<IControllerActivator, CustomServiceBasedControllerActivator>();
-            }
+            services.AddCustomMvc();
            
 
             services.Configure<FileManagerOptions>(options => Configuration.GetSection("FileOptions").Bind(options));

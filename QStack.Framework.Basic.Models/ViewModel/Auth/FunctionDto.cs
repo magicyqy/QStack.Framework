@@ -1,4 +1,5 @@
 ﻿using QStack.Framework.Basic.Model;
+using QStack.Framework.Core.Model;
 using System.Collections.Generic;
 using System.ComponentModel;
 

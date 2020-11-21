@@ -3,7 +3,8 @@ using AutoMapper.Extensions.ExpressionMapping;
 using QStack.Blog.Docker.Crawler.Dtos;
 using QStack.Blog.Docker.Crawler.Models;
 using QStack.Framework.Basic.Services;
-using QStack.Framework.Core.Entity;
+
+using QStack.Framework.Core.Model;
 using QStack.Framework.Core.Persistent;
 using QStack.Framework.Core.Transaction;
 using System;

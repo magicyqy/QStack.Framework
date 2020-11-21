@@ -1,4 +1,4 @@
-using QStack.Framework.Core.Entity;
+using QStack.Framework.Core.Model;
 using System.ComponentModel.DataAnnotations;
 
 namespace QStack.Framework.Basic.Model.Shop

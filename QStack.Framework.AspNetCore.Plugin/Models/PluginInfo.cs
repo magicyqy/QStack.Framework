@@ -1,5 +1,4 @@
-﻿using QStack.Framework.Core.Entity;
-using System;
+﻿using QStack.Framework.Core.Model;
 
 namespace QStack.Framework.AspNetCore.Plugin.Models
 {

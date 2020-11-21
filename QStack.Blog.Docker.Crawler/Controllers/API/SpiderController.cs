@@ -15,10 +15,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NCrontab;
-using QStack.Framework.Core.Entity;
 using Docker.DotNet;
 using Docker.DotNet.Models;
 using QStack.Framework.Core.Log;
+using QStack.Framework.Core.Model;
 
 namespace DotnetSpider.Portal.Controllers.API
 {

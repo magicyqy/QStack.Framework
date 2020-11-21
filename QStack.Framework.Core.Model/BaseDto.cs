@@ -1,12 +1,14 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace QStack.Framework.Core.Entity
+namespace QStack.Framework.Core.Model
 {
-    public class EntityBase: EntityRoot
+    public class BaseDto:BaseRootDto
     {
+       
         [DisplayName("创建时间")]
         public virtual DateTime? CreateDate { get; set; } = DateTime.Now;
         [DisplayName("最后修改时间")]

@@ -1,11 +1,12 @@
-using QStack.Framework.Core.Entity;
+
+using QStack.Framework.Core.Model;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QStack.Blog.Docker.Crawler.Models
 {
-	[Table("SPIDER_HISTORIES")]
+    [Table("SPIDER_HISTORIES")]
 	public class SpiderHistory:EntityBase
 	{
 		
